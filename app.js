@@ -47,8 +47,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/auth", authRoutes);
 app.use("/api/devices", deviceRoutes);
 app.use("/api/reminders", reminderRoutes);
-app.use("/api/users", userRoutes);
 // app.use("/api/alerts", alertRoutes);
+app.use("/api/users", userRoutes);
 
 // Root route
 app.get("/", (req, res) => {

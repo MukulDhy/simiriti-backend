@@ -1,0 +1,3305 @@
+=== BACKEND CODE ANALYSIS REPORT ===
+Generated on: 2025-04-21 00:56:48
+Root Directory: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode
+
+==================================================
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\.env
+║ Size: 337 bytes
+║ Last Modified: 2025-04-20 04:33:38.837582
+╠════════════════════════════════════════════════════════════════════════════════
+# .env
+NODE_ENV=development
+PORT=5000
+# MONGO_URI=mongodb://localhost:27017/care-management
+MONGO_URI=mongodb+srv://taihei415:fhfZQfJJtDWCEa78@cluster0.u11bugl.mongodb.net/
+JWT_SECRET=your_strong_secret_here
+JWT_REFRESH_SECRET=your_strong_refresh_secret_here
+MQTT_BROKER_URL=mqtt://localhost:1883
+CLIENT_URL=http://localhost:3000
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\.gitignore
+║ Size: 31 bytes
+║ Last Modified: 2025-04-20 16:51:11.050332
+╠════════════════════════════════════════════════════════════════════════════════
+.qodo
+node_modules
+node_modules
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\app.js
+║ Size: 2475 bytes
+║ Last Modified: 2025-04-20 17:05:18.276883
+╠════════════════════════════════════════════════════════════════════════════════
+// app.js
+const express = require("express");
+const morgan = require("morgan");
+const cors = require("cors");
+const helmet = require("helmet");
+const path = require("path");
+const config = require("./config/config.js");
+// const
+const connectDB = require("./config/db");
+const logger = require("./utils/logger");
+
+const { defaultLimiter } = require("./middlewares/rateLimit");
+const errorHandler = require("./middlewares/error");
+const mqttService = require("./services/mqtt.service");
+const notificationService = require("./services/notification.service");
+
+// Route imports
+const authRoutes = require("./routes/auth.routes");
+const deviceRoutes = require("./routes/device.routes");
+const reminderRoutes = require("./routes/reminder.routes");
+const userRoutes = require("./routes/user.routes");
+
+// Initialize express app
+const app = express();
+
+// Connect to database
+connectDB();
+
+// Body parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Security middleware
+app.use(helmet());
+app.use(cors());
+
+// Rate limiting - apply to all routes
+app.use(defaultLimiter);
+
+// Logging
+app.use(morgan("combined", { stream: logger.stream }));
+
+// Set static folder
+app.use(express.static(path.join(__dirname, "public")));
+
+// Mount routes
+app.use("/api/auth", authRoutes);
+app.use("/api/devices", deviceRoutes);
+app.use("/api/reminders", reminderRoutes);
+// app.use("/api/alerts", alertRoutes);
+app.use("/api/users", userRoutes);
+
+// Root route
+app.get("/", (req, res) => {
+  res.send("API is running");
+});
+
+// Error handler
+app.use(errorHandler);
+
+// Start server
+const PORT = config.PORT;
+const server = app.listen(PORT, () => {
+  logger.info(`Server running in ${config.NODE_ENV} mode on port ${PORT}`);
+});
+
+// Initialize WebSocket server
+const webSocketService = require("./services/websocket.service");
+webSocketService.initialize(server);
+
+// Connect to MQTT broker
+mqttService.connect();
+
+// Schedule pending reminders
+notificationService
+  .schedulePendingReminders()
+  .then(() => {
+    return notificationService.checkMissedReminders();
+  })
+  .catch((err) => {
+    logger.error(`Error initializing notification service: ${err.message}`);
+  });
+
+// Handle unhandled promise rejections
+process.on("unhandledRejection", (err) => {
+  logger.error(`Unhandled Rejection: ${err.message}`);
+  server.close(() => process.exit(1));
+});
+
+module.exports = app;
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\backend_summary.txt
+║ Size: 0 bytes
+║ Last Modified: 2025-04-21 00:56:48.394353
+╠════════════════════════════════════════════════════════════════════════════════
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\index.py
+║ Size: 2543 bytes
+║ Last Modified: 2025-04-21 00:55:12.126480
+╠════════════════════════════════════════════════════════════════════════════════
+import os
+from datetime import datetime
+
+def scan_backend_code(root_dir, output_file="backend_summary.txt"):
+    """
+    Scans a backend codebase, extracts all files' content, and writes it into a single text file with metadata.
+    
+    Args:
+        root_dir (str): Path to the root directory of your backend code.
+        output_file (str): Name of the output consolidated text file.
+    """
+    ignored_dirs = {'.git', '__pycache__', 'node_modules', 'venv', 'env'}  # Folders to ignore
+    ignored_extensions = {'.pyc', '.DS_Store', '.log', '.tmp'}  # File extensions to ignore
+
+    with open(output_file, 'w', encoding='utf-8') as outfile:
+        # Write header with metadata
+        outfile.write(f"=== BACKEND CODE ANALYSIS REPORT ===\n")
+        outfile.write(f"Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        outfile.write(f"Root Directory: {os.path.abspath(root_dir)}\n\n")
+        outfile.write("=" * 50 + "\n\n")
+
+        for root, dirs, files in os.walk(root_dir):
+            # Skip ignored directories
+            dirs[:] = [d for d in dirs if d not in ignored_dirs]
+
+            for file in files:
+                file_path = os.path.join(root, file)
+                file_ext = os.path.splitext(file)[1]
+
+                if file_ext in ignored_extensions:
+                    continue
+
+                try:
+                    with open(file_path, 'r', encoding='utf-8') as infile:
+                        content = infile.read()
+                except UnicodeDecodeError:
+                    # Skip binary files (e.g., images, compiled files)
+                    continue
+
+                # Write file metadata
+                outfile.write(f"║ File: {file_path}\n")
+                outfile.write(f"║ Size: {os.path.getsize(file_path)} bytes\n")
+                outfile.write(f"║ Last Modified: {datetime.fromtimestamp(os.path.getmtime(file_path))}\n")
+                outfile.write("╠" + "═" * 80 + "\n")
+
+                # Write file content
+                outfile.write(f"{content}\n")
+                outfile.write("\n╚" + "═" * 80 + "\n\n")
+
+        outfile.write(f"=== END OF REPORT ===\n")
+
+if __name__ == "__main__":
+    backend_root = input("Enter the path to your backend root folder: ").strip()
+    if os.path.isdir(backend_root):
+        scan_backend_code(backend_root)
+        print(f"Backend code analysis complete. Output saved to 'backend_summary.txt'.")
+    else:
+        print("Error: Invalid directory path.")
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\package-lock.json
+║ Size: 295484 bytes
+║ Last Modified: 2025-04-09 08:12:39.186683
+╠════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\package.json
+║ Size: 1197 bytes
+║ Last Modified: 2025-04-09 08:12:37.860679
+╠════════════════════════════════════════════════════════════════════════════════
+{
+  "name": "care-management-system",
+  "version": "1.0.0",
+  "description": "Backend API for care management system",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "jest --detectOpenHandles",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": [
+    "express",
+    "mongodb",
+    "api",
+    "healthcare",
+    "device"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "express-validator": "^7.0.1",
+    "helmet": "^6.1.5",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.1.0",
+    "morgan": "^1.10.0",
+    "mqtt": "^4.3.7",
+    "node-schedule": "^2.1.1",
+    "winston": "^3.8.2",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "mongodb-memory-server": "^8.12.2",
+    "nodemon": "^2.0.22",
+    "supertest": "^6.3.3"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./tests/setup.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  }
+}
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\config\config.js
+║ Size: 1426 bytes
+║ Last Modified: 2025-04-20 21:02:38.081657
+╠════════════════════════════════════════════════════════════════════════════════
+// config/config.js
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
+
+const config = {
+  // Server Configuration
+  NODE_ENV: process.env.NODE_ENV || "development",
+  PORT: process.env.PORT || 5000,
+  CLIENT_URL: process.env.CLIENT_URL || "http://localhost:3000",
+
+  // Database
+  MONGO_URI:
+    process.env.MONGO_URI || "mongodb://localhost:27017/care-management",
+
+  // Authentication
+  JWT_SECRET: process.env.JWT_SECRET || "your_jwt_secret_key_here",
+  JWT_EXPIRE: process.env.JWT_EXPIRE || "30d",
+  JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET || "your_refresh_secret",
+
+  // MQTT
+  MQTT_BROKER_URL: process.env.MQTT_BROKER_URL || "mqtt://localhost:1883",
+  MQTT_USERNAME: process.env.MQTT_USERNAME || "mukul",
+  MQTT_PASSWORD: process.env.MQTT_PASSWORD || "12345678",
+
+  // Logging
+  LOG_LEVEL: process.env.LOG_LEVEL || "info",
+
+  // Rate Limiting
+  RATE_LIMIT_WINDOW: parseInt(process.env.RATE_LIMIT_WINDOW) || 900000, // 15 minutes
+  RATE_LIMIT_MAX: parseInt(process.env.RATE_LIMIT_MAX) || 100,
+
+  // WebSocket
+  WEBSOCKET_PATH: process.env.WEBSOCKET_PATH || "/ws",
+
+  // Notification
+  NOTIFICATION_CHECK_INTERVAL:
+    parseInt(process.env.NOTIFICATION_CHECK_INTERVAL) || 60000, // 1 minute
+};
+
+// Validate required configurations
+if (!config.JWT_SECRET) {
+  throw new Error("JWT_SECRET must be defined in environment variables");
+}
+
+module.exports = config;
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\config\db.js
+║ Size: 747 bytes
+║ Last Modified: 2025-04-06 18:32:04.516119
+╠════════════════════════════════════════════════════════════════════════════════
+// config/db.js
+require("colors");
+const mongoose = require("mongoose");
+const logger = require("../utils/logger");
+
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    logger.info(`MongoDB Connected: ${conn.connection.host}`);
+    console.log(
+      `DataBase is Connected to Server ${process.env.PORT} and ${conn.connection.host}:${conn.connection.port}`
+        .underline.bgBlue
+    );
+    return conn;
+  } catch (error) {
+    logger.error(`Error connecting to MongoDB: ${error.message}`);
+    console.log(`Error Occured : ${error.message}`.underline.bgRed);
+    process.exit(1);
+  }
+};
+
+module.exports = connectDB;
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\controllers\auth.controller.js
+║ Size: 7024 bytes
+║ Last Modified: 2025-04-20 03:17:49.986723
+╠════════════════════════════════════════════════════════════════════════════════
+// controllers/auth.controller.js
+const jwt = require("jsonwebtoken");
+const User = require("../models/user.model");
+const Patient = require("../models/patient.model");
+const Caregiver = require("../models/caregiver.model");
+const Family = require("../models/family.model");
+const config = require("../config/config");
+const logger = require("../utils/logger");
+
+// Helper function to generate JWT token
+const generateToken = (id) => {
+  return jwt.sign({ id }, config.JWT_SECRET, {
+    expiresIn: config.JWT_EXPIRE,
+  });
+};
+
+// @desc    Register user
+// @route   POST /api/auth/register
+// @access  Public
+exports.register = async (req, res, next) => {
+  try {
+    const { name, email, password, userType, ...additionalData } = req.body;
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        error: "Email already in use",
+      });
+    }
+
+    // Create base user
+    const userData = {
+      name,
+      email,
+      password,
+      userType,
+    };
+
+    // Create user based on type
+    let user;
+    let extraData;
+
+    switch (userType) {
+      case "patient":
+        user = await Patient.create({
+          ...userData,
+          ...additionalData,
+        });
+        break;
+      case "caregiver":
+        user = await User.create(userData);
+        // If caregiver, check if patient ID is provided
+        if (additionalData.patient) {
+          // Create caregiver relationship
+          extraData = await Caregiver.create({
+            user: user._id,
+            patient: additionalData.patient,
+          });
+        }
+        break;
+      case "family":
+        user = await User.create(userData);
+        // If family, check if patient ID and relationship are provided
+        if (additionalData.patient && additionalData.relationship) {
+          // Create family relationship
+          extraData = await Family.create({
+            user: user._id,
+            patient: additionalData.patient,
+            relationship: additionalData.relationship,
+          });
+        }
+        break;
+      default:
+        // Default case should not happen due to validation
+        return res.status(400).json({
+          success: false,
+          error: "Invalid user type",
+        });
+    }
+
+    // Generate token
+    const token = generateToken(user._id);
+
+    // Send response
+    res.status(201).json({
+      success: true,
+      data: {
+        token,
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          userType: user.userType,
+        },
+      },
+    });
+  } catch (error) {
+    logger.error(`Register error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Login user
+// @route   POST /api/auth/login
+// @access  Public
+exports.login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    // Check if user exists
+    const user = await User.findOne({ email }).select("+password");
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        error: "Invalid credentials",
+      });
+    }
+
+    // Check if password matches
+    const isMatch = await user.matchPassword(password);
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        error: "Invalid credentials",
+      });
+    }
+
+    // Generate token
+    const token = generateToken(user._id);
+
+    // Send response
+    res.status(200).json({
+      success: true,
+      data: {
+        token,
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          userType: user.userType,
+        },
+      },
+    });
+  } catch (error) {
+    logger.error(`Login error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Get current logged in user
+// @route   GET /api/auth/me
+// @access  Private
+exports.getMe = async (req, res, next) => {
+  try {
+    // User is already attached to req by auth middleware
+    const user = req.user;
+
+    // Get additional data based on user type
+    let userData = { ...user.toObject() };
+    delete userData.password;
+
+    // For patient, get devices
+    if (user.userType === "patient") {
+      // Fetch patient with populated fields
+      const patientData = await Patient.findById(user._id)
+        .populate("devices")
+        .select("-password");
+
+      userData = patientData;
+    }
+    // For caregiver, get patients
+    else if (user.userType === "caregiver") {
+      const caregiverData = await Caregiver.find({ user: user._id }).populate(
+        "patient"
+      );
+
+      userData.caregiverFor = caregiverData;
+    }
+    // For family, get patient relationships
+    else if (user.userType === "family") {
+      const familyData = await Family.find({ user: user._id }).populate(
+        "patient"
+      );
+
+      userData.familyFor = familyData;
+    }
+
+    res.status(200).json({
+      success: true,
+      data: userData,
+    });
+  } catch (error) {
+    logger.error(`Get me error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Update user profile
+// @route   PUT /api/auth/profile
+// @access  Private
+exports.updateProfile = async (req, res, next) => {
+  try {
+    const { name, phone, avatar } = req.body;
+
+    // Create update object
+    const updateData = {};
+    if (name) updateData.name = name;
+    if (phone) updateData.phone = phone;
+    if (avatar) updateData.avatar = avatar;
+
+    // Update user
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      { $set: updateData },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({
+        success: false,
+        error: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: updatedUser,
+    });
+  } catch (error) {
+    logger.error(`Update profile error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Change password
+// @route   PUT /api/auth/password
+// @access  Private
+exports.changePassword = async (req, res, next) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    // Get user with password
+    const user = await User.findById(req.user._id).select("+password");
+
+    // Check current password
+    const isMatch = await user.matchPassword(currentPassword);
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        error: "Current password is incorrect",
+      });
+    }
+
+    // Update password
+    user.password = newPassword;
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Password updated successfully",
+    });
+  } catch (error) {
+    logger.error(`Change password error: ${error.message}`);
+    next(error);
+  }
+};
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\controllers\caregiver.controller.js
+║ Size: 2164 bytes
+║ Last Modified: 2025-04-20 02:34:40.572794
+╠════════════════════════════════════════════════════════════════════════════════
+const { asyncHandler } = require("../utils/errorHandler");
+const Caregiver = require("../models/caregiver.model");
+const Patient = require("../models/patient.model");
+
+exports.getCaregiverProfile = asyncHandler(async (req, res) => {
+  const caregiver = await Caregiver.findOne({ user: req.user.id }).populate(
+    "patients.patient",
+    "name medicalRecordNumber"
+  );
+
+  if (!caregiver) throw new Error("Caregiver profile not found");
+
+  res.json({ success: true, data: caregiver });
+});
+
+exports.assignToPatient = asyncHandler(async (req, res) => {
+  const { patientId, relationship } = req.body;
+
+  const patient = await Patient.findById(patientId);
+  if (!patient) throw new Error("Patient not found");
+
+  const caregiver = await Caregiver.findOne({ user: req.user.id });
+  if (!caregiver) throw new Error("Caregiver profile not found");
+
+  await caregiver.addPatient(patientId, relationship);
+
+  // Also add caregiver to patient's caregivers array
+  await Patient.findByIdAndUpdate(patientId, {
+    $addToSet: { caregivers: req.user.id },
+  });
+
+  res.json({ success: true, message: "Patient assigned successfully" });
+});
+
+exports.getAssignedPatients = asyncHandler(async (req, res) => {
+  const caregiver = await Caregiver.findOne({ user: req.user.id }).populate({
+    path: "patients.patient",
+    select: "name dateOfBirth primaryDiagnosis",
+    match: { "patients.active": true },
+  });
+
+  const activePatients = caregiver.patients.filter((p) => p.active);
+  res.json({ success: true, data: activePatients });
+});
+
+exports.updateCaregiverDetails = asyncHandler(async (req, res) => {
+  const updates = Object.keys(req.body);
+  const allowedUpdates = [
+    "qualifications",
+    "licenseNumber",
+    "shifts",
+    "backgroundCheck",
+  ];
+  const isValidOperation = updates.every((update) =>
+    allowedUpdates.includes(update)
+  );
+
+  if (!isValidOperation) throw new Error("Invalid updates!");
+
+  const caregiver = await Caregiver.findOneAndUpdate(
+    { user: req.user.id },
+    req.body,
+    { new: true, runValidators: true }
+  );
+
+  res.json({ success: true, data: caregiver });
+});
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\controllers\device.controller.js
+║ Size: 6375 bytes
+║ Last Modified: 2025-04-06 19:43:39.850798
+╠════════════════════════════════════════════════════════════════════════════════
+// controllers/device.controller.js
+const Device = require('../models/device.model');
+const Patient = require('../models/patient.model');
+const logger = require('../utils/logger');
+const mqttService = require('../services/mqtt.service');
+
+// @desc    Register new device
+// @route   POST /api/devices
+// @access  Private (patient only)
+exports.registerDevice = async (req, res, next) => {
+  try {
+    const { deviceId } = req.body;
+    
+    // Check if device already exists
+    const existingDevice = await Device.findOne({ deviceId });
+    if (existingDevice) {
+      return res.status(400).json({
+        success: false,
+        error: 'Device ID already registered'
+      });
+    }
+    
+    // Create new device
+    const device = await Device.create({
+      deviceId,
+      patient: req.user._id,
+      status: 'active',
+      lastActive: new Date()
+    });
+    
+    // Update patient with device reference
+    await Patient.findByIdAndUpdate(
+      req.user._id,
+      { $push: { devices: device._id } }
+    );
+    
+    // Publish device registration to MQTT
+    mqttService.publishToDevice(deviceId, {
+      type: 'registration',
+      status: 'success',
+      timestamp: new Date()
+    });
+    
+    res.status(201).json({
+      success: true,
+      data: device
+    });
+  } catch (error) {
+    logger.error(`Register device error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Get all devices for the patient
+// @route   GET /api/devices
+// @access  Private (patient only)
+exports.getDevices = async (req, res, next) => {
+  try {
+    const devices = await Device.find({ patient: req.user._id });
+    
+    res.status(200).json({
+      success: true,
+      count: devices.length,
+      data: devices
+    });
+  } catch (error) {
+    logger.error(`Get devices error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Get single device
+// @route   GET /api/devices/:id
+// @access  Private (patient only)
+exports.getDevice = async (req, res, next) => {
+  try {
+    const device = await Device.findById(req.params.id);
+    
+    if (!device) {
+      return res.status(404).json({
+        success: false,
+        error: 'Device not found'
+      });
+    }
+    
+    // Check if device belongs to the patient
+    if (device.patient.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        success: false,
+        error: 'Not authorized to access this device'
+      });
+    }
+    
+    res.status(200).json({
+      success: true,
+      data: device
+    });
+  } catch (error) {
+    logger.error(`Get device error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Update device status
+// @route   PUT /api/devices/:id
+// @access  Private (patient only)
+exports.updateDevice = async (req, res, next) => {
+  try {
+    const { status } = req.body;
+    
+    let device = await Device.findById(req.params.id);
+    
+    if (!device) {
+      return res.status(404).json({
+        success: false,
+        error: 'Device not found'
+      });
+    }
+    
+    // Check if device belongs to the patient
+    if (device.patient.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        success: false,
+        error: 'Not authorized to update this device'
+      });
+    }
+    
+    // Update device
+    device = await Device.findByIdAndUpdate(
+      req.params.id,
+      { 
+        status,
+        lastActive: new Date()
+      },
+      { new: true, runValidators: true }
+    );
+    
+    // Publish status update to MQTT
+    mqttService.publishToDevice(device.deviceId, {
+      type: 'status_update',
+      status: device.status,
+      timestamp: new Date()
+    });
+    
+    res.status(200).json({
+      success: true,
+      data: device
+    });
+  } catch (error) {
+    logger.error(`Update device error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Remove device
+// @route   DELETE /api/devices/:id
+// @access  Private (patient only)
+exports.removeDevice = async (req, res, next) => {
+  try {
+    const device = await Device.findById(req.params.id);
+    
+    if (!device) {
+      return res.status(404).json({
+        success: false,
+        error: 'Device not found'
+      });
+    }
+    
+    // Check if device belongs to the patient
+    if (device.patient.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        success: false,
+        error: 'Not authorized to remove this device'
+      });
+    }
+    
+    // Remove device reference from patient
+    await Patient.findByIdAndUpdate(
+      req.user._id,
+      { $pull: { devices: device._id } }
+    );
+    
+    // Delete device
+    await device.remove();
+    
+    // Publish removal to MQTT
+    mqttService.publishToDevice(device.deviceId, {
+      type: 'deregistration',
+      status: 'removed',
+      timestamp: new Date()
+    });
+    
+    res.status(200).json({
+      success: true,
+      data: {}
+    });
+  } catch (error) {
+    logger.error(`Remove device error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Ping device
+// @route   POST /api/devices/:id/ping
+// @access  Private (patient, caregiver, family)
+exports.pingDevice = async (req, res, next) => {
+  try {
+    const device = await Device.findById(req.params.id)
+      .populate('patient');
+    
+    if (!device) {
+      return res.status(404).json({
+        success: false,
+        error: 'Device not found'
+      });
+    }
+    
+    // Publish ping to MQTT
+    const pingResult = mqttService.publishToDevice(device.deviceId, {
+      type: 'ping',
+      sender: req.user._id,
+      senderType: req.user.userType,
+      timestamp: new Date()
+    });
+    
+    if (!pingResult) {
+      return res.status(500).json({
+        success: false,
+        error: 'Failed to ping device. MQTT service not available.'
+      });
+    }
+    
+    // Update last active
+    device.lastActive = new Date();
+    await device.save();
+    
+    res.status(200).json({
+      success: true,
+      message: 'Ping sent to device',
+      data: {
+        deviceId: device.deviceId,
+        timestamp: new Date()
+      }
+    });
+  } catch (error) {
+    logger.error(`Ping device error: ${error.message}`);
+    next(error);
+  }
+};
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\controllers\reminder.controller.js
+║ Size: 8828 bytes
+║ Last Modified: 2025-04-20 02:34:52.689595
+╠════════════════════════════════════════════════════════════════════════════════
+const { validationResult } = require("express-validator");
+const Reminder = require("../models/reminder.model");
+const Patient = require("../models/patient.model");
+const Family = require("../models/family.model");
+const Caregiver = require("../models/caregiver.model");
+const asyncHandler = require("../utils/asyncHandler");
+const notificationService = require("../services/notification.service");
+const AppError = require("../utils/appError");
+
+/**
+ * @desc    Create a new reminder
+ * @route   POST /api/reminders
+ * @access  Private (Patient, Family, or Caregiver)
+ */
+exports.createReminder = asyncHandler(async (req, res, next) => {
+  // 1. Validate request
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(new AppError("Validation failed", 400, errors.array()));
+  }
+
+  const { title, description, scheduledTime, recurrence = "none" } = req.body;
+  let { patient } = req.body;
+
+  // 2. Determine patient based on user type
+  patient = await determinePatientForUser(req.user, patient);
+  if (!patient) {
+    return next(
+      new AppError("Not authorized to create reminders for this patient", 403)
+    );
+  }
+
+  // 3. Validate scheduled time
+  const scheduleDate = new Date(scheduledTime);
+  if (scheduleDate <= new Date()) {
+    return next(new AppError("Scheduled time must be in the future", 400));
+  }
+
+  // 4. Create and schedule reminder
+  const reminder = await Reminder.create({
+    title,
+    description,
+    scheduledTime: scheduleDate,
+    patient,
+    createdBy: req.user.id,
+    recurrence,
+    status: "scheduled",
+  });
+
+  await notificationService.scheduleReminder(reminder);
+
+  res.status(201).json({
+    status: "success",
+    data: reminder,
+  });
+});
+
+/**
+ * @desc    Get all reminders
+ * @route   GET /api/reminders
+ * @access  Private (Patient, Family, or Caregiver)
+ */
+exports.getReminders = asyncHandler(async (req, res, next) => {
+  // 1. Build base query based on user type
+  const query = await buildReminderQuery(req.user, req.query);
+
+  // 2. Execute query with sorting and pagination
+  const page = parseInt(req.query.page, 10) || 1;
+  const limit = parseInt(req.query.limit, 10) || 20;
+  const skip = (page - 1) * limit;
+
+  const [reminders, total] = await Promise.all([
+    Reminder.find(query)
+      .sort({ scheduledTime: 1 })
+      .skip(skip)
+      .limit(limit)
+      .populate("patient", "name")
+      .populate("createdBy", "name userType"),
+    Reminder.countDocuments(query),
+  ]);
+
+  res.status(200).json({
+    status: "success",
+    results: reminders.length,
+    total,
+    currentPage: page,
+    totalPages: Math.ceil(total / limit),
+    data: reminders,
+  });
+});
+
+/**
+ * @desc    Get single reminder
+ * @route   GET /api/reminders/:id
+ * @access  Private (Owner or linked to patient)
+ */
+exports.getReminder = asyncHandler(async (req, res, next) => {
+  const reminder = await Reminder.findById(req.params.id)
+    .populate("patient", "name")
+    .populate("createdBy", "name userType");
+
+  if (!reminder) {
+    return next(new AppError("Reminder not found", 404));
+  }
+
+  if (!(await hasReminderAccess(req.user, reminder))) {
+    return next(new AppError("Not authorized to access this reminder", 403));
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: reminder,
+  });
+});
+
+/**
+ * @desc    Update reminder
+ * @route   PATCH /api/reminders/:id
+ * @access  Private (Owner or linked to patient)
+ */
+exports.updateReminder = asyncHandler(async (req, res, next) => {
+  // 1. Validate request
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(new AppError("Validation failed", 400, errors.array()));
+  }
+
+  // 2. Find and validate reminder
+  let reminder = await Reminder.findById(req.params.id);
+  if (!reminder) {
+    return next(new AppError("Reminder not found", 404));
+  }
+
+  if (!(await hasReminderAccess(req.user, reminder))) {
+    return next(new AppError("Not authorized to update this reminder", 403));
+  }
+
+  if (reminder.status === "triggered") {
+    return next(new AppError("Cannot update a triggered reminder", 400));
+  }
+
+  // 3. Validate scheduled time if being updated
+  if (req.body.scheduledTime) {
+    const newTime = new Date(req.body.scheduledTime);
+    if (newTime <= new Date()) {
+      return next(new AppError("Scheduled time must be in the future", 400));
+    }
+  }
+
+  // 4. Update reminder
+  const updatedFields = {
+    ...req.body,
+    ...(req.body.scheduledTime && { status: "scheduled" }), // Reset status if time changed
+  };
+
+  reminder = await Reminder.findByIdAndUpdate(req.params.id, updatedFields, {
+    new: true,
+    runValidators: true,
+  });
+
+  // 5. Reschedule if needed
+  if (reminder.status === "scheduled") {
+    await notificationService.scheduleReminder(reminder);
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: reminder,
+  });
+});
+
+/**
+ * @desc    Cancel reminder
+ * @route   DELETE /api/reminders/:id
+ * @access  Private (Owner or linked to patient)
+ */
+exports.cancelReminder = asyncHandler(async (req, res, next) => {
+  const reminder = await Reminder.findById(req.params.id);
+  if (!reminder) {
+    return next(new AppError("Reminder not found", 404));
+  }
+
+  if (!(await hasReminderAccess(req.user, reminder))) {
+    return next(new AppError("Not authorized to cancel this reminder", 403));
+  }
+
+  if (reminder.status === "triggered") {
+    return next(new AppError("Cannot cancel a triggered reminder", 400));
+  }
+
+  reminder.status = "cancelled";
+  await reminder.save();
+
+  res.status(204).json({
+    status: "success",
+    data: null,
+  });
+});
+
+// ==================== HELPER FUNCTIONS ====================
+
+/**
+ * Determine the patient ID based on user type and input
+ */
+async function determinePatientForUser(user, inputPatientId) {
+  switch (user.userType) {
+    case "patient":
+      return user.id; // Patients can only create for themselves
+    case "family":
+      const family = await Family.findOne({ user: user.id });
+      if (!family) return null;
+      // Must either not specify patient or specify their linked patient
+      if (inputPatientId && inputPatientId !== family.patient.toString())
+        return null;
+      return family.patient;
+    case "caregiver":
+      if (!inputPatientId) return null;
+      // Verify caregiver is assigned to this patient
+      const isAssigned = await Caregiver.exists({
+        user: user.id,
+        patient: inputPatientId,
+      });
+      return isAssigned ? inputPatientId : null;
+    default:
+      return null;
+  }
+}
+
+/**
+ * Build query based on user type and request filters
+ */
+async function buildReminderQuery(user, queryParams) {
+  const { status, from, to } = queryParams;
+  const query = {};
+
+  // Base patient filter based on user type
+  switch (user.userType) {
+    case "patient":
+      query.patient = user.id;
+      break;
+    case "family":
+      const family = await Family.findOne({ user: user.id });
+      if (!family)
+        throw new AppError("Family member not linked to any patient", 404);
+      query.patient = family.patient;
+      break;
+    case "caregiver":
+      const assignments = await Caregiver.find({ user: user.id }).select(
+        "patient"
+      );
+      if (!assignments.length)
+        throw new AppError("No patient assignments found", 404);
+      query.patient = { $in: assignments.map((a) => a.patient) };
+      break;
+    default:
+      throw new AppError("Invalid user type", 400);
+  }
+
+  // Additional filters
+  if (status && ["scheduled", "triggered", "cancelled"].includes(status)) {
+    query.status = status;
+  }
+
+  if (from || to) {
+    query.scheduledTime = {};
+    if (from) query.scheduledTime.$gte = new Date(from);
+    if (to) query.scheduledTime.$lte = new Date(to);
+  }
+
+  return query;
+}
+
+/**
+ * Check if user has access to a specific reminder
+ */
+async function hasReminderAccess(user, reminder) {
+  // Creator always has access
+  if (reminder.createdBy.toString() === user.id) return true;
+
+  // Patient has access to their own reminders
+  if (user.userType === "patient" && reminder.patient.toString() === user.id) {
+    return true;
+  }
+
+  // Family members have access to their patient's reminders
+  if (user.userType === "family") {
+    const family = await Family.findOne({ user: user.id });
+    return family && family.patient.toString() === reminder.patient.toString();
+  }
+
+  // Caregivers have access to their assigned patients' reminders
+  if (user.userType === "caregiver") {
+    return Caregiver.exists({
+      user: user.id,
+      patient: reminder.patient,
+    });
+  }
+
+  return false;
+}
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\controllers\user.controller.js
+║ Size: 1480 bytes
+║ Last Modified: 2025-04-20 03:29:15.750937
+╠════════════════════════════════════════════════════════════════════════════════
+const asyncHandler = require("../utils/asyncHandler");
+const User = require("../models/user.model");
+
+exports.getProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user.id).select("-password").populate({
+    path: req.user.userType,
+    select: "-user -__v",
+  });
+
+  res.json({ success: true, data: user });
+});
+
+exports.updateProfile = asyncHandler(async (req, res) => {
+  const updates = Object.keys(req.body);
+  const allowedUpdates = ["name", "phone", "avatar"];
+  const isValidOperation = updates.every((update) =>
+    allowedUpdates.includes(update)
+  );
+
+  if (!isValidOperation) throw new Error("Invalid updates!");
+
+  const user = await User.findByIdAndUpdate(req.user.id, req.body, {
+    new: true,
+    runValidators: true,
+  }).select("-password");
+
+  res.json({ success: true, data: user });
+});
+
+exports.linkPatientToFamily = asyncHandler(async (req, res) => {
+  if (req.user.userType !== "family")
+    throw new Error("Only family members can link patients");
+
+  const patient = await User.findOne({
+    _id: req.body.patientId,
+    userType: "patient",
+  });
+  if (!patient) throw new Error("Patient not found");
+
+  // Implementation depends on your relationship structure
+  // This is a simplified version
+  await User.updateOne(
+    { _id: req.user.id },
+    { $addToSet: { patients: patient._id } }
+  );
+
+  res.json({ success: true, message: "Patient linked successfully" });
+});
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\middlewares\auth.js
+║ Size: 2781 bytes
+║ Last Modified: 2025-04-20 03:18:06.101684
+╠════════════════════════════════════════════════════════════════════════════════
+﻿// const jwt = require('jsonwebtoken');
+// const asyncHandler = require('express-async-handler');
+// const User = require('../models/User');
+
+// const protect = asyncHandler(async (req, res, next) => {
+//   let token;
+
+//   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+//     try {
+//       // Get token from header
+//       token = req.headers.authorization.split(' ')[1];
+
+//       // Verify token
+//       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+//       // Get user from token
+//       req.user = await User.findById(decoded.id).select('-password');
+
+//       next();
+//     } catch (error) {
+//       console.error(error);
+//       res.status(401);
+//       throw new Error('Not authorized');
+//     }
+//   }
+
+//   if (!token) {
+//     res.status(401);
+//     throw new Error('Not authorized, no token');
+//   }
+// });
+
+// module.exports = { protect };
+
+// middleware/auth.js
+const jwt = require("jsonwebtoken");
+const User = require("../models/user.model");
+const config = require("../config/config");
+const logger = require("../utils/logger");
+
+exports.protect = async (req, res, next) => {
+  try {
+    let token;
+
+    // Check for token in headers
+    if (
+      req.headers.authorization &&
+      req.headers.authorization.startsWith("Bearer")
+    ) {
+      token = req.headers.authorization.split(" ")[1];
+    }
+
+    // Check if token exists
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        error: "Not authorized to access this route",
+      });
+    }
+
+    try {
+      // Verify token
+      const decoded = jwt.verify(token, config.JWT_SECRET);
+
+      // Get user from token
+      const user = await User.findById(decoded.id);
+
+      if (!user) {
+        return res.status(401).json({
+          success: false,
+          error: "User not found",
+        });
+      }
+
+      // Set user in request object
+      req.user = user;
+      next();
+    } catch (error) {
+      logger.error(`Auth middleware error: ${error.message}`);
+      return res.status(401).json({
+        success: false,
+        error: "Not authorized to access this route",
+      });
+    }
+  } catch (error) {
+    logger.error(`Auth middleware error: ${error.message}`);
+    return res.status(500).json({
+      success: false,
+      error: "Server error in authentication middleware",
+    });
+  }
+};
+
+exports.authorizeRoles = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.userType)) {
+      return res.status(403).json({
+        success: false,
+        error: `User role ${req.user.userType} is not authorized to access this route`,
+      });
+    }
+    next();
+  };
+};
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\middlewares\error.js
+║ Size: 1325 bytes
+║ Last Modified: 2025-04-09 16:25:09.537470
+╠════════════════════════════════════════════════════════════════════════════════
+// middleware/error.js
+const logger = require("../utils/logger");
+
+const errorHandler = (err, req, res, next) => {
+  // Log error for debugging
+  logger.error(`${err.name}: ${err.message}`);
+  logger.debug(err.stack);
+
+  let error = { ...err };
+  error.message = err.message;
+
+  // Mongoose bad ObjectId
+  if (err.name === "CastError") {
+    const message = "Resource not found";
+    error = { message, statusCode: 404 };
+  }
+
+  // Mongoose duplicate key
+  if (err.code === 11000) {
+    const field = Object.keys(err.keyValue)[0];
+    const message = `Duplicate field value entered: ${field}`;
+    error = { message, statusCode: 400 };
+  }
+
+  // Mongoose validation error
+  if (err.name === "ValidationError") {
+    const message = Object.values(err.errors)
+      .map((val) => val.message)
+      .join(", ");
+    error = { message, statusCode: 400 };
+  }
+
+  // JWT errors
+  if (err.name === "JsonWebTokenError") {
+    const message = "Invalid token";
+    error = { message, statusCode: 401 };
+  }
+
+  if (err.name === "TokenExpiredError") {
+    const message = "Token expired";
+    error = { message, statusCode: 401 };
+  }
+
+  res.status(error.statusCode || 500).json({
+    success: false,
+    error: error.message || "Server Error",
+  });
+};
+
+module.exports = errorHandler;
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\middlewares\rateLimit.js
+║ Size: 1595 bytes
+║ Last Modified: 2025-04-20 03:17:56.093186
+╠════════════════════════════════════════════════════════════════════════════════
+// middleware/rateLimit.js
+const rateLimit = require("express-rate-limit");
+const config = require("../config/config");
+const logger = require("../utils/logger");
+
+const defaultLimiter = rateLimit({
+  windowMs: config.RATE_LIMIT_WINDOW, // Default: 15 minutes
+  max: config.RATE_LIMIT_MAX, // Default: 100 requests per window
+  standardHeaders: true,
+  legacyHeaders: false,
+  handler: (req, res) => {
+    logger.warn(`Rate limit exceeded for IP: ${req.ip}`);
+    res.status(429).json({
+      success: false,
+      error: "Too many requests, please try again later.",
+    });
+  },
+});
+
+// More strict limiter for auth routes
+const authLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 10, // 10 requests per hour
+  standardHeaders: true,
+  legacyHeaders: false,
+  handler: (req, res) => {
+    logger.warn(`Auth rate limit exceeded for IP: ${req.ip}`);
+    res.status(429).json({
+      success: false,
+      error: "Too many authentication attempts, please try again later.",
+    });
+  },
+});
+
+// Stricter limiter for device registration
+const deviceRegLimiter = rateLimit({
+  windowMs: 24 * 60 * 60 * 1000, // 24 hours
+  max: 5, // 5 devices per day
+  standardHeaders: true,
+  legacyHeaders: false,
+  handler: (req, res) => {
+    logger.warn(`Device registration rate limit exceeded for IP: ${req.ip}`);
+    res.status(429).json({
+      success: false,
+      error: "Device registration limit reached, please try again tomorrow.",
+    });
+  },
+});
+
+module.exports = {
+  defaultLimiter,
+  authLimiter,
+  deviceRegLimiter,
+};
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\models\caregiver.model.js
+║ Size: 527 bytes
+║ Last Modified: 2025-04-20 02:08:05.847991
+╠════════════════════════════════════════════════════════════════════════════════
+const mongoose = require("mongoose");
+const User = require("./user.model");
+
+const caregiverSchema = new mongoose.Schema({
+  patient: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Patient",
+    required: true,
+  },
+  deviceId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Device",
+  },
+  relationship: {
+    type: String,
+    required: true,
+  },
+  isAlsoFamilyMember: {
+    type: Boolean,
+    default: true,
+  },
+});
+
+module.exports = User.discriminator("Caregiver", caregiverSchema);
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\models\device.model.js
+║ Size: 472 bytes
+║ Last Modified: 2025-04-06 19:43:52.119123
+╠════════════════════════════════════════════════════════════════════════════════
+﻿const mongoose = require("mongoose");
+
+const deviceSchema = new mongoose.Schema({
+  patient: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Patient',
+    required: true
+  },
+  deviceId: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  lastActive: Date,
+  status: {
+    type: String,
+    enum: ['active', 'inactive'],
+    default: 'active'
+  }
+}, { timestamps: true });
+
+module.exports = mongoose.model("Device", deviceSchema);
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\models\family.model.js
+║ Size: 405 bytes
+║ Last Modified: 2025-04-09 10:42:20.685526
+╠════════════════════════════════════════════════════════════════════════════════
+const mongoose = require("mongoose");
+const User = require("./user.model");
+
+const familySchema = new mongoose.Schema({
+  relationship: {
+    type: String,
+    required: [true, "Relationship to patient is required"],
+  },
+  patients: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Patient",
+    required: true,
+  },
+});
+
+module.exports = User.discriminator("Family", familySchema);
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\models\patient.model.js
+║ Size: 498 bytes
+║ Last Modified: 2025-04-09 10:37:06.415977
+╠════════════════════════════════════════════════════════════════════════════════
+﻿const mongoose = require("mongoose");
+const User = require("./user.model");
+
+const patientSchema = new mongoose.Schema({
+  medicalRecordNumber: {
+    type: String,
+    unique: true,
+  },
+  dateOfBirth: Date,
+  primaryDiagnosis: String,
+  emergencyContact: {
+    name: String,
+    relationship: String,
+    phone: String,
+  },
+  devices: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Device",
+  },
+});
+
+module.exports = User.discriminator("Patient", patientSchema);
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\models\reminder.model.js
+║ Size: 712 bytes
+║ Last Modified: 2025-04-20 02:07:20.559278
+╠════════════════════════════════════════════════════════════════════════════════
+﻿const mongoose = require("mongoose");
+
+const reminderSchema = new mongoose.Schema(
+  {
+    patient: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Patient",
+      required: true,
+    },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    description: String,
+    scheduledTime: {
+      type: Date,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["scheduled", "triggered", "cancelled"],
+      default: "scheduled",
+    },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("Reminder", reminderSchema);
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\models\user.model.js
+║ Size: 1029 bytes
+║ Last Modified: 2025-04-09 10:33:53.072238
+╠════════════════════════════════════════════════════════════════════════════════
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+
+const userSchema = new mongoose.Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
+      match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, "Invalid email"],
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 8,
+    },
+    userType: {
+      type: String,
+      enum: ["patient", "caregiver", "family"],
+      required: true,
+      immutable: true,
+    },
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+      maxlength: 50,
+    },
+    phone: {
+      type: String,
+      trim: true,
+      match: [/^[+]?[(]?[0-9]{1,4}[)]?[-\s./0-9]*$/, "Invalid phone number"],
+    },
+    avatar: {
+      type: String,
+      default: "default-avatar.png",
+    },
+  },
+  {
+    timestamps: true,
+    discriminatorKey: "userType",
+  }
+);
+
+module.exports = mongoose.model("User", userSchema);
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\routes\auth.routes.js
+║ Size: 833 bytes
+║ Last Modified: 2025-04-20 02:11:18.866606
+╠════════════════════════════════════════════════════════════════════════════════
+// routes/auth.routes.js
+const express = require("express");
+const {
+  register,
+  login,
+  getMe,
+  updateProfile,
+  changePassword,
+} = require("../controllers/auth.controller");
+const { protect } = require("../middlewares/auth");
+const {
+  validate,
+  registerValidator,
+  loginValidator,
+} = require("../utils/validators");
+const { authLimiter } = require("../middlewares/rateLimit");
+
+const router = express.Router();
+
+// Apply rate limiting to auth routes
+router.use(authLimiter);
+
+// Public routes
+router.post("/register", validate(registerValidator), register);
+router.post("/login", validate(loginValidator), login);
+
+// Protected routes
+router.use(protect);
+router.get("/me", getMe);
+router.put("/profile", updateProfile);
+router.put("/password", changePassword);
+
+module.exports = router;
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\routes\device.routes.js
+║ Size: 1094 bytes
+║ Last Modified: 2025-04-20 02:12:42.334709
+╠════════════════════════════════════════════════════════════════════════════════
+// routes/device.routes.js
+const express = require('express');
+const { 
+  registerDevice, 
+  getDevices, 
+  getDevice, 
+  updateDevice, 
+  removeDevice,
+  pingDevice
+} = require('../controllers/device.controller');
+const { protect, authorizeRoles } = require('../middlewares/auth');
+const { validate, deviceValidator } = require('../utils/validators');
+const { deviceRegLimiter } = require('../middlewares/rateLimit');
+
+const router = express.Router();
+
+// Protect all device routes
+router.use(protect);
+
+// Patient-only routes
+router.route('/')
+  .post(
+    authorizeRoles('patient'),
+    deviceRegLimiter,
+    validate(deviceValidator),
+    registerDevice
+  )
+  .get(authorizeRoles('patient'), getDevices);
+
+router.route('/:id')
+  .get(authorizeRoles('patient'), getDevice)
+  .put(authorizeRoles('patient'), updateDevice)
+  .delete(authorizeRoles('patient'), removeDevice);
+
+// Routes accessible by patient, caregiver, and family
+router.post(
+  '/:id/ping',
+  authorizeRoles('patient', 'caregiver', 'family'),
+  pingDevice
+);
+
+module.exports = router;
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\routes\reminder.routes.js
+║ Size: 1826 bytes
+║ Last Modified: 2025-04-20 02:28:32.102272
+╠════════════════════════════════════════════════════════════════════════════════
+// routes/reminder.routes.js
+const express = require("express");
+const router = express.Router();
+const { protect, authorizeRoles } = require("../middlewares/auth");
+const {
+  createReminder,
+  getReminders,
+  getReminder,
+  updateReminder,
+  cancelReminder,
+} = require("../controllers/reminder.controller");
+const {
+  validate,
+  reminderValidator,
+  updateReminderValidator,
+} = require("../utils/validators");
+const { defaultLimiter } = require("../middlewares/rateLimit");
+
+// Apply rate limiting and authentication to all routes
+router.use(defaultLimiter);
+router.use(protect);
+
+/**
+ * @desc    Create a new reminder
+ * @route   POST /api/reminders
+ * @access  Private (Patient, Family, Caregiver)
+ */
+router.post(
+  "/",
+  authorizeRoles("patient", "family", "caregiver"),
+  validate(reminderValidator),
+  createReminder
+);
+
+/**
+ * @desc    Get all reminders
+ * @route   GET /api/reminders
+ * @access  Private (Patient, Family, Caregiver)
+ */
+router.get("/", authorizeRoles("patient", "family", "caregiver"), getReminders);
+
+/**
+ * @desc    Get single reminder
+ * @route   GET /api/reminders/:id
+ * @access  Private (Owner or linked to patient)
+ */
+router.get(
+  "/:id",
+  authorizeRoles("patient", "family", "caregiver"),
+  getReminder
+);
+
+/**
+ * @desc    Update reminder
+ * @route   PATCH /api/reminders/:id
+ * @access  Private (Owner or linked to patient)
+ */
+router.patch(
+  "/:id",
+  authorizeRoles("patient", "family", "caregiver"),
+  validate(updateReminderValidator),
+  updateReminder
+);
+
+/**
+ * @desc    Cancel reminder
+ * @route   DELETE /api/reminders/:id
+ * @access  Private (Owner or linked to patient)
+ */
+router.delete(
+  "/:id",
+  authorizeRoles("patient", "family", "caregiver"),
+  cancelReminder
+);
+
+module.exports = router;
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\routes\user.routes.js
+║ Size: 411 bytes
+║ Last Modified: 2025-04-20 02:12:49.203405
+╠════════════════════════════════════════════════════════════════════════════════
+const express = require("express");
+const { protect } = require("../middlewares/auth");
+const {
+  getProfile,
+  updateProfile,
+  linkPatientToFamily,
+} = require("../controllers/user.controller");
+
+const router = express.Router();
+
+router.use(protect);
+
+router.route("/me").get(getProfile).put(updateProfile);
+
+router.route("/link-patient").post(linkPatientToFamily);
+
+module.exports = router;
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\services\mqtt.service.js
+║ Size: 3258 bytes
+║ Last Modified: 2025-04-20 04:52:53.802498
+╠════════════════════════════════════════════════════════════════════════════════
+// services/mqtt.service.js
+const mqtt = require("mqtt");
+const config = require("../config/config");
+const logger = require("../utils/logger");
+
+class MqttService {
+  constructor() {
+    this.client = null;
+    this.connected = false;
+    this.topics = {
+      DEVICE_STATUS: "devices/+/status",
+      DEVICE_COMMAND: "devices/{deviceId}/commands",
+      ALERT_NOTIFICATION: "patients/{patientId}/alerts",
+    };
+  }
+
+  connect() {
+    try {
+      const options = {
+        username: config.MQTT_USERNAME,
+        password: config.MQTT_PASSWORD,
+        reconnectPeriod: 1000,
+        connectTimeout: 30 * 1000,
+      };
+
+      this.client = mqtt.connect(config.MQTT_BROKER_URL, options);
+
+      this.client.on("connect", () => {
+        this.connected = true;
+        logger.info("Connected to MQTT broker");
+        this.subscribe(this.topics.DEVICE_STATUS);
+      });
+
+      this.client.on("error", (error) => {
+        logger.error(`MQTT connection error: ${error.message}`);
+        this.connected = false;
+      });
+
+      this.client.on("close", () => {
+        logger.info("MQTT connection closed");
+        this.connected = false;
+      });
+
+      this.client.on("message", (topic, message) => {
+        this.handleMessage(topic, message);
+      });
+    } catch (error) {
+      logger.error(`MQTT service error: ${error.message}`);
+    }
+  }
+
+  handleMessage(topic, message) {
+    try {
+      const payload = JSON.parse(message.toString());
+
+      // Handle device status updates
+      if (topic.match(/devices\/(.+)\/status/)) {
+        const deviceId = topic.split("/")[1];
+        logger.info(
+          `Received status update from device ${deviceId}: ${JSON.stringify(
+            payload
+          )}`
+        );
+        // Update device status in database
+        // ...
+      }
+    } catch (error) {
+      logger.error(`Error handling MQTT message: ${error.message}`);
+    }
+  }
+
+  subscribe(topic) {
+    if (!this.connected) {
+      logger.warn("Cannot subscribe: MQTT client not connected");
+      return false;
+    }
+
+    this.client.subscribe(topic, (err) => {
+      if (err) {
+        logger.error(`Error subscribing to ${topic}: ${err.message}`);
+        return;
+      }
+      logger.info(`Subscribed to ${topic}`);
+    });
+    return true;
+  }
+
+  publishToDevice(deviceId, message) {
+    if (!this.connected) {
+      logger.warn("Cannot publish: MQTT client not connected");
+      return false;
+    }
+
+    const topic = this.topics.DEVICE_COMMAND.replace("{deviceId}", deviceId);
+    this.client.publish(topic, JSON.stringify(message), { qos: 1 });
+    logger.info(`Published message to ${topic}`);
+    return true;
+  }
+
+  sendAlert(patientId, alert) {
+    if (!this.connected) {
+      logger.warn("Cannot send alert: MQTT client not connected");
+      return false;
+    }
+
+    const topic = this.topics.ALERT_NOTIFICATION.replace(
+      "{patientId}",
+      patientId
+    );
+    this.client.publish(topic, JSON.stringify(alert), { qos: 1 });
+    logger.info(`Alert sent to patient ${patientId}`);
+    return true;
+  }
+}
+
+// Singleton instance
+const mqttService = new MqttService();
+
+module.exports = mqttService;
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\services\notification.service.js
+║ Size: 6221 bytes
+║ Last Modified: 2025-04-20 02:05:20.601422
+╠════════════════════════════════════════════════════════════════════════════════
+// services/notification.service.js
+const schedule = require("node-schedule");
+const mqttService = require("./mqtt.service");
+const webSocketService = require("./websocket.service");
+const logger = require("../utils/logger");
+const Reminder = require("../models/reminder.model");
+const Device = require("../models/device.model");
+
+class NotificationService {
+  constructor() {
+    this.scheduledJobs = new Map();
+  }
+
+  async scheduleReminder(reminder) {
+    try {
+      const jobId = `reminder_${reminder._id}`;
+
+      // Cancel existing job if it exists
+      if (this.scheduledJobs.has(jobId)) {
+        this.scheduledJobs.get(jobId).cancel();
+        this.scheduledJobs.delete(jobId);
+      }
+
+      // Schedule new job
+      const job = schedule.scheduleJob(reminder.scheduledTime, async () => {
+        await this.triggerReminder(reminder._id);
+      });
+
+      this.scheduledJobs.set(jobId, job);
+
+      logger.info(
+        `Scheduled reminder ${reminder._id} for ${reminder.scheduledTime}`
+      );
+      return true;
+    } catch (error) {
+      logger.error(`Error scheduling reminder: ${error.message}`);
+      return false;
+    }
+  }
+
+  async triggerReminder(reminderId) {
+    try {
+      const reminder = await Reminder.findById(reminderId)
+        .populate("patient")
+        .populate("createdBy");
+
+      if (!reminder || reminder.status !== "scheduled") {
+        logger.warn(
+          `Cannot trigger reminder ${reminderId}: not found or not scheduled`
+        );
+        return false;
+      }
+
+      // Update reminder status
+      reminder.status = "triggered";
+      await reminder.save();
+
+      // Send notifications directly (no alert creation)
+      await this.sendReminderNotifications(reminder);
+
+      // Handle recurrence if needed
+      if (reminder.recurrence !== "none") {
+        await this.scheduleRecurringReminder(reminder);
+      }
+
+      logger.info(`Triggered reminder ${reminderId}`);
+      return true;
+    } catch (error) {
+      logger.error(`Error triggering reminder: ${error.message}`);
+      return false;
+    }
+  }
+
+  async sendReminderNotifications(reminder) {
+    try {
+      // Populate reminder with patient data
+      const populatedReminder = await Reminder.findById(reminder._id).populate({
+        path: "patient",
+        populate: [
+          { path: "devices" },
+          { path: "caregivers", populate: { path: "user" } },
+          { path: "family", populate: { path: "user" } },
+        ],
+      });
+
+      if (!populatedReminder) {
+        logger.warn(
+          `Cannot send notifications: Reminder ${reminder._id} not found`
+        );
+        return false;
+      }
+
+      // Send to WebSocket clients
+      webSocketService.broadcastReminder(populatedReminder);
+
+      // Send to patient's devices via MQTT
+      if (populatedReminder.patient.devices?.length > 0) {
+        for (const device of populatedReminder.patient.devices) {
+          if (device.status === "active") {
+            mqttService.publishToDevice(device.deviceId, {
+              type: "reminder",
+              reminderId: populatedReminder._id,
+              title: populatedReminder.title,
+              description: populatedReminder.description,
+              timestamp: new Date(),
+            });
+          }
+        }
+      }
+
+      logger.info(`Sent notifications for reminder ${reminder._id}`);
+      return true;
+    } catch (error) {
+      logger.error(`Error sending reminder notifications: ${error.message}`);
+      return false;
+    }
+  }
+
+  async scheduleRecurringReminder(reminder) {
+    try {
+      const nextDate = this.calculateNextOccurrence(
+        reminder.scheduledTime,
+        reminder.recurrence
+      );
+
+      const newReminder = await Reminder.create({
+        patient: reminder.patient._id,
+        createdBy: reminder.createdBy._id,
+        title: reminder.title,
+        description: reminder.description,
+        scheduledTime: nextDate,
+        status: "scheduled",
+        recurrence: reminder.recurrence,
+      });
+
+      await this.scheduleReminder(newReminder);
+      logger.info(`Created recurring reminder for ${reminder._id}`);
+      return newReminder;
+    } catch (error) {
+      logger.error(`Error scheduling recurring reminder: ${error.message}`);
+      return null;
+    }
+  }
+
+  calculateNextOccurrence(date, recurrence) {
+    const nextDate = new Date(date);
+    switch (recurrence) {
+      case "daily":
+        nextDate.setDate(nextDate.getDate() + 1);
+        break;
+      case "weekly":
+        nextDate.setDate(nextDate.getDate() + 7);
+        break;
+      case "monthly":
+        nextDate.setMonth(nextDate.getMonth() + 1);
+        break;
+      default:
+        break;
+    }
+    return nextDate;
+  }
+
+  async schedulePendingReminders() {
+    try {
+      const reminders = await Reminder.find({ status: "scheduled" });
+      let scheduledCount = 0;
+
+      for (const reminder of reminders) {
+        if (new Date(reminder.scheduledTime) > new Date()) {
+          await this.scheduleReminder(reminder);
+          scheduledCount++;
+        }
+      }
+
+      logger.info(
+        `Scheduled ${scheduledCount} pending reminders on service start`
+      );
+      return scheduledCount;
+    } catch (error) {
+      logger.error(`Error scheduling pending reminders: ${error.message}`);
+      return 0;
+    }
+  }
+
+  async checkMissedReminders() {
+    try {
+      const now = new Date();
+      const missedReminders = await Reminder.find({
+        scheduledTime: { $lt: now },
+        status: "scheduled",
+      });
+
+      for (const reminder of missedReminders) {
+        await this.triggerReminder(reminder._id);
+      }
+
+      if (missedReminders.length > 0) {
+        logger.info(`Processed ${missedReminders.length} missed reminders`);
+      }
+
+      return missedReminders.length;
+    } catch (error) {
+      logger.error(`Error checking missed reminders: ${error.message}`);
+      return 0;
+    }
+  }
+}
+
+// Singleton instance
+const notificationService = new NotificationService();
+
+module.exports = notificationService;
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\services\reminder.service.js
+║ Size: 6312 bytes
+║ Last Modified: 2025-04-20 02:05:09.797371
+╠════════════════════════════════════════════════════════════════════════════════
+// services/reminder.service.js
+const Reminder = require("../models/reminder.model");
+const notificationService = require("./notification.service");
+const logger = require("../utils/logger");
+const AppError = require("../utils/appError");
+
+/**
+ * @desc    Create a new reminder and schedule it
+ * @param   {Object} reminderData - Reminder data including title, description, scheduledTime, etc.
+ * @returns {Promise<Object>} Created reminder
+ */
+exports.createReminder = async (reminderData) => {
+  try {
+    // Validate scheduled time
+    if (new Date(reminderData.scheduledTime) <= new Date()) {
+      throw new AppError("Scheduled time must be in the future", 400);
+    }
+
+    const reminder = await Reminder.create({
+      ...reminderData,
+      status: "scheduled",
+    });
+
+    // Schedule notification
+    await notificationService.scheduleReminder(reminder);
+
+    logger.info(`Created and scheduled reminder ${reminder._id}`);
+    return reminder;
+  } catch (error) {
+    logger.error(`Error creating reminder: ${error.message}`);
+    throw error;
+  }
+};
+
+/**
+ * @desc    Get reminder by ID
+ * @param   {String} id - Reminder ID
+ * @returns {Promise<Object>} Found reminder
+ */
+exports.getReminderById = async (id) => {
+  const reminder = await Reminder.findById(id)
+    .populate("patient", "name email")
+    .populate("createdBy", "name userType");
+
+  if (!reminder) {
+    throw new AppError("Reminder not found", 404);
+  }
+
+  return reminder;
+};
+
+/**
+ * @desc    Update reminder by ID
+ * @param   {String} id - Reminder ID
+ * @param   {Object} updateData - Data to update
+ * @returns {Promise<Object>} Updated reminder
+ */
+exports.updateReminder = async (id, updateData) => {
+  try {
+    const reminder = await Reminder.findById(id);
+    if (!reminder) {
+      throw new AppError("Reminder not found", 404);
+    }
+
+    // Prevent modifying triggered reminders
+    if (reminder.status === "triggered") {
+      throw new AppError("Cannot modify a triggered reminder", 400);
+    }
+
+    // If changing time, validate it's in the future
+    if (updateData.scheduledTime) {
+      const newTime = new Date(updateData.scheduledTime);
+      if (newTime <= new Date()) {
+        throw new AppError("New scheduled time must be in the future", 400);
+      }
+      updateData.status = "scheduled"; // Reset status if time changed
+    }
+
+    const updatedReminder = await Reminder.findByIdAndUpdate(id, updateData, {
+      new: true,
+      runValidators: true,
+    });
+
+    // Reschedule if needed
+    if (updatedReminder.status === "scheduled") {
+      await notificationService.scheduleReminder(updatedReminder);
+    }
+
+    logger.info(`Updated reminder ${id}`);
+    return updatedReminder;
+  } catch (error) {
+    logger.error(`Error updating reminder ${id}: ${error.message}`);
+    throw error;
+  }
+};
+
+/**
+ * @desc    Cancel reminder by ID
+ * @param   {String} id - Reminder ID
+ * @returns {Promise<Object>} Cancelled reminder
+ */
+exports.cancelReminder = async (id) => {
+  const reminder = await Reminder.findById(id);
+  if (!reminder) {
+    throw new AppError("Reminder not found", 404);
+  }
+
+  if (reminder.status === "triggered") {
+    throw new AppError("Cannot cancel a triggered reminder", 400);
+  }
+
+  reminder.status = "cancelled";
+  await reminder.save();
+
+  logger.info(`Cancelled reminder ${id}`);
+  return reminder;
+};
+
+/**
+ * @desc    Check for and process due reminders
+ * @returns {Promise<Number>} Number of processed reminders
+ */
+exports.processDueReminders = async () => {
+  try {
+    const now = new Date();
+    const dueReminders = await Reminder.find({
+      scheduledTime: { $lte: now },
+      status: "scheduled",
+    }).populate("patient");
+
+    let processedCount = 0;
+
+    for (const reminder of dueReminders) {
+      try {
+        // Update reminder status
+        reminder.status = "triggered";
+        await reminder.save();
+
+        // Send notifications (no alert creation)
+        await notificationService.sendReminderNotifications(reminder);
+
+        // Handle recurrence if needed
+        if (reminder.recurrence !== "none") {
+          await notificationService.scheduleRecurringReminder(reminder);
+        }
+
+        processedCount++;
+        logger.info(`Processed due reminder ${reminder._id}`);
+      } catch (error) {
+        logger.error(
+          `Error processing reminder ${reminder._id}: ${error.message}`
+        );
+      }
+    }
+
+    if (processedCount > 0) {
+      logger.info(`Processed ${processedCount} due reminders`);
+    }
+
+    return processedCount;
+  } catch (error) {
+    logger.error(`Error processing due reminders: ${error.message}`);
+    throw error;
+  }
+};
+
+/**
+ * @desc    Get reminders by patient ID
+ * @param   {String} patientId - Patient ID
+ * @param   {Object} [filters] - Optional filters (status, from, to)
+ * @returns {Promise<Array>} List of reminders
+ */
+exports.getRemindersByPatient = async (patientId, filters = {}) => {
+  const query = { patient: patientId };
+
+  // Apply filters
+  if (filters.status) {
+    query.status = filters.status;
+  }
+  if (filters.from || filters.to) {
+    query.scheduledTime = {};
+    if (filters.from) query.scheduledTime.$gte = new Date(filters.from);
+    if (filters.to) query.scheduledTime.$lte = new Date(filters.to);
+  }
+
+  return Reminder.find(query)
+    .sort({ scheduledTime: 1 })
+    .populate("createdBy", "name userType");
+};
+
+/**
+ * @desc    Get reminders by creator ID
+ * @param   {String} creatorId - User ID who created the reminders
+ * @param   {Object} [filters] - Optional filters
+ * @returns {Promise<Array>} List of reminders
+ */
+exports.getRemindersByCreator = async (creatorId, filters = {}) => {
+  const query = { createdBy: creatorId };
+
+  // Apply filters (same as getRemindersByPatient)
+  if (filters.status) {
+    query.status = filters.status;
+  }
+  if (filters.from || filters.to) {
+    query.scheduledTime = {};
+    if (filters.from) query.scheduledTime.$gte = new Date(filters.from);
+    if (filters.to) query.scheduledTime.$lte = new Date(filters.to);
+  }
+
+  return Reminder.find(query)
+    .sort({ scheduledTime: 1 })
+    .populate("patient", "name");
+};
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\services\websocket.service.js
+║ Size: 6856 bytes
+║ Last Modified: 2025-04-20 03:18:01.705869
+╠════════════════════════════════════════════════════════════════════════════════
+// services/websocket.service.js
+const WebSocket = require("ws");
+const logger = require("../utils/logger");
+const jwt = require("jsonwebtoken");
+const config = require("../config/config");
+
+class WebSocketService {
+  constructor() {
+    this.wss = null;
+    this.clients = new Map(); // Map user IDs to WebSocket connections
+    this.heartbeatInterval = 30000; // 30 seconds
+  }
+
+  initialize(server) {
+    this.wss = new WebSocket.Server({
+      server,
+      clientTracking: true,
+      verifyClient: (info, done) => {
+        // Basic origin check (extend for production)
+        if (!this.isOriginAllowed(info.origin)) {
+          return done(false, 401, "Unauthorized origin");
+        }
+        done(true);
+      },
+    });
+
+    this.setupEventHandlers();
+    this.setupHeartbeat();
+    logger.info("WebSocket server initialized");
+  }
+
+  setupEventHandlers() {
+    this.wss.on("connection", (ws, req) => {
+      logger.info("New WebSocket connection attempt");
+
+      // 1. Authenticate connection
+      this.authenticateConnection(ws, req)
+        .then((user) => {
+          if (!user) {
+            ws.close(1008, "Authentication failed");
+            return;
+          }
+
+          // 2. Store connection
+          this.addClient(user.id, ws);
+
+          // 3. Set up message handlers
+          this.setupMessageHandlers(ws, user.id);
+
+          // 4. Send connection confirmation
+          this.sendConnectionSuccess(ws, user);
+
+          logger.info(`WebSocket connection established for user ${user.id}`);
+        })
+        .catch((err) => {
+          logger.error(`Connection error: ${err.message}`);
+          ws.close(1011, "Server error");
+        });
+    });
+  }
+
+  async authenticateConnection(ws, req) {
+    try {
+      const token = this.extractToken(req);
+      if (!token) {
+        ws.close(1008, "Authentication token required");
+        return null;
+      }
+
+      // Verify JWT token
+      const decoded = jwt.verify(token, config.jwt.secret);
+      return decoded.user;
+    } catch (err) {
+      logger.error(`Authentication error: ${err.message}`);
+      ws.close(1008, "Invalid token");
+      return null;
+    }
+  }
+
+  extractToken(req) {
+    // Check URL params first
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    const urlToken = url.searchParams.get("token");
+
+    // Fallback to headers (for non-browser clients)
+    return urlToken || req.headers["sec-websocket-protocol"];
+  }
+
+  isOriginAllowed(origin) {
+    if (!origin) return true; // Non-browser clients
+    const allowedOrigins = config.cors.allowedOrigins;
+    return allowedOrigins.includes(origin) || allowedOrigins.includes("*");
+  }
+
+  setupMessageHandlers(ws, userId) {
+    ws.on("message", (message) => {
+      try {
+        const data = JSON.parse(message);
+        logger.debug(`Message from ${userId}: ${JSON.stringify(data)}`);
+
+        // Handle ping/pong
+        if (data.type === "ping") {
+          ws.send(JSON.stringify({ type: "pong", timestamp: Date.now() }));
+          return;
+        }
+
+        // Add custom message handlers here if needed
+      } catch (error) {
+        logger.error(`Message handling error: ${error.message}`);
+      }
+    });
+
+    ws.on("close", () => {
+      logger.info(`Connection closed for user ${userId}`);
+      this.removeClient(userId);
+    });
+
+    ws.on("error", (error) => {
+      logger.error(`Connection error for ${userId}: ${error.message}`);
+      this.removeClient(userId);
+    });
+  }
+
+  setupHeartbeat() {
+    setInterval(() => {
+      this.clients.forEach((ws, userId) => {
+        if (ws.isAlive === false) {
+          logger.info(`Terminating stale connection for ${userId}`);
+          return ws.terminate();
+        }
+
+        ws.isAlive = false;
+        ws.ping(() => {});
+      });
+    }, this.heartbeatInterval);
+
+    this.wss.on("connection", (ws) => {
+      ws.isAlive = true;
+      ws.on("pong", () => {
+        ws.isAlive = true;
+      });
+    });
+  }
+
+  sendConnectionSuccess(ws, user) {
+    ws.send(
+      JSON.stringify({
+        type: "connection",
+        status: "authenticated",
+        userType: user.userType,
+        timestamp: new Date().toISOString(),
+      })
+    );
+  }
+
+  addClient(userId, ws) {
+    // Close existing connection if present
+    if (this.clients.has(userId)) {
+      this.clients.get(userId).close(1001, "Duplicate connection");
+    }
+
+    this.clients.set(userId, ws);
+    logger.info(`Client ${userId} connected (${this.clients.size} total)`);
+  }
+
+  removeClient(userId) {
+    if (this.clients.delete(userId)) {
+      logger.info(
+        `Client ${userId} disconnected (${this.clients.size} remaining)`
+      );
+    }
+  }
+
+  sendToUser(userId, data) {
+    const client = this.clients.get(userId);
+    if (!client || client.readyState !== WebSocket.OPEN) return false;
+
+    try {
+      client.send(JSON.stringify(data));
+      return true;
+    } catch (err) {
+      logger.error(`Send error to ${userId}: ${err.message}`);
+      this.removeClient(userId);
+      return false;
+    }
+  }
+
+  broadcastToUsers(userIds, data) {
+    let successCount = 0;
+    userIds.forEach((userId) => {
+      if (this.sendToUser(userId, data)) successCount++;
+    });
+    return successCount;
+  }
+
+  broadcastReminder(reminder) {
+    const targetUsers = this.getReminderRecipients(reminder);
+    const sentCount = this.broadcastToUsers(targetUsers, {
+      type: "reminder",
+      data: {
+        id: reminder._id,
+        title: reminder.title,
+        description: reminder.description,
+        scheduledTime: reminder.scheduledTime.toISOString(),
+        status: reminder.status,
+        patientId: reminder.patient._id || reminder.patient,
+      },
+      timestamp: new Date().toISOString(),
+    });
+
+    logger.info(
+      `Reminder broadcast to ${sentCount}/${targetUsers.length} users`
+    );
+    return sentCount;
+  }
+
+  getReminderRecipients(reminder) {
+    const recipients = new Set();
+
+    // Always include the patient
+    recipients.add(
+      reminder.patient._id?.toString() || reminder.patient.toString()
+    );
+
+    // Include caregivers if populated
+    if (reminder.patient.caregivers) {
+      reminder.patient.caregivers.forEach((c) =>
+        recipients.add(c.user._id?.toString() || c.user.toString())
+      );
+    }
+
+    // Include family if populated
+    if (reminder.patient.family) {
+      recipients.add(
+        reminder.patient.family.user._id?.toString() ||
+          reminder.patient.family.user.toString()
+      );
+    }
+
+    return Array.from(recipients);
+  }
+}
+
+// Singleton instance
+const webSocketService = new WebSocketService();
+
+module.exports = webSocketService;
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\tests\setup.js
+║ Size: 921 bytes
+║ Last Modified: 2025-04-06 18:42:34.004256
+╠════════════════════════════════════════════════════════════════════════════════
+// tests/setup.js
+const mongoose = require("mongoose");
+const { MongoMemoryServer } = require("mongodb-memory-server");
+const logger = require("../utils/logger");
+
+let mongoServer;
+
+// Setup before tests
+beforeAll(async () => {
+  mongoServer = await MongoMemoryServer.create();
+  const mongoUri = mongoServer.getUri();
+
+  await mongoose.connect(mongoUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
+  logger.info("Connected to in-memory database for testing");
+});
+
+// Clean up after tests
+afterAll(async () => {
+  await mongoose.disconnect();
+  await mongoServer.stop();
+  logger.info("Disconnected from in-memory database");
+});
+
+// Clear database between tests
+afterEach(async () => {
+  const collections = mongoose.connection.collections;
+  for (const key in collections) {
+    const collection = collections[key];
+    await collection.deleteMany({});
+  }
+});
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\tests\controllers\auth.controller.test.js
+║ Size: 3856 bytes
+║ Last Modified: 2025-04-20 02:09:56.704204
+╠════════════════════════════════════════════════════════════════════════════════
+// tests/controllers/auth.controller.test.js
+const request = require("supertest");
+const app = require("../../app");
+const User = require("../../models/user.model");
+describe("Auth Controller", () => {
+  describe("POST /api/auth/register", () => {
+    it("should register a new user", async () => {
+      const userData = {
+        name: "Test User",
+        email: "test@example.com",
+        password: "password123",
+        userType: "patient",
+      };
+
+      const response = await request(app)
+        .post("/api/auth/register")
+        .send(userData);
+
+      expect(response.statusCode).toBe(201);
+      expect(response.body.success).toBe(true);
+      expect(response.body.data).toHaveProperty("token");
+      expect(response.body.data.user).toHaveProperty("email", userData.email);
+      expect(response.body.data.user).toHaveProperty(
+        "userType",
+        userData.userType
+      );
+
+      // Verify user was created in DB
+      const userInDb = await User.findOne({ email: userData.email });
+      expect(userInDb).toBeTruthy();
+      expect(userInDb.name).toBe(userData.name);
+    });
+
+    it("should not register a user with existing email", async () => {
+      // Create a user first
+      await User.create({
+        name: "Existing User",
+        email: "existing@example.com",
+        password: "password123",
+        userType: "patient",
+      });
+
+      // Try to register with same email
+      const userData = {
+        name: "New User",
+        email: "existing@example.com",
+        password: "password123",
+        userType: "caregiver",
+      };
+
+      const response = await request(app)
+        .post("/api/auth/register")
+        .send(userData);
+
+      expect(response.statusCode).toBe(400);
+      expect(response.body.success).toBe(false);
+      expect(response.body).toHaveProperty("error");
+    });
+
+    it("should validate required fields", async () => {
+      const userData = {
+        name: "Incomplete User",
+        email: "incomplete@example.com",
+        // Missing password and userType
+      };
+
+      const response = await request(app)
+        .post("/api/auth/register")
+        .send(userData);
+
+      expect(response.statusCode).toBe(400);
+      expect(response.body.success).toBe(false);
+    });
+  });
+
+  describe("POST /api/auth/login", () => {
+    beforeEach(async () => {
+      // Create a test user
+      await User.create({
+        name: "Login Test",
+        email: "login@example.com",
+        password: "password123",
+        userType: "patient",
+      });
+    });
+
+    it("should login with correct credentials", async () => {
+      const loginData = {
+        email: "login@example.com",
+        password: "password123",
+      };
+
+      const response = await request(app)
+        .post("/api/auth/login")
+        .send(loginData);
+
+      expect(response.statusCode).toBe(200);
+      expect(response.body.success).toBe(true);
+      expect(response.body.data).toHaveProperty("token");
+    });
+
+    it("should not login with incorrect password", async () => {
+      const loginData = {
+        email: "login@example.com",
+        password: "wrongpassword",
+      };
+
+      const response = await request(app)
+        .post("/api/auth/login")
+        .send(loginData);
+
+      expect(response.statusCode).toBe(401);
+      expect(response.body.success).toBe(false);
+    });
+
+    it("should not login with non-existent email", async () => {
+      const loginData = {
+        email: "nonexistent@example.com",
+        password: "password123",
+      };
+
+      const response = await request(app)
+        .post("/api/auth/login")
+        .send(loginData);
+
+      expect(response.statusCode).toBe(401);
+      expect(response.body.success).toBe(false);
+    });
+  });
+});
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\utils\appError.js
+║ Size: 1776 bytes
+║ Last Modified: 2025-04-20 02:40:42.036083
+╠════════════════════════════════════════════════════════════════════════════════
+// utils/appError.js
+class AppError extends Error {
+  /**
+   * Create custom application error
+   * @param {string} message - Error message
+   * @param {number} statusCode - HTTP status code
+   * @param {Array} errors - Optional array of validation errors
+   * @param {string} stack - Error stack trace
+   */
+  constructor(message, statusCode, errors = [], stack = "") {
+    super(message);
+
+    this.statusCode = statusCode;
+    this.status = `${statusCode}`.startsWith("4") ? "fail" : "error";
+    this.isOperational = true;
+    this.errors = errors;
+
+    if (stack) {
+      this.stack = stack;
+    } else {
+      Error.captureStackTrace(this, this.constructor);
+    }
+
+    // Log the error creation (optional)
+    if (process.env.NODE_ENV === "development") {
+      console.error(this);
+    }
+  }
+
+  /**
+   * Create a validation error
+   * @param {Array} errors - Array of validation errors
+   * @returns {AppError}
+   */
+  static validationError(errors) {
+    return new AppError("Validation failed", 400, errors);
+  }
+
+  /**
+   * Create a not found error
+   * @param {string} message - Custom not found message
+   * @returns {AppError}
+   */
+  static notFound(message = "Resource not found") {
+    return new AppError(message, 404);
+  }
+
+  /**
+   * Create an unauthorized error
+   * @param {string} message - Custom unauthorized message
+   * @returns {AppError}
+   */
+  static unauthorized(message = "Not authorized") {
+    return new AppError(message, 401);
+  }
+
+  /**
+   * Create a forbidden error
+   * @param {string} message - Custom forbidden message
+   * @returns {AppError}
+   */
+  static forbidden(message = "Forbidden") {
+    return new AppError(message, 403);
+  }
+}
+
+module.exports = AppError;
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\utils\asyncHandler.js
+║ Size: 217 bytes
+║ Last Modified: 2025-04-09 16:20:20.887982
+╠════════════════════════════════════════════════════════════════════════════════
+// utils/asyncHandler.js
+
+// Wrapper to avoid try-catch blocks in controllers
+const asyncHandler = (fn) => (req, res, next) =>
+  Promise.resolve(fn(req, res, next)).catch(next);
+
+module.exports = asyncHandler;
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\utils\logger.js
+║ Size: 1075 bytes
+║ Last Modified: 2025-04-20 03:18:14.793807
+╠════════════════════════════════════════════════════════════════════════════════
+// utils/logger.js
+const winston = require("winston");
+const config = require("../config/config");
+
+const logger = winston.createLogger({
+  level: config.LOG_LEVEL,
+  format: winston.format.combine(
+    winston.format.timestamp({
+      format: "YYYY-MM-DD HH:mm:ss",
+    }),
+    winston.format.errors({ stack: true }),
+    winston.format.splat(),
+    winston.format.json()
+  ),
+  defaultMeta: { service: "simiriti-management-api" },
+  transports: [
+    new winston.transports.File({ filename: "logs/error.log", level: "error" }),
+    new winston.transports.File({ filename: "logs/combined.log" }),
+  ],
+});
+
+// If we're not in production, also log to the console
+if (process.env.NODE_ENV !== "production") {
+  logger.add(
+    new winston.transports.Console({
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.simple()
+      ),
+    })
+  );
+}
+
+// Create a stream object for Morgan
+logger.stream = {
+  write: (message) => {
+    logger.info(message.trim());
+  },
+};
+
+module.exports = logger;
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\utils\validators.js
+║ Size: 4749 bytes
+║ Last Modified: 2025-04-20 02:33:01.623650
+╠════════════════════════════════════════════════════════════════════════════════
+// utils/validators.js
+const { check, validationResult } = require("express-validator");
+
+// Validation middleware handler
+exports.validate = (validations) => {
+  return async (req, res, next) => {
+    // Run all validations
+    await Promise.all(validations.map((validation) => validation.run(req)));
+
+    // Check if there are validation errors
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        errors: errors.array(),
+      });
+    }
+
+    next();
+  };
+};
+exports.reminderValidator = [
+  check("title", "Title is required").not().isEmpty().trim().escape(),
+  check("description", "Description is required")
+    .not()
+    .isEmpty()
+    .trim()
+    .escape(),
+  check("scheduledTime", "Valid scheduled time is required")
+    .isISO8601()
+    .toDate(),
+  check("recurrence", "Recurrence must be none, daily, weekly, or monthly")
+    .optional()
+    .isIn(["none", "daily", "weekly", "monthly"]),
+  check("patient", "Patient ID must be valid").optional().isMongoId(),
+];
+
+exports.updateReminderValidator = [
+  check("title", "Title is required")
+    .optional()
+    .not()
+    .isEmpty()
+    .trim()
+    .escape(),
+  check("description", "Description is required")
+    .optional()
+    .not()
+    .isEmpty()
+    .trim()
+    .escape(),
+  check("scheduledTime", "Valid scheduled time is required")
+    .optional()
+    .isISO8601()
+    .toDate(),
+  check("recurrence", "Recurrence must be none, daily, weekly, or monthly")
+    .optional()
+    .isIn(["none", "daily", "weekly", "monthly"]),
+  check("status", "Status must be scheduled or cancelled")
+    .optional()
+    .isIn(["scheduled", "cancelled"]),
+];
+// Auth validators
+exports.registerValidator = [
+  check("name")
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("Name is required")
+    .isLength({ min: 2, max: 50 })
+    .withMessage("Name must be between 2 and 50 characters"),
+
+  check("email")
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Please include a valid email")
+    .normalizeEmail(),
+
+  check("password")
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("Password is required")
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 8 characters long")
+    .matches(/\d/)
+    .withMessage("Password must contain a number"),
+
+  check("userType")
+    .isIn(["patient", "caregiver", "family"])
+    .withMessage("User type must be patient, caregiver, or family"),
+];
+
+exports.loginValidator = [
+  check("email")
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Please include a valid email"),
+
+  check("password").trim().not().isEmpty().withMessage("Password is required"),
+];
+
+// Device validators
+exports.deviceValidator = [
+  check("deviceId")
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("Device ID is required")
+    .isLength({ min: 5, max: 50 })
+    .withMessage("Device ID must be between 5 and 50 characters"),
+];
+
+// Reminder validators
+exports.reminderValidator = [
+  check("title")
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("Title is required")
+    .isLength({ max: 100 })
+    .withMessage("Title cannot exceed 100 characters"),
+
+  check("description")
+    .optional()
+    .isLength({ max: 500 })
+    .withMessage("Description cannot exceed 500 characters"),
+
+  check("scheduledTime")
+    .not()
+    .isEmpty()
+    .withMessage("Scheduled time is required")
+    .custom((value) => {
+      const scheduledTime = new Date(value);
+      const now = new Date();
+
+      if (scheduledTime < now) {
+        throw new Error("Scheduled time must be in the future");
+      }
+      return true;
+    }),
+
+  check("recurrence")
+    .isIn(["none", "daily", "weekly", "monthly"])
+    .withMessage("Recurrence must be none, daily, weekly, or monthly"),
+
+  check("patient")
+    .optional()
+    .isMongoId()
+    .withMessage("Invalid patient ID format"),
+];
+
+// Caregiver/family validators
+exports.caregiverValidator = [
+  check("patient")
+    .not()
+    .isEmpty()
+    .withMessage("Patient ID is required")
+    .isMongoId()
+    .withMessage("Invalid patient ID format"),
+];
+
+exports.familyValidator = [
+  check("patient")
+    .not()
+    .isEmpty()
+    .withMessage("Patient ID is required")
+    .isMongoId()
+    .withMessage("Invalid patient ID format"),
+
+  check("relationship")
+    .not()
+    .isEmpty()
+    .withMessage("Relationship is required")
+    .isLength({ max: 50 })
+    .withMessage("Relationship cannot exceed 50 characters"),
+];
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+=== END OF REPORT ===

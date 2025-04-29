@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
     },
     userType: {
       type: String,
-      enum: ["patient", "caregiver", "family"],
+      enum: ["Patient", "Caregiver", "Family"],
       required: true,
       immutable: true,
     },
@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    discriminatorKey: "userType",
+    discriminatorKey: "kind",
   }
 );
 

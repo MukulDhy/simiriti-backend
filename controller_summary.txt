@@ -1,0 +1,978 @@
+=== BACKEND CODE ANALYSIS REPORT ===
+Generated on: 2025-04-24 03:09:34
+Root Directory: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\controllers
+
+==================================================
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\controllers\auth.controller.js
+║ Size: 7024 bytes
+║ Last Modified: 2025-04-20 03:17:49.986723
+╠════════════════════════════════════════════════════════════════════════════════
+// controllers/auth.controller.js
+const jwt = require("jsonwebtoken");
+const User = require("../models/user.model");
+const Patient = require("../models/patient.model");
+const Caregiver = require("../models/caregiver.model");
+const Family = require("../models/family.model");
+const config = require("../config/config");
+const logger = require("../utils/logger");
+
+// Helper function to generate JWT token
+const generateToken = (id) => {
+  return jwt.sign({ id }, config.JWT_SECRET, {
+    expiresIn: config.JWT_EXPIRE,
+  });
+};
+
+// @desc    Register user
+// @route   POST /api/auth/register
+// @access  Public
+exports.register = async (req, res, next) => {
+  try {
+    const { name, email, password, userType, ...additionalData } = req.body;
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        error: "Email already in use",
+      });
+    }
+
+    // Create base user
+    const userData = {
+      name,
+      email,
+      password,
+      userType,
+    };
+
+    // Create user based on type
+    let user;
+    let extraData;
+
+    switch (userType) {
+      case "patient":
+        user = await Patient.create({
+          ...userData,
+          ...additionalData,
+        });
+        break;
+      case "caregiver":
+        user = await User.create(userData);
+        // If caregiver, check if patient ID is provided
+        if (additionalData.patient) {
+          // Create caregiver relationship
+          extraData = await Caregiver.create({
+            user: user._id,
+            patient: additionalData.patient,
+          });
+        }
+        break;
+      case "family":
+        user = await User.create(userData);
+        // If family, check if patient ID and relationship are provided
+        if (additionalData.patient && additionalData.relationship) {
+          // Create family relationship
+          extraData = await Family.create({
+            user: user._id,
+            patient: additionalData.patient,
+            relationship: additionalData.relationship,
+          });
+        }
+        break;
+      default:
+        // Default case should not happen due to validation
+        return res.status(400).json({
+          success: false,
+          error: "Invalid user type",
+        });
+    }
+
+    // Generate token
+    const token = generateToken(user._id);
+
+    // Send response
+    res.status(201).json({
+      success: true,
+      data: {
+        token,
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          userType: user.userType,
+        },
+      },
+    });
+  } catch (error) {
+    logger.error(`Register error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Login user
+// @route   POST /api/auth/login
+// @access  Public
+exports.login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    // Check if user exists
+    const user = await User.findOne({ email }).select("+password");
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        error: "Invalid credentials",
+      });
+    }
+
+    // Check if password matches
+    const isMatch = await user.matchPassword(password);
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        error: "Invalid credentials",
+      });
+    }
+
+    // Generate token
+    const token = generateToken(user._id);
+
+    // Send response
+    res.status(200).json({
+      success: true,
+      data: {
+        token,
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          userType: user.userType,
+        },
+      },
+    });
+  } catch (error) {
+    logger.error(`Login error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Get current logged in user
+// @route   GET /api/auth/me
+// @access  Private
+exports.getMe = async (req, res, next) => {
+  try {
+    // User is already attached to req by auth middleware
+    const user = req.user;
+
+    // Get additional data based on user type
+    let userData = { ...user.toObject() };
+    delete userData.password;
+
+    // For patient, get devices
+    if (user.userType === "patient") {
+      // Fetch patient with populated fields
+      const patientData = await Patient.findById(user._id)
+        .populate("devices")
+        .select("-password");
+
+      userData = patientData;
+    }
+    // For caregiver, get patients
+    else if (user.userType === "caregiver") {
+      const caregiverData = await Caregiver.find({ user: user._id }).populate(
+        "patient"
+      );
+
+      userData.caregiverFor = caregiverData;
+    }
+    // For family, get patient relationships
+    else if (user.userType === "family") {
+      const familyData = await Family.find({ user: user._id }).populate(
+        "patient"
+      );
+
+      userData.familyFor = familyData;
+    }
+
+    res.status(200).json({
+      success: true,
+      data: userData,
+    });
+  } catch (error) {
+    logger.error(`Get me error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Update user profile
+// @route   PUT /api/auth/profile
+// @access  Private
+exports.updateProfile = async (req, res, next) => {
+  try {
+    const { name, phone, avatar } = req.body;
+
+    // Create update object
+    const updateData = {};
+    if (name) updateData.name = name;
+    if (phone) updateData.phone = phone;
+    if (avatar) updateData.avatar = avatar;
+
+    // Update user
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      { $set: updateData },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({
+        success: false,
+        error: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: updatedUser,
+    });
+  } catch (error) {
+    logger.error(`Update profile error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Change password
+// @route   PUT /api/auth/password
+// @access  Private
+exports.changePassword = async (req, res, next) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    // Get user with password
+    const user = await User.findById(req.user._id).select("+password");
+
+    // Check current password
+    const isMatch = await user.matchPassword(currentPassword);
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        error: "Current password is incorrect",
+      });
+    }
+
+    // Update password
+    user.password = newPassword;
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Password updated successfully",
+    });
+  } catch (error) {
+    logger.error(`Change password error: ${error.message}`);
+    next(error);
+  }
+};
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\controllers\caregiver.controller.js
+║ Size: 2164 bytes
+║ Last Modified: 2025-04-20 02:34:40.572794
+╠════════════════════════════════════════════════════════════════════════════════
+const { asyncHandler } = require("../utils/errorHandler");
+const Caregiver = require("../models/caregiver.model");
+const Patient = require("../models/patient.model");
+
+exports.getCaregiverProfile = asyncHandler(async (req, res) => {
+  const caregiver = await Caregiver.findOne({ user: req.user.id }).populate(
+    "patients.patient",
+    "name medicalRecordNumber"
+  );
+
+  if (!caregiver) throw new Error("Caregiver profile not found");
+
+  res.json({ success: true, data: caregiver });
+});
+
+exports.assignToPatient = asyncHandler(async (req, res) => {
+  const { patientId, relationship } = req.body;
+
+  const patient = await Patient.findById(patientId);
+  if (!patient) throw new Error("Patient not found");
+
+  const caregiver = await Caregiver.findOne({ user: req.user.id });
+  if (!caregiver) throw new Error("Caregiver profile not found");
+
+  await caregiver.addPatient(patientId, relationship);
+
+  // Also add caregiver to patient's caregivers array
+  await Patient.findByIdAndUpdate(patientId, {
+    $addToSet: { caregivers: req.user.id },
+  });
+
+  res.json({ success: true, message: "Patient assigned successfully" });
+});
+
+exports.getAssignedPatients = asyncHandler(async (req, res) => {
+  const caregiver = await Caregiver.findOne({ user: req.user.id }).populate({
+    path: "patients.patient",
+    select: "name dateOfBirth primaryDiagnosis",
+    match: { "patients.active": true },
+  });
+
+  const activePatients = caregiver.patients.filter((p) => p.active);
+  res.json({ success: true, data: activePatients });
+});
+
+exports.updateCaregiverDetails = asyncHandler(async (req, res) => {
+  const updates = Object.keys(req.body);
+  const allowedUpdates = [
+    "qualifications",
+    "licenseNumber",
+    "shifts",
+    "backgroundCheck",
+  ];
+  const isValidOperation = updates.every((update) =>
+    allowedUpdates.includes(update)
+  );
+
+  if (!isValidOperation) throw new Error("Invalid updates!");
+
+  const caregiver = await Caregiver.findOneAndUpdate(
+    { user: req.user.id },
+    req.body,
+    { new: true, runValidators: true }
+  );
+
+  res.json({ success: true, data: caregiver });
+});
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\controllers\device.controller.js
+║ Size: 6375 bytes
+║ Last Modified: 2025-04-06 19:43:39.850798
+╠════════════════════════════════════════════════════════════════════════════════
+// controllers/device.controller.js
+const Device = require('../models/device.model');
+const Patient = require('../models/patient.model');
+const logger = require('../utils/logger');
+const mqttService = require('../services/mqtt.service');
+
+// @desc    Register new device
+// @route   POST /api/devices
+// @access  Private (patient only)
+exports.registerDevice = async (req, res, next) => {
+  try {
+    const { deviceId } = req.body;
+    
+    // Check if device already exists
+    const existingDevice = await Device.findOne({ deviceId });
+    if (existingDevice) {
+      return res.status(400).json({
+        success: false,
+        error: 'Device ID already registered'
+      });
+    }
+    
+    // Create new device
+    const device = await Device.create({
+      deviceId,
+      patient: req.user._id,
+      status: 'active',
+      lastActive: new Date()
+    });
+    
+    // Update patient with device reference
+    await Patient.findByIdAndUpdate(
+      req.user._id,
+      { $push: { devices: device._id } }
+    );
+    
+    // Publish device registration to MQTT
+    mqttService.publishToDevice(deviceId, {
+      type: 'registration',
+      status: 'success',
+      timestamp: new Date()
+    });
+    
+    res.status(201).json({
+      success: true,
+      data: device
+    });
+  } catch (error) {
+    logger.error(`Register device error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Get all devices for the patient
+// @route   GET /api/devices
+// @access  Private (patient only)
+exports.getDevices = async (req, res, next) => {
+  try {
+    const devices = await Device.find({ patient: req.user._id });
+    
+    res.status(200).json({
+      success: true,
+      count: devices.length,
+      data: devices
+    });
+  } catch (error) {
+    logger.error(`Get devices error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Get single device
+// @route   GET /api/devices/:id
+// @access  Private (patient only)
+exports.getDevice = async (req, res, next) => {
+  try {
+    const device = await Device.findById(req.params.id);
+    
+    if (!device) {
+      return res.status(404).json({
+        success: false,
+        error: 'Device not found'
+      });
+    }
+    
+    // Check if device belongs to the patient
+    if (device.patient.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        success: false,
+        error: 'Not authorized to access this device'
+      });
+    }
+    
+    res.status(200).json({
+      success: true,
+      data: device
+    });
+  } catch (error) {
+    logger.error(`Get device error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Update device status
+// @route   PUT /api/devices/:id
+// @access  Private (patient only)
+exports.updateDevice = async (req, res, next) => {
+  try {
+    const { status } = req.body;
+    
+    let device = await Device.findById(req.params.id);
+    
+    if (!device) {
+      return res.status(404).json({
+        success: false,
+        error: 'Device not found'
+      });
+    }
+    
+    // Check if device belongs to the patient
+    if (device.patient.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        success: false,
+        error: 'Not authorized to update this device'
+      });
+    }
+    
+    // Update device
+    device = await Device.findByIdAndUpdate(
+      req.params.id,
+      { 
+        status,
+        lastActive: new Date()
+      },
+      { new: true, runValidators: true }
+    );
+    
+    // Publish status update to MQTT
+    mqttService.publishToDevice(device.deviceId, {
+      type: 'status_update',
+      status: device.status,
+      timestamp: new Date()
+    });
+    
+    res.status(200).json({
+      success: true,
+      data: device
+    });
+  } catch (error) {
+    logger.error(`Update device error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Remove device
+// @route   DELETE /api/devices/:id
+// @access  Private (patient only)
+exports.removeDevice = async (req, res, next) => {
+  try {
+    const device = await Device.findById(req.params.id);
+    
+    if (!device) {
+      return res.status(404).json({
+        success: false,
+        error: 'Device not found'
+      });
+    }
+    
+    // Check if device belongs to the patient
+    if (device.patient.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        success: false,
+        error: 'Not authorized to remove this device'
+      });
+    }
+    
+    // Remove device reference from patient
+    await Patient.findByIdAndUpdate(
+      req.user._id,
+      { $pull: { devices: device._id } }
+    );
+    
+    // Delete device
+    await device.remove();
+    
+    // Publish removal to MQTT
+    mqttService.publishToDevice(device.deviceId, {
+      type: 'deregistration',
+      status: 'removed',
+      timestamp: new Date()
+    });
+    
+    res.status(200).json({
+      success: true,
+      data: {}
+    });
+  } catch (error) {
+    logger.error(`Remove device error: ${error.message}`);
+    next(error);
+  }
+};
+
+// @desc    Ping device
+// @route   POST /api/devices/:id/ping
+// @access  Private (patient, caregiver, family)
+exports.pingDevice = async (req, res, next) => {
+  try {
+    const device = await Device.findById(req.params.id)
+      .populate('patient');
+    
+    if (!device) {
+      return res.status(404).json({
+        success: false,
+        error: 'Device not found'
+      });
+    }
+    
+    // Publish ping to MQTT
+    const pingResult = mqttService.publishToDevice(device.deviceId, {
+      type: 'ping',
+      sender: req.user._id,
+      senderType: req.user.userType,
+      timestamp: new Date()
+    });
+    
+    if (!pingResult) {
+      return res.status(500).json({
+        success: false,
+        error: 'Failed to ping device. MQTT service not available.'
+      });
+    }
+    
+    // Update last active
+    device.lastActive = new Date();
+    await device.save();
+    
+    res.status(200).json({
+      success: true,
+      message: 'Ping sent to device',
+      data: {
+        deviceId: device.deviceId,
+        timestamp: new Date()
+      }
+    });
+  } catch (error) {
+    logger.error(`Ping device error: ${error.message}`);
+    next(error);
+  }
+};
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\controllers\reminder.controller.js
+║ Size: 8807 bytes
+║ Last Modified: 2025-04-23 03:15:25.312038
+╠════════════════════════════════════════════════════════════════════════════════
+const { validationResult } = require("express-validator");
+const Reminder = require("../models/reminder.model");
+const Patient = require("../models/patient.model");
+const Family = require("../models/family.model");
+const Caregiver = require("../models/caregiver.model");
+const asyncHandler = require("../utils/asyncHandler");
+const notificationService = require("../services/notification.service");
+const AppError = require("../utils/appError");
+
+/**
+ * @desc    Create a new reminder
+ * @route   POST /api/reminders
+ * @access  Private (Patient, Family, or Caregiver)
+ */
+exports.createReminder = asyncHandler(async (req, res, next) => {
+  // 1. Validate request
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(new AppError("Validation failed", 400, errors.array()));
+  }
+
+  const { title, description, scheduledTime } = req.body;
+  let { patient } = req.body;
+
+  // 2. Determine patient based on user type
+  patient = await determinePatientForUser(req.user, patient);
+  if (!patient) {
+    return next(
+      new AppError("Not authorized to create reminders for this patient", 403)
+    );
+  }
+
+  // 3. Validate scheduled time
+  const scheduleDate = new Date(scheduledTime);
+  if (scheduleDate <= new Date()) {
+    return next(new AppError("Scheduled time must be in the future", 400));
+  }
+
+  // 4. Create and schedule reminder
+  const reminder = await Reminder.create({
+    title,
+    description,
+    scheduledTime: scheduleDate,
+    patient,
+    createdBy: req.user.id,
+    recurrence,
+    status: "scheduled",
+  });
+
+  await notificationService.scheduleReminder(reminder);
+
+  res.status(201).json({
+    status: "success",
+    data: reminder,
+  });
+});
+
+/**
+ * @desc    Get all reminders
+ * @route   GET /api/reminders
+ * @access  Private (Patient, Family, or Caregiver)
+ */
+exports.getReminders = asyncHandler(async (req, res, next) => {
+  // 1. Build base query based on user type
+  const query = await buildReminderQuery(req.user, req.query);
+
+  // 2. Execute query with sorting and pagination
+  const page = parseInt(req.query.page, 10) || 1;
+  const limit = parseInt(req.query.limit, 10) || 20;
+  const skip = (page - 1) * limit;
+
+  const [reminders, total] = await Promise.all([
+    Reminder.find(query)
+      .sort({ scheduledTime: 1 })
+      .skip(skip)
+      .limit(limit)
+      .populate("patient", "name")
+      .populate("createdBy", "name userType"),
+    Reminder.countDocuments(query),
+  ]);
+
+  res.status(200).json({
+    status: "success",
+    results: reminders.length,
+    total,
+    currentPage: page,
+    totalPages: Math.ceil(total / limit),
+    data: reminders,
+  });
+});
+
+/**
+ * @desc    Get single reminder
+ * @route   GET /api/reminders/:id
+ * @access  Private (Owner or linked to patient)
+ */
+exports.getReminder = asyncHandler(async (req, res, next) => {
+  const reminder = await Reminder.findById(req.params.id)
+    .populate("patient", "name")
+    .populate("createdBy", "name userType");
+
+  if (!reminder) {
+    return next(new AppError("Reminder not found", 404));
+  }
+
+  if (!(await hasReminderAccess(req.user, reminder))) {
+    return next(new AppError("Not authorized to access this reminder", 403));
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: reminder,
+  });
+});
+
+/**
+ * @desc    Update reminder
+ * @route   PATCH /api/reminders/:id
+ * @access  Private (Owner or linked to patient)
+ */
+exports.updateReminder = asyncHandler(async (req, res, next) => {
+  // 1. Validate request
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(new AppError("Validation failed", 400, errors.array()));
+  }
+
+  // 2. Find and validate reminder
+  let reminder = await Reminder.findById(req.params.id);
+  if (!reminder) {
+    return next(new AppError("Reminder not found", 404));
+  }
+
+  if (!(await hasReminderAccess(req.user, reminder))) {
+    return next(new AppError("Not authorized to update this reminder", 403));
+  }
+
+  if (reminder.status === "triggered") {
+    return next(new AppError("Cannot update a triggered reminder", 400));
+  }
+
+  // 3. Validate scheduled time if being updated
+  if (req.body.scheduledTime) {
+    const newTime = new Date(req.body.scheduledTime);
+    if (newTime <= new Date()) {
+      return next(new AppError("Scheduled time must be in the future", 400));
+    }
+  }
+
+  // 4. Update reminder
+  const updatedFields = {
+    ...req.body,
+    ...(req.body.scheduledTime && { status: "scheduled" }), // Reset status if time changed
+  };
+
+  reminder = await Reminder.findByIdAndUpdate(req.params.id, updatedFields, {
+    new: true,
+    runValidators: true,
+  });
+
+  // 5. Reschedule if needed
+  if (reminder.status === "scheduled") {
+    await notificationService.scheduleReminder(reminder);
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: reminder,
+  });
+});
+
+/**
+ * @desc    Cancel reminder
+ * @route   DELETE /api/reminders/:id
+ * @access  Private (Owner or linked to patient)
+ */
+exports.cancelReminder = asyncHandler(async (req, res, next) => {
+  const reminder = await Reminder.findById(req.params.id);
+  if (!reminder) {
+    return next(new AppError("Reminder not found", 404));
+  }
+
+  if (!(await hasReminderAccess(req.user, reminder))) {
+    return next(new AppError("Not authorized to cancel this reminder", 403));
+  }
+
+  if (reminder.status === "triggered") {
+    return next(new AppError("Cannot cancel a triggered reminder", 400));
+  }
+
+  reminder.status = "cancelled";
+  await reminder.save();
+
+  res.status(204).json({
+    status: "success",
+    data: null,
+  });
+});
+
+// ==================== HELPER FUNCTIONS ====================
+
+/**
+ * Determine the patient ID based on user type and input
+ */
+async function determinePatientForUser(user, inputPatientId) {
+  switch (user.userType) {
+    case "patient":
+      return user.id; // Patients can only create for themselves
+    case "family":
+      const family = await Family.findOne({ user: user.id });
+      if (!family) return null;
+      // Must either not specify patient or specify their linked patient
+      if (inputPatientId && inputPatientId !== family.patient.toString())
+        return null;
+      return family.patient;
+    case "caregiver":
+      if (!inputPatientId) return null;
+      // Verify caregiver is assigned to this patient
+      const isAssigned = await Caregiver.exists({
+        user: user.id,
+        patient: inputPatientId,
+      });
+      return isAssigned ? inputPatientId : null;
+    default:
+      return null;
+  }
+}
+
+/**
+ * Build query based on user type and request filters
+ */
+async function buildReminderQuery(user, queryParams) {
+  const { status, from, to } = queryParams;
+  const query = {};
+
+  // Base patient filter based on user type
+  switch (user.userType) {
+    case "patient":
+      query.patient = user.id;
+      break;
+    case "family":
+      const family = await Family.findOne({ user: user.id });
+      if (!family)
+        throw new AppError("Family member not linked to any patient", 404);
+      query.patient = family.patient;
+      break;
+    case "caregiver":
+      const assignments = await Caregiver.find({ user: user.id }).select(
+        "patient"
+      );
+      if (!assignments.length)
+        throw new AppError("No patient assignments found", 404);
+      query.patient = { $in: assignments.map((a) => a.patient) };
+      break;
+    default:
+      throw new AppError("Invalid user type", 400);
+  }
+
+  // Additional filters
+  if (status && ["scheduled", "triggered", "cancelled"].includes(status)) {
+    query.status = status;
+  }
+
+  if (from || to) {
+    query.scheduledTime = {};
+    if (from) query.scheduledTime.$gte = new Date(from);
+    if (to) query.scheduledTime.$lte = new Date(to);
+  }
+
+  return query;
+}
+
+/**
+ * Check if user has access to a specific reminder
+ */
+async function hasReminderAccess(user, reminder) {
+  // Creator always has access
+  if (reminder.createdBy.toString() === user.id) return true;
+
+  // Patient has access to their own reminders
+  if (user.userType === "patient" && reminder.patient.toString() === user.id) {
+    return true;
+  }
+
+  // Family members have access to their patient's reminders
+  if (user.userType === "family") {
+    const family = await Family.findOne({ user: user.id });
+    return family && family.patient.toString() === reminder.patient.toString();
+  }
+
+  // Caregivers have access to their assigned patients' reminders
+  if (user.userType === "caregiver") {
+    return Caregiver.exists({
+      user: user.id,
+      patient: reminder.patient,
+    });
+  }
+
+  return false;
+}
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+║ File: C:\Users\Aarti\Downloads\ERP---Attendance-System-main\backendCode\controllers\user.controller.js
+║ Size: 1480 bytes
+║ Last Modified: 2025-04-20 03:29:15.750937
+╠════════════════════════════════════════════════════════════════════════════════
+const asyncHandler = require("../utils/asyncHandler");
+const User = require("../models/user.model");
+
+exports.getProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user.id).select("-password").populate({
+    path: req.user.userType,
+    select: "-user -__v",
+  });
+
+  res.json({ success: true, data: user });
+});
+
+exports.updateProfile = asyncHandler(async (req, res) => {
+  const updates = Object.keys(req.body);
+  const allowedUpdates = ["name", "phone", "avatar"];
+  const isValidOperation = updates.every((update) =>
+    allowedUpdates.includes(update)
+  );
+
+  if (!isValidOperation) throw new Error("Invalid updates!");
+
+  const user = await User.findByIdAndUpdate(req.user.id, req.body, {
+    new: true,
+    runValidators: true,
+  }).select("-password");
+
+  res.json({ success: true, data: user });
+});
+
+exports.linkPatientToFamily = asyncHandler(async (req, res) => {
+  if (req.user.userType !== "family")
+    throw new Error("Only family members can link patients");
+
+  const patient = await User.findOne({
+    _id: req.body.patientId,
+    userType: "patient",
+  });
+  if (!patient) throw new Error("Patient not found");
+
+  // Implementation depends on your relationship structure
+  // This is a simplified version
+  await User.updateOne(
+    { _id: req.user.id },
+    { $addToSet: { patients: patient._id } }
+  );
+
+  res.json({ success: true, message: "Patient linked successfully" });
+});
+
+
+╚════════════════════════════════════════════════════════════════════════════════
+
+=== END OF REPORT ===

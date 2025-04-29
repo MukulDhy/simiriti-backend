@@ -59,9 +59,6 @@ class NotificationService {
       await this.sendReminderNotifications(reminder);
 
       // Handle recurrence if needed
-      if (reminder.recurrence !== "none") {
-        await this.scheduleRecurringReminder(reminder);
-      }
 
       logger.info(`Triggered reminder ${reminderId}`);
       return true;
@@ -114,50 +111,6 @@ class NotificationService {
       logger.error(`Error sending reminder notifications: ${error.message}`);
       return false;
     }
-  }
-
-  async scheduleRecurringReminder(reminder) {
-    try {
-      const nextDate = this.calculateNextOccurrence(
-        reminder.scheduledTime,
-        reminder.recurrence
-      );
-
-      const newReminder = await Reminder.create({
-        patient: reminder.patient._id,
-        createdBy: reminder.createdBy._id,
-        title: reminder.title,
-        description: reminder.description,
-        scheduledTime: nextDate,
-        status: "scheduled",
-        recurrence: reminder.recurrence,
-      });
-
-      await this.scheduleReminder(newReminder);
-      logger.info(`Created recurring reminder for ${reminder._id}`);
-      return newReminder;
-    } catch (error) {
-      logger.error(`Error scheduling recurring reminder: ${error.message}`);
-      return null;
-    }
-  }
-
-  calculateNextOccurrence(date, recurrence) {
-    const nextDate = new Date(date);
-    switch (recurrence) {
-      case "daily":
-        nextDate.setDate(nextDate.getDate() + 1);
-        break;
-      case "weekly":
-        nextDate.setDate(nextDate.getDate() + 7);
-        break;
-      case "monthly":
-        nextDate.setMonth(nextDate.getMonth() + 1);
-        break;
-      default:
-        break;
-    }
-    return nextDate;
   }
 
   async schedulePendingReminders() {

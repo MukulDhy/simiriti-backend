@@ -19,7 +19,7 @@ exports.createReminder = asyncHandler(async (req, res, next) => {
     return next(new AppError("Validation failed", 400, errors.array()));
   }
 
-  const { title, description, scheduledTime, recurrence = "none" } = req.body;
+  const { title, description, scheduledTime } = req.body;
   let { patient } = req.body;
 
   // 2. Determine patient based on user type
