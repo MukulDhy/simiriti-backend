@@ -1,196 +1,271 @@
-🧠 Smiriti Backend API Documentation
-Base URL: https://simiriti-backend.onrender.com
-API Version: v1
-Format: JSON
-Auth: Bearer Token (JWT) for protected routes
+# 🧠 Smiriti Backend API
 
-📚 Table of Contents
-Authentication Routes
+> Base URL: **https://simiriti-backend.onrender.com**  
+> API Version: **v1**  
+> Format: **JSON**  
+> Authentication: **Bearer Token (JWT)** for protected routes
 
-User Routes
+---
 
-Device Routes
+## 📖 Table of Contents
 
-Reminder Routes
+- [Overview](#overview)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [API Endpoints](#api-endpoints)
+  - [Authentication](#authentication)
+  - [User Management](#user-management)
+  - [Device Management](#device-management)
+  - [Reminders](#reminders)
+  - [Real-time Communication](#real-time-communication)
+- [Error Handling](#error-handling)
+- [Contributing](#contributing)
+- [License](#license)
 
-Common Headers & Error Format
+---
 
-Integration Tips
+## 🔍 Overview
 
-1. ✅ Authentication Routes
-POST /api/auth/register
-Description: Register a new user
-Access: Public
-Body:
+The **Smiriti Backend API** serves as the core of the Smiriti application, managing user authentication, device registration, reminder scheduling, and real-time communications. Built with **Node.js** and **Express**, it ensures secure and efficient operations for all backend functionalities.
 
-json
-Copy
-Edit
+---
+
+## ✨ Features
+
+- **User Authentication**: Secure registration and login using JWT.
+- **Device Management**: Register, update, and monitor devices.
+- **Reminder Scheduling**: Create, update, and manage reminders.
+- **Real-time Communication**: WebSocket and MQTT support for instant updates.
+- **Role-Based Access Control**: Permissions tailored for patients, caregivers, and family members.
+- **Rate Limiting**: Protects against abuse by limiting repeated requests.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js** (v14 or above)
+- **npm** (v6 or above)
+- **MongoDB** (Ensure MongoDB is running)
+
+### Installation
+
+Clone the repository:
+```bash
+git clone https://github.com/yourusername/smiriti-backend.git
+cd smiriti-backend
+```
+
+Install dependencies:
+```bash
+npm install
+```
+
+Configure environment variables:  
+Create a `.env` file in the root directory and add the following:
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+```
+
+Run the server:
+```bash
+npm start
+```
+
+The server should now be running at `http://localhost:5000`.
+
+---
+
+## 📡 API Endpoints
+
+### 🔐 Authentication
+
+#### POST /api/auth/register
+Register a new user.
+
+```json
 {
   "name": "John Doe",
   "email": "john@example.com",
   "password": "yourStrongPassword"
 }
-Response:
+```
 
-json
-Copy
-Edit
-{
-  "token": "JWT_TOKEN_HERE",
-  "user": { "id": "...", "name": "...", "email": "...", "role": "patient" }
-}
-POST /api/auth/login
-Description: Login with email & password
-Access: Public
-Body:
+#### POST /api/auth/login
+Authenticate user and retrieve token.
 
-json
-Copy
-Edit
+```json
 {
   "email": "john@example.com",
   "password": "yourStrongPassword"
 }
-Response: Same as register
+```
 
-GET /api/auth/me
-Description: Get logged-in user profile
-Access: Protected (all roles)
+#### GET /api/auth/me
+Retrieve current user's profile.  
+**Headers:**
+```
+Authorization: Bearer <JWT_TOKEN>
+```
 
-PUT /api/auth/profile
-Description: Update logged-in user’s profile
-Access: Protected (all roles)
-Body: (any editable user fields)
+#### PUT /api/auth/profile
+Update user profile.  
+**Headers:**
+```
+Authorization: Bearer <JWT_TOKEN>
+```
 
-PUT /api/auth/password
-Description: Change password
-Access: Protected (all roles)
-Body:
+#### PUT /api/auth/password
+Change user password.
 
-json
-Copy
-Edit
+```json
 {
-  "currentPassword": "old123",
-  "newPassword": "newStrong123"
+  "currentPassword": "oldPassword",
+  "newPassword": "newStrongPassword"
 }
-2. 👤 User Routes
-GET /api/users/me
-Description: Get profile of current user
-Access: Protected
+```
 
-PUT /api/users/me
-Description: Update profile
-Access: Protected
-Body: Same as /profile
+---
 
-POST /api/users/link-patient
-Description: Link family to a patient
-Access: Protected
-Body:
+### 👤 User Management
 
-json
-Copy
-Edit
+#### GET /api/users/me
+Retrieve current user's profile.  
+**Headers:**
+```
+Authorization: Bearer <JWT_TOKEN>
+```
+
+#### PUT /api/users/me
+Update current user's profile.  
+**Headers:**
+```
+Authorization: Bearer <JWT_TOKEN>
+```
+
+#### POST /api/users/link-patient
+Link a family member to a patient.
+
+```json
 {
-  "patientId": "PATIENT_ID"
+  "patientId": "patient_user_id"
 }
-3. 📟 Device Routes
-All endpoints require authentication.
+```
 
-POST /api/devices/
-Access: patient only
-Description: Register a device
-Body:
+---
 
-json
-Copy
-Edit
+### 📱 Device Management
+
+> All device routes are protected.
+
+#### POST /api/devices/
+Register a new device.
+
+```json
 {
-  "name": "Band 1",
-  "serial": "ESP32-XXXX"
+  "name": "Device Name",
+  "serial": "Device Serial Number"
 }
-GET /api/devices/
-Access: patient
-Description: Get all registered devices for the patient
+```
 
-GET /api/devices/:id
-Access: patient
-Description: Get specific device
+#### GET /api/devices/
+Retrieve all devices.
 
-PUT /api/devices/:id
-Access: patient
-Description: Update device info
+#### GET /api/devices/:id
+Retrieve a specific device by ID.
 
-DELETE /api/devices/:id
-Access: patient
-Description: Remove device
+#### PUT /api/devices/:id
+Update device information.
 
-POST /api/devices/:id/ping
-Access: patient, caregiver, family
-Description: Send a ping to a device
-Use case: Notify wearable from any authorized role
+#### DELETE /api/devices/:id
+Remove a device.
 
-4. ⏰ Reminder Routes
-All endpoints require authentication and roles: patient, family, or caregiver.
+#### POST /api/devices/:id/ping
+Send a ping to a device.
 
-POST /api/reminders/
-Description: Create a new reminder
-Body:
+**All routes require:**
+```
+Authorization: Bearer <JWT_TOKEN>
+```
 
-json
-Copy
-Edit
+---
+
+### ⏰ Reminders
+
+> All reminder routes are protected.
+
+#### POST /api/reminders/
+Create a new reminder.
+
+```json
 {
   "title": "Take Medicine",
   "time": "2025-05-04T15:00:00Z"
 }
-GET /api/reminders/
-Description: Get all reminders
+```
 
-GET /api/reminders/:id
-Description: Get a single reminder by ID
+#### GET /api/reminders/
+Retrieve all reminders.
 
-PATCH /api/reminders/:id
-Description: Update a reminder
-Body: Same fields as create, partial allowed
+#### GET /api/reminders/:id
+Retrieve a specific reminder.
 
-DELETE /api/reminders/:id
-Description: Cancel a reminder
+#### PATCH /api/reminders/:id
+Update a reminder.
 
-5. 📎 Common Headers & Error Format
-Authentication Header (Protected Routes)
-makefile
-Copy
-Edit
+#### DELETE /api/reminders/:id
+Cancel a reminder.
+
+**All routes require:**
+```
 Authorization: Bearer <JWT_TOKEN>
-Error Format
-json
-Copy
-Edit
+```
+
+---
+
+### 🔁 Real-time Communication
+
+The backend supports:
+
+- **WebSockets**: Instant updates & notifications
+- **MQTT**: Efficient ESP32 communication
+
+---
+
+## ❗ Error Handling
+
+All errors follow this format:
+```json
 {
   "success": false,
   "message": "Detailed error message here"
 }
-6. 🔧 Integration Tips
-Login first using /api/auth/login to receive a JWT Token.
+```
 
-Store the JWT in frontend state (e.g., localStorage or secure cookie).
+Common HTTP codes:
 
-Send the token in all API calls needing auth using the Authorization header.
+- 400: Bad Request
+- 401: Unauthorized
+- 403: Forbidden
+- 404: Not Found
+- 500: Internal Server Error
 
-Devices and reminders are role-specific, ensure user roles are respected in your frontend logic.
+---
 
-Use GET /api/reminders/ and display upcoming alerts to the patient on the main screen.
+## 🤝 Contributing
 
-Handle server errors gracefully using the standardized message field.
+1. Fork the repo
+2. Create a new branch: `git checkout -b feature/YourFeature`
+3. Commit changes: `git commit -m 'Add YourFeature'`
+4. Push to the branch: `git push origin feature/YourFeature`
+5. Open a pull request
 
-The server uses rate limiting, avoid repeated rapid requests.
+---
 
-🖧 Real-time Integration Notes
-This backend supports WebSocket-based updates (websocket.service.js) and MQTT via mqtt.service.js.
+## 📄 License
 
-Use WebSockets for real-time updates to device states and reminders.
-
-MQTT is internally used for communication between backend and ESP32 devices.
+Licensed under the **MIT License**
