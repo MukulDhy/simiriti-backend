@@ -16,7 +16,7 @@ const notificationService = require("./services/notification.service");
 
 // Route imports
 const authRoutes = require("./routes/auth.routes");
-const deviceRoutes = require("./routes/device.routes");
+// const deviceRoutes = require("./routes/device.routes");
 const reminderRoutes = require("./routes/reminder.routes");
 const userRoutes = require("./routes/user.routes");
 
@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Mount routes
 app.use("/api/auth", authRoutes);
-app.use("/api/devices", deviceRoutes);
+// app.use("/api/devices", deviceRoutes);
 app.use("/api/reminders", reminderRoutes);
 // app.use("/api/alerts", alertRoutes);
 app.use("/api/users", userRoutes);

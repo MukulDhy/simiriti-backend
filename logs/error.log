@@ -4359,3 +4359,83 @@
 {"level":"error","message":"❌ MQTT connection error: read ECONNRESET","service":"simiriti-management-api","timestamp":"2025-04-26 19:33:12"}
 {"level":"error","message":"❌ MQTT connection error: read ECONNRESET","service":"simiriti-management-api","timestamp":"2025-04-26 20:44:34"}
 {"level":"error","message":"❌ MQTT connection error: read ECONNRESET","service":"simiriti-management-api","timestamp":"2025-04-26 23:51:34"}
+{"level":"error","message":"❌ MQTT connection error: read ECONNRESET","service":"simiriti-management-api","timestamp":"2025-04-30 22:30:33"}
+{"level":"error","message":"❌ MQTT connection error: read ECONNRESET","service":"simiriti-management-api","timestamp":"2025-05-01 02:33:51"}
+{"level":"error","message":"❌ MQTT connection error: getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-01 02:33:52"}
+{"level":"error","message":"❌ MQTT connection error: getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-01 02:33:52"}
+{"level":"error","message":"❌ MQTT connection error: getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-01 02:33:53"}
+{"level":"error","message":"❌ MQTT connection error: getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-01 02:33:54"}
+{"level":"error","message":"❌ MQTT connection error: read ECONNRESET","service":"simiriti-management-api","timestamp":"2025-05-01 07:34:41"}
+{"level":"error","message":"❌ MQTT error (Device 2113): read ECONNRESET","service":"simiriti-management-api","timestamp":"2025-05-05 12:13:53"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:13:55"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:13:55"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:13:56"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:13:56"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:13:57"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:13:57"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:13:58"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:13:58"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:13:59"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:13:59"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:00"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:00"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:01"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:01"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:02"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:02"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:03"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:03"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:04"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:04"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:05"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:05"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:06"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:06"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:07"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:07"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:08"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:08"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:09"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:09"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:10"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:10"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:11"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:11"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:12"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:12"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:13"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:13"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:14"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:14"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:15"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:15"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:16"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:16"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:17"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:17"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:18"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:18"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:19"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:19"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:20"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:20"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:21"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:21"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:22"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:22"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:23"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:23"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:24"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:24"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:25"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:25"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:26"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:26"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:27"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:27"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:28"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:28"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:29"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:29"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:30"}
+{"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:30"}

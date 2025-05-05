@@ -6,9 +6,10 @@ class MqttService {
   constructor() {
     this.client = null;
     this.connected = false;
+    this.deviceId = "2113"; // Hardcoded device ID
     this.topics = {
-      DEVICE_STATUS: "devices/{deviceId}/status",
-      DEVICE_COMMAND: "devices/{deviceId}/commands",
+      DEVICE_STATUS: `devices/${this.deviceId}/status`, // Pre-formatted topic
+      DEVICE_COMMAND: `devices/${this.deviceId}/commands`, // Pre-formatted topic
     };
   }
 
@@ -22,23 +23,26 @@ class MqttService {
         protocol: "mqtts", // TLS connection
       };
 
-      const url = "mqtts://02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud:8883";
+      const url =
+        "mqtts://02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud:8883";
 
       this.client = mqtt.connect(url, options);
 
       this.client.on("connect", () => {
         this.connected = true;
-        logger.info("✅ Connected to HiveMQ Cloud MQTT broker");
+        logger.info(`✅ Connected to HiveMQ Cloud for device ${this.deviceId}`);
         this.subscribe(this.topics.DEVICE_STATUS);
       });
 
       this.client.on("error", (error) => {
-        logger.error(`❌ MQTT connection error: ${error.message}`);
+        logger.error(
+          `❌ MQTT error (Device ${this.deviceId}): ${error.message}`
+        );
         this.connected = false;
       });
 
       this.client.on("close", () => {
-        logger.info("ℹ️ MQTT connection closed");
+        logger.info(`ℹ️ MQTT connection closed for device ${this.deviceId}`);
         this.connected = false;
       });
 
@@ -46,7 +50,9 @@ class MqttService {
         this.handleMessage(topic, message);
       });
     } catch (error) {
-      logger.error(`MQTT service error: ${error.message}`);
+      logger.error(
+        `MQTT service error (Device ${this.deviceId}): ${error.message}`
+      );
     }
   }
 
@@ -54,46 +60,47 @@ class MqttService {
     try {
       const payload = JSON.parse(message.toString());
 
-      if (topic.match(/devices\/(.+)\/status/)) {
-        const deviceId = topic.split("/")[1];
+      if (topic === this.topics.DEVICE_STATUS) {
         logger.info(
-          `📥 Received status update from device ${deviceId}: ${JSON.stringify(
-            payload
-          )}`
+          `📥 Status from ${this.deviceId}: ${JSON.stringify(payload)}`
         );
-        // Update device status in database
-        // ...
+        // Handle device status updates here
       }
     } catch (error) {
-      logger.error(`Error handling MQTT message: ${error.message}`);
+      logger.error(
+        `Message handling error (Device ${this.deviceId}): ${error.message}`
+      );
     }
   }
 
   subscribe(topic) {
     if (!this.connected) {
-      logger.warn("⚠️ Cannot subscribe: MQTT client not connected");
+      logger.warn(`⚠️ ${this.deviceId}: Can't subscribe - not connected`);
       return false;
     }
 
     this.client.subscribe(topic, (err) => {
       if (err) {
-        logger.error(`❌ Error subscribing to ${topic}: ${err.message}`);
+        logger.error(`❌ ${this.deviceId} subscription failed: ${err.message}`);
         return;
       }
-      logger.info(`📡 Subscribed to ${topic}`);
+      logger.info(`📡 ${this.deviceId} subscribed to ${topic}`);
     });
     return true;
   }
 
-  publishToDevice(deviceId, message) {
+  publishToDevice(message) {
     if (!this.connected) {
-      logger.warn("⚠️ Cannot publish: MQTT client not connected");
+      logger.warn(`⚠️ ${this.deviceId}: Can't publish - not connected`);
       return false;
     }
 
-    const topic = this.topics.DEVICE_COMMAND.replace("{deviceId}", deviceId);
-    this.client.publish(topic, JSON.stringify(message), { qos: 1 });
-    logger.info(`📤 Published message to ${topic}`);
+    this.client.publish(this.topics.DEVICE_COMMAND, JSON.stringify(message), {
+      qos: 1,
+    });
+    logger.info(
+      `📤 Command sent to ${this.deviceId}: ${JSON.stringify(message)}`
+    );
     return true;
   }
 }

@@ -1,14 +1,13 @@
-// services/notification.service.js
 const schedule = require("node-schedule");
 const mqttService = require("./mqtt.service");
 const webSocketService = require("./websocket.service");
 const logger = require("../utils/logger");
 const Reminder = require("../models/reminder.model");
-const Device = require("../models/device.model");
 
 class NotificationService {
   constructor() {
     this.scheduledJobs = new Map();
+    this.deviceId = "2113"; // Hardcoded device ID
   }
 
   async scheduleReminder(reminder) {
@@ -29,7 +28,7 @@ class NotificationService {
       this.scheduledJobs.set(jobId, job);
 
       logger.info(
-        `Scheduled reminder ${reminder._id} for ${reminder.scheduledTime}`
+        `⏰ Scheduled reminder ${reminder._id} for ${reminder.scheduledTime}`
       );
       return true;
     } catch (error) {
@@ -40,13 +39,11 @@ class NotificationService {
 
   async triggerReminder(reminderId) {
     try {
-      const reminder = await Reminder.findById(reminderId)
-        .populate("patient")
-        .populate("createdBy");
+      const reminder = await Reminder.findById(reminderId).populate("patient");
 
       if (!reminder || reminder.status !== "scheduled") {
         logger.warn(
-          `Cannot trigger reminder ${reminderId}: not found or not scheduled`
+          `⚠️ Cannot trigger reminder ${reminderId}: not found or not scheduled`
         );
         return false;
       }
@@ -55,12 +52,10 @@ class NotificationService {
       reminder.status = "triggered";
       await reminder.save();
 
-      // Send notifications directly (no alert creation)
+      // Send notifications
       await this.sendReminderNotifications(reminder);
 
-      // Handle recurrence if needed
-
-      logger.info(`Triggered reminder ${reminderId}`);
+      logger.info(`🔔 Triggered reminder ${reminderId}`);
       return true;
     } catch (error) {
       logger.error(`Error triggering reminder: ${error.message}`);
@@ -70,45 +65,24 @@ class NotificationService {
 
   async sendReminderNotifications(reminder) {
     try {
-      // Populate reminder with patient data
-      const populatedReminder = await Reminder.findById(reminder._id).populate({
-        path: "patient",
-        populate: [
-          { path: "devices" },
-          { path: "caregivers", populate: { path: "user" } },
-          { path: "family", populate: { path: "user" } },
-        ],
+      // Send to WebSocket (if needed)
+      webSocketService.broadcastReminder(reminder);
+
+      // Send directly to the single device
+      mqttService.publishToDevice({
+        type: "reminder",
+        reminderId: reminder._id,
+        title: reminder.title,
+        description: reminder.description,
+        timestamp: new Date(),
       });
 
-      if (!populatedReminder) {
-        logger.warn(
-          `Cannot send notifications: Reminder ${reminder._id} not found`
-        );
-        return false;
-      }
-
-      // Send to WebSocket clients
-      webSocketService.broadcastReminder(populatedReminder);
-
-      // Send to patient's devices via MQTT
-      if (populatedReminder.patient.devices?.length > 0) {
-        for (const device of populatedReminder.patient.devices) {
-          if (device.status === "active") {
-            mqttService.publishToDevice(device.deviceId, {
-              type: "reminder",
-              reminderId: populatedReminder._id,
-              title: populatedReminder.title,
-              description: populatedReminder.description,
-              timestamp: new Date(),
-            });
-          }
-        }
-      }
-
-      logger.info(`Sent notifications for reminder ${reminder._id}`);
+      logger.info(
+        `📨 Sent reminder to device ${this.deviceId}: ${reminder.title}`
+      );
       return true;
     } catch (error) {
-      logger.error(`Error sending reminder notifications: ${error.message}`);
+      logger.error(`Error sending notifications: ${error.message}`);
       return false;
     }
   }
@@ -126,7 +100,7 @@ class NotificationService {
       }
 
       logger.info(
-        `Scheduled ${scheduledCount} pending reminders on service start`
+        `♻️ Scheduled ${scheduledCount} pending reminders on startup`
       );
       return scheduledCount;
     } catch (error) {
@@ -148,7 +122,7 @@ class NotificationService {
       }
 
       if (missedReminders.length > 0) {
-        logger.info(`Processed ${missedReminders.length} missed reminders`);
+        logger.info(`⏳ Processed ${missedReminders.length} missed reminders`);
       }
 
       return missedReminders.length;
@@ -161,5 +135,4 @@ class NotificationService {
 
 // Singleton instance
 const notificationService = new NotificationService();
-
 module.exports = notificationService;
