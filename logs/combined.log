@@ -7045,3 +7045,16 @@
 {"level":"info","message":"ℹ️ MQTT connection closed for device 2113","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:30"}
 {"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:32"}
 {"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:32"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-05 13:11:12"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-05 13:11:12"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-05 13:11:13"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-05 13:11:13"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-00.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-05 13:11:14"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-05 13:11:14"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-08 18:20:09"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-08 18:20:10"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-08 18:20:10"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-08 18:20:11"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-00.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-08 18:20:11"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-08 18:20:12"}
+{"level":"info","message":"::ffff:192.168.0.9 - - [08/May/2025:17:43:17 +0000] \"POST /api/auth/register HTTP/1.1\" 400 846 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-08 23:13:17"}
