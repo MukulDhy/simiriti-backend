@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const helmet = require("helmet");
 const path = require("path");
+const bodyParser = require("body-parser");
 const config = require("./config/config.js");
 // const
 const connectDB = require("./config/db");
@@ -21,6 +22,7 @@ const reminderRoutes = require("./routes/reminder.routes");
 const userRoutes = require("./routes/user.routes");
 const basicRoutes = require("./routes/basic.routes.js");
 
+const whatsappRoutes = require("./routes/whatsapp.routes.js");
 // Initialize express app
 const app = express();
 
@@ -30,6 +32,9 @@ connectDB();
 // Body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Routes
 
 // Security middleware
 app.use(helmet());
@@ -51,6 +56,7 @@ app.use("/api/reminders", reminderRoutes);
 // app.use("/api/alerts", alertRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/basic", basicRoutes);
+app.use("/api/whatsapp", whatsappRoutes);
 
 // Root route
 app.get("/", (req, res) => {

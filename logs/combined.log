@@ -7508,3 +7508,33 @@
 {"level":"info","message":"::ffff:192.168.0.9 - - [11/May/2025:14:54:18 +0000] \"POST /api/auth/login HTTP/1.1\" 200 678 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-11 20:24:18"}
 {"level":"info","message":"::ffff:192.168.0.9 - - [11/May/2025:14:54:19 +0000] \"POST /api/basic/patient HTTP/1.1\" 200 548 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-11 20:24:19"}
 {"level":"info","message":"::ffff:192.168.0.9 - - [11/May/2025:15:05:11 +0000] \"POST /api/basic/patient HTTP/1.1\" 200 548 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-11 20:35:11"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-11 20:38:51"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-11 20:38:51"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-11 20:38:52"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-11 20:38:52"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-01.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-11 20:38:53"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-11 20:38:54"}
+{"level":"info","message":"::ffff:192.168.0.9 - - [11/May/2025:15:12:04 +0000] \"POST /api/basic/patient HTTP/1.1\" 200 548 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-11 20:42:04"}
+{"level":"info","message":"::ffff:192.168.0.9 - - [11/May/2025:15:15:10 +0000] \"POST /api/basic/patient HTTP/1.1\" 200 548 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-11 20:45:10"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-11 21:54:44"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-11 21:54:44"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-11 21:54:48"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-11 21:54:48"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-11 21:54:49"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-11 21:54:49"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-00.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-11 21:54:50"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-11 21:54:50"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-11 21:55:16"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-11 21:55:16"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-11 21:55:16"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-11 21:55:17"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-01.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-11 21:55:17"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-11 21:55:18"}
+{"level":"info","message":"::1 - - [11/May/2025:16:26:17 +0000] \"POST /api/whatsapp/send HTTP/1.1\" 400 35 \"-\" \"curl/8.6.0\"","service":"simiriti-management-api","timestamp":"2025-05-11 21:56:17"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-11 22:02:35"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-11 22:02:35"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-11 22:02:36"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-11 22:02:36"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-02.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-11 22:02:37"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-11 22:02:37"}
+{"level":"info","message":"::1 - - [11/May/2025:16:33:24 +0000] \"POST /api/whatsapp/send HTTP/1.1\" 200 83 \"-\" \"curl/8.6.0\"","service":"simiriti-management-api","timestamp":"2025-05-11 22:03:24"}
