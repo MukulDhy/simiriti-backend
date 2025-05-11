@@ -18,7 +18,14 @@ const userSchema = new mongoose.Schema(
     },
     userType: {
       type: String,
-      enum: ["Patient", "Caregiver", "Family"],
+      enum: [
+        "Patient",
+        "Caregiver",
+        "Family",
+        "patient",
+        "caregiver",
+        "family",
+      ],
       required: true,
       immutable: true,
     },

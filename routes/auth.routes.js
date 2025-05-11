@@ -18,10 +18,11 @@ const { authLimiter } = require("../middlewares/rateLimit");
 const router = express.Router();
 
 // Apply rate limiting to auth routes
-router.use(authLimiter);
+// router.use(authLimiter);
 
 // Public routes
 router.post("/register", validate(registerValidator), register);
+// router.post("/register", register);
 router.post("/login", validate(loginValidator), login);
 
 // Protected routes

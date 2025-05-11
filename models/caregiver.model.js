@@ -8,8 +8,8 @@ const caregiverSchema = new mongoose.Schema({
     required: true,
   },
   deviceId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Device",
+    type: Number,
+    default: 2113,
   },
   relationship: {
     type: String,

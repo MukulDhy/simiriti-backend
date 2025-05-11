@@ -19,8 +19,9 @@ const generateToken = (id) => {
 // @access  Public
 exports.register = async (req, res, next) => {
   try {
+    console.log("register started ");
     const { name, email, password, userType, ...additionalData } = req.body;
-
+    console.log(req.body);
     // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -88,12 +89,7 @@ exports.register = async (req, res, next) => {
       success: true,
       data: {
         token,
-        user: {
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-          userType: user.userType,
-        },
+        user,
       },
     });
   } catch (error) {
@@ -119,7 +115,7 @@ exports.login = async (req, res, next) => {
     }
 
     // Check if password matches
-    const isMatch = await user.matchPassword(password);
+    const isMatch = user.password === password;
     if (!isMatch) {
       return res.status(401).json({
         success: false,
@@ -135,12 +131,7 @@ exports.login = async (req, res, next) => {
       success: true,
       data: {
         token,
-        user: {
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-          userType: user.userType,
-        },
+        user,
       },
     });
   } catch (error) {

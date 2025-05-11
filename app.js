@@ -19,6 +19,7 @@ const authRoutes = require("./routes/auth.routes");
 // const deviceRoutes = require("./routes/device.routes");
 const reminderRoutes = require("./routes/reminder.routes");
 const userRoutes = require("./routes/user.routes");
+const basicRoutes = require("./routes/basic.routes.js");
 
 // Initialize express app
 const app = express();
@@ -35,7 +36,7 @@ app.use(helmet());
 app.use(cors());
 
 // Rate limiting - apply to all routes
-app.use(defaultLimiter);
+// app.use(defaultLimiter);
 
 // Logging
 app.use(morgan("combined", { stream: logger.stream }));
@@ -49,6 +50,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/reminders", reminderRoutes);
 // app.use("/api/alerts", alertRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/basic", basicRoutes);
 
 // Root route
 app.get("/", (req, res) => {

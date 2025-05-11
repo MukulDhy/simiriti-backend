@@ -113,7 +113,7 @@ exports.deviceValidator = [
     .not()
     .isEmpty()
     .withMessage("Device ID is required")
-    .isLength({ min: 5, max: 50 })
+    .isLength({ min: 2, max: 50 })
     .withMessage("Device ID must be between 5 and 50 characters"),
 ];
 
@@ -180,4 +180,12 @@ exports.familyValidator = [
     .withMessage("Relationship is required")
     .isLength({ max: 50 })
     .withMessage("Relationship cannot exceed 50 characters"),
+];
+
+exports.basicDetails = [
+  check("patientId")
+    .isEmpty()
+    .withMessage("Patient ID is required")
+    .isMongoId()
+    .withMessage("Invalid patient ID format"),
 ];

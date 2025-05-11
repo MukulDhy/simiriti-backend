@@ -4439,3 +4439,10 @@
 {"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:29"}
 {"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:30"}
 {"level":"error","message":"❌ MQTT error (Device 2113): getaddrinfo ENOTFOUND 02ed6b84181647639b35d467c00afbd9.s1.eu.hivemq.cloud","service":"simiriti-management-api","timestamp":"2025-05-05 12:14:30"}
+{"level":"error","message":"Register error: Patient validation failed: userType: `patient` is not a valid enum value for path `userType`.","service":"simiriti-management-api","timestamp":"2025-05-09 22:42:53"}
+{"level":"error","message":"ValidationError: Patient validation failed: userType: `patient` is not a valid enum value for path `userType`.","service":"simiriti-management-api","timestamp":"2025-05-09 22:42:53"}
+{"level":"error","message":"Login error: user.matchPassword is not a function","service":"simiriti-management-api","timestamp":"2025-05-09 23:30:00"}
+{"level":"error","message":"TypeError: user.matchPassword is not a function","service":"simiriti-management-api","timestamp":"2025-05-09 23:30:00"}
+{"level":"error","message":"❌ MQTT error (Device 2113): read ECONNRESET","service":"simiriti-management-api","timestamp":"2025-05-10 07:48:26"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'userType')","service":"simiriti-management-api","timestamp":"2025-05-11 15:33:07"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'userType')","service":"simiriti-management-api","timestamp":"2025-05-11 15:51:41"}
