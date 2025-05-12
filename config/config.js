@@ -3,6 +3,20 @@ const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 
 const config = {
+  server: {
+    host: process.env.HOST || "192.168.0.103",
+    port: process.env.PORT || 5000,
+  },
+  cors: {
+    allowedOrigins: [
+      "http://localhost:3000",
+      "http://192.168.0.103:8081",
+      "http://192.168.0.103:5000", // Add your server's own origin
+    ],
+  },
+  jwt: {
+    secret: process.env.JWT_SECRET || "your_jwt_secret_key_here",
+  },
   // Server Configuration
   NODE_ENV: process.env.NODE_ENV || "development",
   PORT: process.env.PORT || 5000,

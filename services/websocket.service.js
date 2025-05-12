@@ -1,156 +1,178 @@
-// services/websocket.service.js
 const WebSocket = require("ws");
-const logger = require("../utils/logger");
 const jwt = require("jsonwebtoken");
+const logger = require("../utils/logger");
 const config = require("../config/config");
-
+const User = require("../models/user.model");
 class WebSocketService {
   constructor() {
     this.wss = null;
-    this.clients = new Map(); // Map user IDs to WebSocket connections
-    this.heartbeatInterval = 30000; // 30 seconds
+    this.clients = new Map();
+    this.heartbeatInterval = 25000; // 25 seconds
+    this.pingInterval = null;
   }
 
   initialize(server) {
-    this.wss = new WebSocket.Server({
-      server,
-      clientTracking: true,
-      verifyClient: (info, done) => {
-        // Basic origin check (extend for production)
-        if (!this.isOriginAllowed(info.origin)) {
-          return done(false, 401, "Unauthorized origin");
-        }
-        done(true);
-      },
+    this.wss = new WebSocket.Server({ noServer: true });
+
+    server.on("upgrade", (request, socket, head) => {
+      this.handleUpgrade(request, socket, head).catch((err) => {
+        logger.error(`Upgrade failed: ${err.message}`);
+        socket.destroy();
+      });
     });
 
     this.setupEventHandlers();
-    this.setupHeartbeat();
     logger.info("WebSocket server initialized");
   }
 
-  setupEventHandlers() {
-    this.wss.on("connection", (ws, req) => {
-      logger.info("New WebSocket connection attempt");
-
-      // 1. Authenticate connection
-      this.authenticateConnection(ws, req)
-        .then((user) => {
-          if (!user) {
-            ws.close(1008, "Authentication failed");
-            return;
-          }
-
-          // 2. Store connection
-          this.addClient(user.id, ws);
-
-          // 3. Set up message handlers
-          this.setupMessageHandlers(ws, user.id);
-
-          // 4. Send connection confirmation
-          this.sendConnectionSuccess(ws, user);
-
-          logger.info(`WebSocket connection established for user ${user.id}`);
-        })
-        .catch((err) => {
-          logger.error(`Connection error: ${err.message}`);
-          ws.close(1011, "Server error");
-        });
-    });
-  }
-
-  async authenticateConnection(ws, req) {
+  async handleUpgrade(request, socket, head) {
     try {
-      const token = this.extractToken(req);
-      if (!token) {
-        ws.close(1008, "Authentication token required");
-        return null;
+      const { user, error } = await this.verifyClient(request);
+      if (error || !user) {
+        logger.warn(`Rejected connection: ${error}`);
+        return socket.end("HTTP/1.1 401 Unauthorized\r\n\rn");
       }
 
-      // Verify JWT token
-      const decoded = jwt.verify(token, config.jwt.secret);
-      return decoded.user;
+      this.wss.handleUpgrade(request, socket, head, (ws) => {
+        this.wss.emit("connection", ws, request);
+      });
     } catch (err) {
-      logger.error(`Authentication error: ${err.message}`);
-      ws.close(1008, "Invalid token");
+      logger.error(`Upgrade error: ${err.message}`);
+      throw err;
+    }
+  }
+
+  async verifyClient(request) {
+    try {
+      const origin = request.headers.origin;
+      if (!this.isOriginAllowed(origin)) {
+        return { error: "Origin not allowed" };
+      }
+
+      const token = this.extractToken(request);
+      if (!token) {
+        return { error: "No token provided" };
+      }
+
+      const decoded = await new Promise((resolve, reject) => {
+        jwt.verify(token, config.jwt.secret, (err, decoded) => {
+          if (err) reject(err);
+          else resolve(decoded);
+        });
+      });
+
+      if (!decoded?.id) {
+        return { error: "Invalid token payload" };
+      }
+      const user = await User.findById(decoded?.id);
+      request.user = user;
+      return { user: user };
+    } catch (err) {
+      logger.warn(`Verification failed: ${err.message}`);
+      return { error: err.message };
+    }
+  }
+
+  extractToken(request) {
+    try {
+      const url = new URL(request.url, `http://${request.headers.host}`);
+      return (
+        url.searchParams.get("token") ||
+        request.headers["sec-websocket-protocol"] ||
+        request.headers["authorization"]?.split(" ")[1]
+      );
+    } catch (err) {
       return null;
     }
   }
 
-  extractToken(req) {
-    // Check URL params first
-    const url = new URL(req.url, `http://${req.headers.host}`);
-    const urlToken = url.searchParams.get("token");
-
-    // Fallback to headers (for non-browser clients)
-    return urlToken || req.headers["sec-websocket-protocol"];
-  }
-
   isOriginAllowed(origin) {
-    if (!origin) return true; // Non-browser clients
-    const allowedOrigins = config.cors.allowedOrigins;
+    if (!origin || process.env.NODE_ENV === "development") return true;
+
+    const allowedOrigins = [
+      ...(config.cors?.allowedOrigins || []),
+      `http://${config.server.host}:${config.server.port}`,
+      "http://localhost:3000",
+      "http://192.168.0.103:8081",
+    ];
+
     return allowedOrigins.includes(origin) || allowedOrigins.includes("*");
   }
 
-  setupMessageHandlers(ws, userId) {
-    ws.on("message", (message) => {
-      try {
-        const data = JSON.parse(message);
-        logger.debug(`Message from ${userId}: ${JSON.stringify(data)}`);
-
-        // Handle ping/pong
-        if (data.type === "ping") {
-          ws.send(JSON.stringify({ type: "pong", timestamp: Date.now() }));
-          return;
-        }
-
-        // Add custom message handlers here if needed
-      } catch (error) {
-        logger.error(`Message handling error: ${error.message}`);
+  setupEventHandlers() {
+    this.wss.on("connection", (ws, request) => {
+      const userId = request.user?.id;
+      if (!userId) {
+        return ws.close(1008, "Authentication failed");
       }
-    });
 
-    ws.on("close", () => {
-      logger.info(`Connection closed for user ${userId}`);
-      this.removeClient(userId);
-    });
+      logger.info(`New connection from user ${userId}`);
 
-    ws.on("error", (error) => {
-      logger.error(`Connection error for ${userId}: ${error.message}`);
-      this.removeClient(userId);
-    });
-  }
+      // Send immediate authentication confirmation
+      ws.send(
+        JSON.stringify({
+          type: "connection",
+          status: "authenticated",
+          userId,
+          timestamp: new Date().toISOString(),
+        })
+      );
 
-  setupHeartbeat() {
-    setInterval(() => {
-      this.clients.forEach((ws, userId) => {
-        if (ws.isAlive === false) {
-          logger.info(`Terminating stale connection for ${userId}`);
-          return ws.terminate();
-        }
+      // Add to clients map
+      this.addClient(userId, ws);
 
-        ws.isAlive = false;
-        ws.ping(() => {});
-      });
-    }, this.heartbeatInterval);
-
-    this.wss.on("connection", (ws) => {
+      // Setup heartbeat
       ws.isAlive = true;
       ws.on("pong", () => {
         ws.isAlive = true;
+        logger.debug(`Heartbeat from ${userId}`);
+      });
+
+      // Message handler
+      ws.on("message", (data) => {
+        this.handleMessage(ws, userId, data);
+      });
+
+      ws.on("close", () => {
+        logger.info(`Connection closed for user ${userId}`);
+        this.removeClient(userId);
+      });
+
+      ws.on("error", (err) => {
+        logger.error(`Connection error for ${userId}: ${err.message}`);
+        this.removeClient(userId);
       });
     });
+
+    // Start heartbeat interval if not already running
+    if (!this.pingInterval) {
+      this.pingInterval = setInterval(() => {
+        this.wss.clients.forEach((client) => {
+          if (client.isAlive === false) {
+            logger.info("Terminating stale connection");
+            return client.terminate();
+          }
+
+          client.isAlive = false;
+          client.ping();
+        });
+      }, this.heartbeatInterval);
+    }
   }
 
-  sendConnectionSuccess(ws, user) {
-    ws.send(
-      JSON.stringify({
-        type: "connection",
-        status: "authenticated",
-        userType: user.userType,
-        timestamp: new Date().toISOString(),
-      })
-    );
+  handleMessage(ws, userId, data) {
+    try {
+      const message = JSON.parse(data);
+      logger.debug(`Message from ${userId}:`, message);
+
+      if (message.type === "ping") {
+        return ws.send(JSON.stringify({ type: "pong", timestamp: Date.now() }));
+      }
+
+      // Add other message handlers here
+    } catch (err) {
+      logger.error(`Message handling error: ${err.message}`);
+    }
   }
 
   addClient(userId, ws) {
@@ -169,6 +191,12 @@ class WebSocketService {
         `Client ${userId} disconnected (${this.clients.size} remaining)`
       );
     }
+
+    // Clear interval if no clients left
+    if (this.clients.size === 0 && this.pingInterval) {
+      clearInterval(this.pingInterval);
+      this.pingInterval = null;
+    }
   }
 
   sendToUser(userId, data) {
@@ -185,63 +213,15 @@ class WebSocketService {
     }
   }
 
-  broadcastToUsers(userIds, data) {
+  broadcast(data) {
     let successCount = 0;
-    userIds.forEach((userId) => {
-      if (this.sendToUser(userId, data)) successCount++;
+    this.clients.forEach((client, userId) => {
+      if (this.sendToUser(userId, data)) {
+        successCount++;
+      }
     });
     return successCount;
   }
-
-  broadcastReminder(reminder) {
-    const targetUsers = this.getReminderRecipients(reminder);
-    const sentCount = this.broadcastToUsers(targetUsers, {
-      type: "reminder",
-      data: {
-        id: reminder._id,
-        title: reminder.title,
-        description: reminder.description,
-        scheduledTime: reminder.scheduledTime.toISOString(),
-        status: reminder.status,
-        patientId: reminder.patient._id || reminder.patient,
-      },
-      timestamp: new Date().toISOString(),
-    });
-
-    logger.info(
-      `Reminder broadcast to ${sentCount}/${targetUsers.length} users`
-    );
-    return sentCount;
-  }
-
-  getReminderRecipients(reminder) {
-    const recipients = new Set();
-
-    // Always include the patient
-    recipients.add(
-      reminder.patient._id?.toString() || reminder.patient.toString()
-    );
-
-    // Include caregivers if populated
-    if (reminder.patient.caregivers) {
-      reminder.patient.caregivers.forEach((c) =>
-        recipients.add(c.user._id?.toString() || c.user.toString())
-      );
-    }
-
-    // Include family if populated
-    if (reminder.patient.family) {
-      recipients.add(
-        reminder.patient.family.user._id?.toString() ||
-          reminder.patient.family.user.toString()
-      );
-    }
-
-    return Array.from(recipients);
-  }
 }
 
-// Singleton instance
-const webSocketService = new WebSocketService();
-
-module.exports = webSocketService;
+module.exports = new WebSocketService();

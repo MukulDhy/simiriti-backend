@@ -27,7 +27,7 @@ router.use(protect);
  */
 router.post(
   "/",
-  authorizeRoles("patient", "family", "caregiver"),
+  authorizeRoles("caregiver"),
   validate(reminderValidator),
   createReminder
 );
