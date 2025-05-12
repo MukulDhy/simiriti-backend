@@ -5,7 +5,6 @@ const caregiverSchema = new mongoose.Schema({
   patient: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Patient",
-    required: true,
   },
   deviceId: {
     type: Number,

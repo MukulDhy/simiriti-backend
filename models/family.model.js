@@ -6,7 +6,7 @@ const familySchema = new mongoose.Schema({
     type: String,
     required: [true, "Relationship to patient is required"],
   },
-  patients: {
+  patient: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Patient",
     required: true,

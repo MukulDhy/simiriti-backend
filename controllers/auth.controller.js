@@ -20,8 +20,10 @@ const generateToken = (id) => {
 exports.register = async (req, res, next) => {
   try {
     console.log("register started ");
-    const { name, email, password, userType, ...additionalData } = req.body;
+    const { name, email, password, phone, userType, ...additionalData } =
+      req.body;
     console.log(req.body);
+
     // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -37,13 +39,16 @@ exports.register = async (req, res, next) => {
       email,
       password,
       userType,
+      phone,
     };
 
     // Create user based on type
     let user;
     let extraData;
 
-    switch (userType) {
+    switch (
+      userType.toLowerCase() // Convert to lowercase to handle case variations
+    ) {
       case "patient":
         user = await Patient.create({
           ...userData,
@@ -51,26 +56,57 @@ exports.register = async (req, res, next) => {
         });
         break;
       case "caregiver":
-        user = await User.create(userData);
-        // If caregiver, check if patient ID is provided
-        if (additionalData.patient) {
-          // Create caregiver relationship
-          extraData = await Caregiver.create({
-            user: user._id,
-            patient: additionalData.patient,
+        // user = await User.create(userData);
+        // If caregiver, check if patient email is provided
+        console.log("dawkhjdkwqhdihqwiudhiqwd");
+        if (additionalData.patientEmail) {
+          // Find patient by email
+          const patient = await Patient.findOne({
+            email: additionalData.patientEmail,
           });
+          console.log(patient);
+          if (patient) {
+            // Create caregiver relationship if patient exists
+            user = await Caregiver.create({
+              ...userData,
+              patient: patient._id,
+              deviceId: additionalData.deviceId || 2113,
+              relationship: additionalData.relationship || "Caregiver",
+              isAlsoFamilyMember: additionalData.isAlsoFamilyMember || true,
+            });
+          } else {
+            user = await Caregiver.create({
+              userData,
+              deviceId: additionalData.deviceId || 2113,
+              relationship: additionalData.relationship || "Caregiver",
+              isAlsoFamilyMember: additionalData.isAlsoFamilyMember || true,
+            });
+          }
+          // If patient doesn't exist, just proceed without creating relationship
         }
         break;
       case "family":
-        user = await User.create(userData);
-        // If family, check if patient ID and relationship are provided
-        if (additionalData.patient && additionalData.relationship) {
-          // Create family relationship
-          extraData = await Family.create({
-            user: user._id,
-            patient: additionalData.patient,
-            relationship: additionalData.relationship,
+        // If family, check if patient email and relationship are provided
+        if (additionalData.patientEmail && additionalData.relationship) {
+          // Find patient by email
+          const patient = await Patient.findOne({
+            email: additionalData.patientEmail,
           });
+          if (patient) {
+            // Create family relationship if patient exists
+            user = await Family.create({
+              ...userData,
+              patient: patient._id,
+              relationship: additionalData.relationship,
+            });
+          } else {
+            return res.status(400).json({
+              success: false,
+              error: "Patient Does not exist or First Make account of Patient",
+              message: "Patient Does not exist First Patient Should Login In",
+            });
+          }
+          // If patient doesn't exist, just proceed without creating relationship
         }
         break;
       default:

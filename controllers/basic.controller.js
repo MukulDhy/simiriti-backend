@@ -1,5 +1,6 @@
 const Caregiver = require("../models/caregiver.model");
 const Patient = require("../models/patient.model");
+const Family = require("../models/family.model");
 const asyncHandler = require("../utils/asyncHandler");
 
 exports.getCaretakerDetails = asyncHandler(async (req, res) => {
@@ -70,7 +71,7 @@ exports.getAllFamilyMembers = asyncHandler(async (req, res) => {
   }
 
   // Find all family members associated with this patient (without population)
-  const familyMembers = await Family.find({ patients: patientId });
+  const familyMembers = await Family.find({ patient: patientId });
 
   res.json({
     success: true,
