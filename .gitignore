@@ -4,3 +4,4 @@ node_modules
 frontend
 config/config.js
 .env
+logs
