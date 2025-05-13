@@ -9836,3 +9836,38 @@
 {"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:05:26\",\"rssi\":-56,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:28:16"}
 {"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:05:57\",\"rssi\":-50,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:28:46"}
 {"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:06:27\",\"rssi\":-48,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:29:16"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-13 19:31:27"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-13 19:31:28"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-13 19:31:28"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-13 19:31:29"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-02.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-13 19:31:30"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-13 19:31:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:08:56\",\"rssi\":-57,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:31:46"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:09:26\",\"rssi\":-48,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:32:16"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:09:56\",\"rssi\":-53,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:32:46"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-13 19:33:42"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-13 19:33:42"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-13 19:33:43"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-13 19:33:43"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-01.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-13 19:33:44"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-13 19:33:44"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-13 19:33:50"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-13 19:33:50"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-13 19:33:50"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-13 19:33:51"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-01.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-13 19:33:51"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-13 19:33:52"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:11:26\",\"rssi\":-49,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:34:16"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:11:56\",\"rssi\":-53,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:34:46"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:12:26\",\"rssi\":-53,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:35:16"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:12:56\",\"rssi\":-58,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:35:46"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:13:26\",\"rssi\":-56,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:36:16"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:13:56\",\"rssi\":-58,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:36:46"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:14:26\",\"rssi\":-57,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:37:16"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-13 19:39:07"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-13 19:39:07"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-13 19:39:08"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-13 19:39:08"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-02.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-13 19:39:09"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-13 19:39:09"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:16:26\",\"rssi\":-53,\"free_heap\":147624}","service":"simiriti-management-api","timestamp":"2025-05-13 19:39:16"}
