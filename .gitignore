@@ -5,3 +5,6 @@ frontend
 config/config.js
 .env
 logs
+logs/
+logs*
+env
