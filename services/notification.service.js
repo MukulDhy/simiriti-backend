@@ -79,6 +79,9 @@ class NotificationService {
 =======
       webSocketService.broadcastReminder(reminder);
       logger.warn(`Sending the notification to the notification the mqtt device ==== ${reminder}`)
+<<<<<<< HEAD
+>>>>>>> aa231886cfc8dabd47909c7362612176afa171e4
+=======
 >>>>>>> aa231886cfc8dabd47909c7362612176afa171e4
       // Send directly to the single device
       mqttService.publishToDevice({
