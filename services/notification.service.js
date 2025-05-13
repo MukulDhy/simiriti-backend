@@ -67,8 +67,11 @@ class NotificationService {
     try {
       // Send to WebSocket (if needed)
       // webSocketService.broadcastReminder(reminder);
-      console.log("Senidnin notificatiopon to the mqtt device ")
-      // Send directly to the single device
+      console.log("Senidnin notificatiopon to the mqtt device ");
+      // webSocketService.broadcastReminder(reminder);
+      logger.warn(
+        `Sending the notification to the notification the mqtt device ==== ${reminder}`
+      );
       mqttService.publishToDevice({
         type: "reminder",
         reminderId: reminder._id,

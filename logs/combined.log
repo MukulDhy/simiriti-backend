@@ -9681,3 +9681,158 @@
 {"level":"info","message":"::ffff:192.168.0.6 - - [12/May/2025:21:58:47 +0000] \"POST /api/basic/patient HTTP/1.1\" 200 548 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 03:28:47"}
 {"level":"info","message":"::ffff:192.168.0.6 - - [12/May/2025:21:58:48 +0000] \"POST /api/basic/caregiver HTTP/1.1\" 200 1407 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 03:28:48"}
 {"level":"info","message":"::ffff:192.168.0.6 - - [12/May/2025:21:58:49 +0000] \"POST /api/basic/family HTTP/1.1\" 200 910 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 03:28:49"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-13 17:45:59"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-13 17:45:59"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-13 17:46:00"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-13 17:46:00"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-01.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-13 17:46:01"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-13 17:46:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:09:56\",\"rssi\":-26,\"free_heap\":147600}","service":"simiriti-management-api","timestamp":"2025-05-13 17:46:17"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:10:26\",\"rssi\":-25,\"free_heap\":147600}","service":"simiriti-management-api","timestamp":"2025-05-13 17:46:47"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:10:56\",\"rssi\":-27,\"free_heap\":147600}","service":"simiriti-management-api","timestamp":"2025-05-13 17:47:17"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:11:26\",\"rssi\":-26,\"free_heap\":147600}","service":"simiriti-management-api","timestamp":"2025-05-13 17:47:47"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:11:56\",\"rssi\":-25,\"free_heap\":147600}","service":"simiriti-management-api","timestamp":"2025-05-13 17:48:17"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:12:26\",\"rssi\":-24,\"free_heap\":147588}","service":"simiriti-management-api","timestamp":"2025-05-13 17:48:47"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:12:56\",\"rssi\":-26,\"free_heap\":147588}","service":"simiriti-management-api","timestamp":"2025-05-13 17:49:17"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:13:26\",\"rssi\":-27,\"free_heap\":147600}","service":"simiriti-management-api","timestamp":"2025-05-13 17:49:47"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:13:56\",\"rssi\":-25,\"free_heap\":147600}","service":"simiriti-management-api","timestamp":"2025-05-13 17:50:17"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:14:26\",\"rssi\":-25,\"free_heap\":147588}","service":"simiriti-management-api","timestamp":"2025-05-13 17:50:47"}
+{"level":"info","message":"New connection from user 6821b47b6ca658cd01671549","service":"simiriti-management-api","timestamp":"2025-05-13 18:25:04"}
+{"level":"info","message":"Client 6821b47b6ca658cd01671549 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-05-13 18:25:04"}
+{"level":"info","message":"::ffff:192.168.0.9 - - [13/May/2025:12:55:05 +0000] \"GET /api/reminders HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 18:25:05"}
+{"level":"info","message":"::ffff:192.168.0.9 - - [13/May/2025:12:55:08 +0000] \"POST /api/basic/patient HTTP/1.1\" 200 548 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 18:25:08"}
+{"level":"info","message":"::ffff:192.168.0.9 - - [13/May/2025:12:55:09 +0000] \"POST /api/basic/caregiver HTTP/1.1\" 200 1407 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 18:25:09"}
+{"level":"info","message":"::ffff:192.168.0.9 - - [13/May/2025:12:55:09 +0000] \"POST /api/basic/family HTTP/1.1\" 200 910 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 18:25:09"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-13 18:27:59"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-13 18:27:59"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-13 18:28:00"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-13 18:28:00"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-01.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-13 18:28:01"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-13 18:28:02"}
+{"level":"info","message":"New connection from user 6821b47b6ca658cd01671549","service":"simiriti-management-api","timestamp":"2025-05-13 18:28:07"}
+{"level":"info","message":"Client 6821b47b6ca658cd01671549 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-05-13 18:28:07"}
+{"level":"info","message":"Connection closed for user 6821b47b6ca658cd01671549","service":"simiriti-management-api","timestamp":"2025-05-13 18:29:33"}
+{"level":"info","message":"Client 6821b47b6ca658cd01671549 disconnected (0 remaining)","service":"simiriti-management-api","timestamp":"2025-05-13 18:29:33"}
+{"level":"info","message":"New connection from user 6821b47b6ca658cd01671549","service":"simiriti-management-api","timestamp":"2025-05-13 18:31:46"}
+{"level":"info","message":"Client 6821b47b6ca658cd01671549 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-05-13 18:31:46"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-13 18:49:30"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-13 18:49:30"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-13 18:49:31"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-13 18:49:31"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-02.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-13 18:49:32"}
+{"level":"info","message":"New connection from user 6821b47b6ca658cd01671549","service":"simiriti-management-api","timestamp":"2025-05-13 18:49:33"}
+{"level":"info","message":"Client 6821b47b6ca658cd01671549 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-05-13 18:49:33"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-13 18:49:33"}
+{"level":"info","message":"Connection closed for user 6821b47b6ca658cd01671549","service":"simiriti-management-api","timestamp":"2025-05-13 18:51:02"}
+{"level":"info","message":"Client 6821b47b6ca658cd01671549 disconnected (0 remaining)","service":"simiriti-management-api","timestamp":"2025-05-13 18:51:02"}
+{"level":"info","message":"New connection from user 6821b47b6ca658cd01671549","service":"simiriti-management-api","timestamp":"2025-05-13 18:51:25"}
+{"level":"info","message":"Client 6821b47b6ca658cd01671549 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-05-13 18:51:25"}
+{"level":"info","message":"::ffff:192.168.0.10 - - [13/May/2025:13:21:25 +0000] \"GET /api/reminders HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 18:51:25"}
+{"level":"info","message":"::ffff:192.168.0.10 - - [13/May/2025:13:21:29 +0000] \"POST /api/basic/patient HTTP/1.1\" 200 548 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 18:51:29"}
+{"level":"info","message":"::ffff:192.168.0.10 - - [13/May/2025:13:21:29 +0000] \"POST /api/basic/caregiver HTTP/1.1\" 200 1407 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 18:51:29"}
+{"level":"info","message":"::ffff:192.168.0.10 - - [13/May/2025:13:21:30 +0000] \"POST /api/basic/family HTTP/1.1\" 200 910 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 18:51:30"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-13 18:54:01"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-13 18:54:02"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-13 18:54:02"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-13 18:54:02"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-00.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-13 18:54:03"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-13 18:54:04"}
+{"level":"info","message":"New connection from user 6821b47b6ca658cd01671549","service":"simiriti-management-api","timestamp":"2025-05-13 18:54:05"}
+{"level":"info","message":"Client 6821b47b6ca658cd01671549 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-05-13 18:54:05"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-13 18:54:34"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-13 18:54:35"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-13 18:54:35"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-13 18:54:35"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-01.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-13 18:54:36"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-13 18:54:37"}
+{"level":"info","message":"New connection from user 6821b47b6ca658cd01671549","service":"simiriti-management-api","timestamp":"2025-05-13 18:54:38"}
+{"level":"info","message":"Client 6821b47b6ca658cd01671549 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-05-13 18:54:38"}
+{"level":"info","message":"Connection closed for user 6821b47b6ca658cd01671549","service":"simiriti-management-api","timestamp":"2025-05-13 18:56:26"}
+{"level":"info","message":"Client 6821b47b6ca658cd01671549 disconnected (0 remaining)","service":"simiriti-management-api","timestamp":"2025-05-13 18:56:26"}
+{"level":"info","message":"New connection from user 6821b47b6ca658cd01671549","service":"simiriti-management-api","timestamp":"2025-05-13 18:56:30"}
+{"level":"info","message":"Client 6821b47b6ca658cd01671549 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-05-13 18:56:30"}
+{"level":"info","message":"::ffff:192.168.0.10 - - [13/May/2025:13:26:31 +0000] \"GET /api/reminders HTTP/1.1\" 304 - \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 18:56:31"}
+{"level":"info","message":"::ffff:192.168.0.10 - - [13/May/2025:13:26:33 +0000] \"POST /api/basic/patient HTTP/1.1\" 200 548 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 18:56:33"}
+{"level":"info","message":"::ffff:192.168.0.10 - - [13/May/2025:13:26:33 +0000] \"POST /api/basic/caregiver HTTP/1.1\" 200 1407 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 18:56:33"}
+{"level":"info","message":"::ffff:192.168.0.10 - - [13/May/2025:13:26:34 +0000] \"POST /api/basic/family HTTP/1.1\" 200 910 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 18:56:34"}
+{"level":"info","message":"⏰ Scheduled reminder 6823493f66194f75b6463400 for Tue May 13 2025 19:02:11 GMT+0530 (India Standard Time)","service":"simiriti-management-api","timestamp":"2025-05-13 18:59:35"}
+{"level":"info","message":"⏰ Created reminder for device 2113: 6823493f66194f75b6463400","service":"simiriti-management-api","timestamp":"2025-05-13 18:59:35"}
+{"level":"info","message":"::ffff:192.168.0.10 - - [13/May/2025:13:29:35 +0000] \"POST /api/reminders/add HTTP/1.1\" 201 352 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 18:59:35"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"ip\":\"192.168.41.96\"}","service":"simiriti-management-api","timestamp":"2025-05-13 19:00:51"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:04:26\",\"rssi\":-30,\"free_heap\":147476}","service":"simiriti-management-api","timestamp":"2025-05-13 19:01:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:04:56\",\"rssi\":-31,\"free_heap\":147476}","service":"simiriti-management-api","timestamp":"2025-05-13 19:01:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:05:26\",\"rssi\":-29,\"free_heap\":147476}","service":"simiriti-management-api","timestamp":"2025-05-13 19:02:01"}
+{"level":"error","message":"Error sending notifications: webSocketService.broadcastReminder is not a function","service":"simiriti-management-api","timestamp":"2025-05-13 19:02:12"}
+{"level":"info","message":"🔔 Triggered reminder 6823493f66194f75b6463400","service":"simiriti-management-api","timestamp":"2025-05-13 19:02:12"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:05:56\",\"rssi\":-32,\"free_heap\":147476}","service":"simiriti-management-api","timestamp":"2025-05-13 19:02:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:06:26\",\"rssi\":-30,\"free_heap\":147476}","service":"simiriti-management-api","timestamp":"2025-05-13 19:03:01"}
+{"level":"info","message":"⏰ Scheduled reminder 68234a2866194f75b6463406 for Tue May 13 2025 19:05:11 GMT+0530 (India Standard Time)","service":"simiriti-management-api","timestamp":"2025-05-13 19:03:28"}
+{"level":"info","message":"⏰ Created reminder for device 2113: 68234a2866194f75b6463406","service":"simiriti-management-api","timestamp":"2025-05-13 19:03:28"}
+{"level":"info","message":"::ffff:192.168.0.10 - - [13/May/2025:13:33:28 +0000] \"POST /api/reminders/add HTTP/1.1\" 201 352 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 19:03:28"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:06:57\",\"rssi\":-50,\"free_heap\":147476}","service":"simiriti-management-api","timestamp":"2025-05-13 19:03:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:07:27\",\"rssi\":-35,\"free_heap\":147476}","service":"simiriti-management-api","timestamp":"2025-05-13 19:04:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"ip\":\"192.168.41.96\"}","service":"simiriti-management-api","timestamp":"2025-05-13 19:04:12"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:04:26\",\"rssi\":-37,\"free_heap\":147544}","service":"simiriti-management-api","timestamp":"2025-05-13 19:04:35"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:04:56\",\"rssi\":-33,\"free_heap\":147544}","service":"simiriti-management-api","timestamp":"2025-05-13 19:05:05"}
+{"level":"error","message":"Error sending notifications: webSocketService.broadcastReminder is not a function","service":"simiriti-management-api","timestamp":"2025-05-13 19:05:12"}
+{"level":"info","message":"🔔 Triggered reminder 68234a2866194f75b6463406","service":"simiriti-management-api","timestamp":"2025-05-13 19:05:12"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"ip\":\"192.168.41.96\"}","service":"simiriti-management-api","timestamp":"2025-05-13 19:05:37"}
+{"level":"info","message":"⏰ Scheduled reminder 68234abc66194f75b646340c for Tue May 13 2025 19:07:11 GMT+0530 (India Standard Time)","service":"simiriti-management-api","timestamp":"2025-05-13 19:05:56"}
+{"level":"info","message":"⏰ Created reminder for device 2113: 68234abc66194f75b646340c","service":"simiriti-management-api","timestamp":"2025-05-13 19:05:56"}
+{"level":"info","message":"::ffff:192.168.0.10 - - [13/May/2025:13:35:56 +0000] \"POST /api/reminders/add HTTP/1.1\" 201 352 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-13 19:05:56"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:04:26\",\"rssi\":-44,\"free_heap\":147588}","service":"simiriti-management-api","timestamp":"2025-05-13 19:06:00"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:04:56\",\"rssi\":-35,\"free_heap\":147588}","service":"simiriti-management-api","timestamp":"2025-05-13 19:06:30"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:05:26\",\"rssi\":-36,\"free_heap\":147588}","service":"simiriti-management-api","timestamp":"2025-05-13 19:07:00"}
+{"level":"error","message":"Error sending notifications: webSocketService.broadcastReminder is not a function","service":"simiriti-management-api","timestamp":"2025-05-13 19:07:12"}
+{"level":"info","message":"🔔 Triggered reminder 68234abc66194f75b646340c","service":"simiriti-management-api","timestamp":"2025-05-13 19:07:12"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:05:56\",\"rssi\":-35,\"free_heap\":147588}","service":"simiriti-management-api","timestamp":"2025-05-13 19:07:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:06:26\",\"rssi\":-44,\"free_heap\":147588}","service":"simiriti-management-api","timestamp":"2025-05-13 19:08:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:06:56\",\"rssi\":-25,\"free_heap\":147588}","service":"simiriti-management-api","timestamp":"2025-05-13 19:08:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:07:26\",\"rssi\":-30,\"free_heap\":147588}","service":"simiriti-management-api","timestamp":"2025-05-13 19:09:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:07:56\",\"rssi\":-33,\"free_heap\":147588}","service":"simiriti-management-api","timestamp":"2025-05-13 19:09:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:08:26\",\"rssi\":-33,\"free_heap\":147588}","service":"simiriti-management-api","timestamp":"2025-05-13 19:10:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:08:56\",\"rssi\":-34,\"free_heap\":147588}","service":"simiriti-management-api","timestamp":"2025-05-13 19:10:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:09:26\",\"rssi\":-80,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:11:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:09:56\",\"rssi\":-94,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:11:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:10:26\",\"rssi\":-75,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:12:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:10:56\",\"rssi\":-86,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:12:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:11:26\",\"rssi\":-81,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:13:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:11:56\",\"rssi\":-80,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:13:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:12:26\",\"rssi\":-67,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:14:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:12:56\",\"rssi\":-88,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:14:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:13:26\",\"rssi\":-92,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:15:05"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:13:56\",\"rssi\":-87,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:15:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:14:26\",\"rssi\":-85,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:16:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:14:56\",\"rssi\":-90,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:16:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:15:26\",\"rssi\":-88,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:17:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:15:56\",\"rssi\":-86,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:17:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:16:26\",\"rssi\":-86,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:18:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:16:56\",\"rssi\":-83,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:18:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:17:27\",\"rssi\":-82,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:19:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:17:57\",\"rssi\":-83,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:19:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:18:27\",\"rssi\":-84,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:20:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:18:57\",\"rssi\":-82,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:20:31"}
+{"level":"info","message":"Connection closed for user 6821b47b6ca658cd01671549","service":"simiriti-management-api","timestamp":"2025-05-13 19:20:42"}
+{"level":"info","message":"Client 6821b47b6ca658cd01671549 disconnected (0 remaining)","service":"simiriti-management-api","timestamp":"2025-05-13 19:20:42"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:19:27\",\"rssi\":-83,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:21:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:19:57\",\"rssi\":-84,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:21:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:20:27\",\"rssi\":-82,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:22:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:20:57\",\"rssi\":-91,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:22:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:21:27\",\"rssi\":-82,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:23:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:21:57\",\"rssi\":-85,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:23:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:22:27\",\"rssi\":-84,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:24:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:22:57\",\"rssi\":-60,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:24:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:23:27\",\"rssi\":-28,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:25:01"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:23:57\",\"rssi\":-51,\"free_heap\":146112}","service":"simiriti-management-api","timestamp":"2025-05-13 19:25:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:24:26\",\"rssi\":-60,\"free_heap\":147628}","service":"simiriti-management-api","timestamp":"2025-05-13 19:26:01"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-13 19:27:00"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-13 19:27:00"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-13 19:27:01"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-13 19:27:01"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-02.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-13 19:27:02"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-13 19:27:03"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:04:26\",\"rssi\":-46,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:27:16"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:04:56\",\"rssi\":-55,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:27:46"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:05:26\",\"rssi\":-56,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:28:16"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:05:57\",\"rssi\":-50,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:28:46"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"time\":\"2025-04-01T19:06:27\",\"rssi\":-48,\"free_heap\":147636}","service":"simiriti-management-api","timestamp":"2025-05-13 19:29:16"}
