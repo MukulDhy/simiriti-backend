@@ -26,9 +26,9 @@ router.use(protect);
  * @access  Private (Patient, Family, Caregiver)
  */
 router.post(
-  "/",
+  "/add",
   authorizeRoles("caregiver"),
-  validate(reminderValidator),
+  // validate(reminderValidator),
   createReminder
 );
 

@@ -9,7 +9,7 @@ exports.createReminder = asyncHandler(async (req, res, next) => {
     throw new AppError("Validation failed", 400, errors.array());
   }
 
-  const { title, description, scheduledTime } = req.body;
+  const { title, description, scheduledTime, patientId } = req.body;
 
   if (new Date(scheduledTime) <= new Date()) {
     throw new AppError("Scheduled time must be in the future", 400);
@@ -19,6 +19,7 @@ exports.createReminder = asyncHandler(async (req, res, next) => {
     title,
     description,
     scheduledTime,
+    patient: patientId,
     createdBy: req.user.id,
   });
 
