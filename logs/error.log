@@ -4661,3 +4661,295 @@
 {"level":"error","message":"Error sending notifications: webSocketService.broadcastReminder is not a function","service":"simiriti-management-api","timestamp":"2025-05-13 19:02:12"}
 {"level":"error","message":"Error sending notifications: webSocketService.broadcastReminder is not a function","service":"simiriti-management-api","timestamp":"2025-05-13 19:05:12"}
 {"level":"error","message":"Error sending notifications: webSocketService.broadcastReminder is not a function","service":"simiriti-management-api","timestamp":"2025-05-13 19:07:12"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:02"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:03"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:03"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:03"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:03"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:03"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:03"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:03"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:03"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:03"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:18:03"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:44"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:45"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:48"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:48"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:48"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:48"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:48"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:48"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:48"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:48"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:48"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:48"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:49"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:50"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:50"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:50"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:50"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:50"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:50"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:50"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:51"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:51"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:51"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:51"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:51"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:22:51"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:25:23"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:25:23"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:25:23"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:25:23"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:25:23"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:25:23"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:25:23"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:25:23"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:25:23"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:25:23"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:25:23"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:25:23"}
+{"level":"error","message":"Message handling error (Device 2113): io is not defined","service":"simiriti-management-api","timestamp":"2025-05-14 16:25:23"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:26:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:26:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:26:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:26:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:26:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:26:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:26:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:26:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:26:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:26:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emit')","service":"simiriti-management-api","timestamp":"2025-05-14 16:26:01"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emits')","service":"simiriti-management-api","timestamp":"2025-05-14 16:26:27"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'emits')","service":"simiriti-management-api","timestamp":"2025-05-14 16:26:27"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'locals')","service":"simiriti-management-api","timestamp":"2025-05-14 16:29:49"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'locals')","service":"simiriti-management-api","timestamp":"2025-05-14 16:29:49"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'locals')","service":"simiriti-management-api","timestamp":"2025-05-14 16:29:49"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'locals')","service":"simiriti-management-api","timestamp":"2025-05-14 16:29:49"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'locals')","service":"simiriti-management-api","timestamp":"2025-05-14 16:29:49"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'locals')","service":"simiriti-management-api","timestamp":"2025-05-14 16:29:49"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'locals')","service":"simiriti-management-api","timestamp":"2025-05-14 16:29:49"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'locals')","service":"simiriti-management-api","timestamp":"2025-05-14 16:29:49"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'locals')","service":"simiriti-management-api","timestamp":"2025-05-14 16:29:49"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'locals')","service":"simiriti-management-api","timestamp":"2025-05-14 16:29:49"}
+{"level":"error","message":"Message handling error (Device 2113): Cannot read properties of undefined (reading 'locals')","service":"simiriti-management-api","timestamp":"2025-05-14 16:29:49"}
