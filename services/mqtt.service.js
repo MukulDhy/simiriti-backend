@@ -59,8 +59,12 @@ class MqttService {
   handleMessage(topic, message) {
     try {
       const payload = JSON.parse(message.toString());
-
+      console.log(payload);
       if (topic === this.topics.DEVICE_STATUS) {
+
+        if(payload.reminder === "Alert"){
+          logger.info("Loggssss ALleeerttt came from patient")
+        }
         logger.info(
           `📥 Status from ${this.deviceId}: ${JSON.stringify(payload)}`
         );
