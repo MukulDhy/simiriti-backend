@@ -97,7 +97,6 @@
 // });
 
 // module.exports = app;
-// app.js
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -215,4 +214,4 @@ process.on("unhandledRejection", (err) => {
 });
 
 // Export server, app, and io (but do NOT export mqttService here)
-module.exports = { app, server, io };
+module.exports = { app, server, io, mqttService };

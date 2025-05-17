@@ -130,7 +130,6 @@
 
 // // const mqttService = new MqttService();
 // module.exports = MqttService;
-
 const mqtt = require("mqtt");
 const config = require("../config/config");
 const logger = require("../utils/logger");
@@ -186,6 +185,11 @@ class MqttService {
       this.client.on("message", (topic, message) => {
         this.handleMessage(topic, message);
       });
+
+      this.client.on("offline", () => {
+        this.connected = false;
+        logger.info(`ℹ️ MQTT client offline for device ${this.deviceId}`);
+      });
     } catch (error) {
       logger.error(
         `MQTT service error (Device ${this.deviceId}): ${error.message}`
@@ -230,7 +234,7 @@ class MqttService {
   }
 
   subscribe(topic) {
-    if (!this.connected) {
+    if (!this.client || !this.connected) {
       logger.warn(`⚠️ ${this.deviceId}: Can't subscribe - not connected`);
       return false;
     }
@@ -246,18 +250,39 @@ class MqttService {
   }
 
   publishToDevice(message) {
-    if (!this.connected) {
+    if (!this.client || !this.connected) {
       logger.warn(`⚠️ ${this.deviceId}: Can't publish - not connected`);
       return false;
     }
 
-    this.client.publish(this.topics.DEVICE_COMMAND, JSON.stringify(message), {
-      qos: 1,
-    });
-    logger.info(
-      `📤 Command sent to ${this.deviceId}: ${JSON.stringify(message)}`
-    );
-    return true;
+    try {
+      this.client.publish(
+        this.topics.DEVICE_COMMAND,
+        JSON.stringify(message),
+        {
+          qos: 1,
+          retain: false,
+        },
+        (err) => {
+          if (err) {
+            logger.error(`❌ ${this.deviceId} publish failed: ${err.message}`);
+            return;
+          }
+          logger.info(
+            `📤 Command sent to ${this.deviceId}: ${JSON.stringify(message)}`
+          );
+        }
+      );
+      return true;
+    } catch (error) {
+      logger.error(`❌ ${this.deviceId} publish error: ${error.message}`);
+      return false;
+    }
+  }
+
+  // Add a method to check connection status
+  isConnected() {
+    return this.connected && this.client;
   }
 }
 

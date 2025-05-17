@@ -2,6 +2,7 @@ const { validationResult } = require("express-validator");
 const asyncHandler = require("../utils/asyncHandler");
 const AppError = require("../utils/appError");
 const reminderService = require("../services/reminder.service");
+const reminderModel = require("../models/reminder.model");
 
 exports.createReminder = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
@@ -22,15 +23,27 @@ exports.createReminder = asyncHandler(async (req, res, next) => {
     patient: patientId,
     createdBy: req.user.id,
   });
-
+  console.log("Reminder Set Scuccessfull");
   res.status(201).json({
-    status: "success",
+    success: true,
     data: reminder,
   });
 });
 
 exports.getReminders = asyncHandler(async (req, res) => {
-  const reminders = await reminderService.getAllReminders();
+  const { patientId } = req.query; // Get from query parameters
+  console.log("patientId = ", patientId);
+
+  let reminders;
+
+  if (patientId) {
+    // Fetch reminders only for the specific patient
+    reminders = await reminderModel.find({ patient: patientId });
+  } else {
+    // Fallback: fetch all reminders (optional, depending on your logic)
+    reminders = await reminderService.getAllReminders();
+  }
+
   res.status(200).json({
     status: "success",
     count: reminders.length,
