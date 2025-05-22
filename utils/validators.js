@@ -4,10 +4,7 @@ const { check, validationResult } = require("express-validator");
 // Validation middleware handler
 exports.validate = (validations) => {
   return async (req, res, next) => {
-    // Run all validations
     await Promise.all(validations.map((validation) => validation.run(req)));
-
-    // Check if there are validation errors
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -16,7 +13,6 @@ exports.validate = (validations) => {
         errors: errors.array(),
       });
     }
-
     next();
   };
 };
@@ -93,7 +89,15 @@ exports.registerValidator = [
     .isIn(["patient", "caregiver", "family"])
     .withMessage("User type must be patient, caregiver, or family"),
 ];
-
+exports.locationValidator = [
+  check("latitude")
+    .isFloat({ min: -90, max: 90 })
+    .withMessage("Latitude must be between -90 and 90"),
+  check("longitude")
+    .isFloat({ min: -180, max: 180 })
+    .withMessage("Longitude must be between -180 and 180"),
+  check("updatedAt").optional().isISO8601().withMessage("Invalid date format"),
+];
 exports.loginValidator = [
   check("email")
     .trim()

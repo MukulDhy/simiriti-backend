@@ -1,5 +1,5 @@
 const schedule = require("node-schedule");
-const mqttService = require("./mqtt.service");
+const { getInstance: getMqttService } = require("./mqtt.service");
 const webSocketService = require("./websocket.service");
 const logger = require("../utils/logger");
 const Reminder = require("../models/reminder.model");
@@ -65,33 +65,83 @@ class NotificationService {
 
   async sendReminderNotifications(reminder) {
     try {
-      // Send to WebSocket (if needed)
-      console.log("Senidnin notificatiopon to the mqtt device ");
-      // webSocketService.broadcastReminder(reminder);
-      // logger.warn(
-      //   `Sending the notification to the notification the mqtt device ==== ${reminder}`
-      // );
-      // // webSocketService.broadcastReminder(reminder);
-      // logger.warn(
-      //   `Sending the notification to the notification the mqtt device ==== ${reminder}`
-      // );
-      // webSocketService.broadcastReminder(reminder);
       logger.warn(
-        `Sending the notification to the notification the mqtt device ==== ${reminder}`
+        `Sending the notification to the mqtt device for reminder: ${reminder.title}`
       );
-      // Send directly to the single device
-      mqttService.publishToDevice({
+
+      // Get MQTT service instance
+      let mqttService;
+
+      try {
+        // First try to get from the module exports
+        const mqttModule = require("./mqtt.service");
+        mqttService = mqttModule.getInstance();
+
+        if (!mqttService) {
+          throw new Error("MQTT service instance not available");
+        }
+      } catch (error) {
+        logger.error(
+          `Failed to get MQTT service from module: ${error.message}`
+        );
+        // Fall back to global instance
+        mqttService = global.mqttService;
+      }
+
+      if (!mqttService) {
+        logger.error("MQTT service not available - all methods failed");
+        return false;
+      }
+
+      // Verify the service has the required method
+      if (typeof mqttService.publishToDevice !== "function") {
+        logger.error(
+          `MQTT service is missing publishToDevice method. Available methods: ${Object.keys(
+            mqttService
+          ).join(", ")}`
+        );
+        return false;
+      }
+
+      if (!mqttService.isConnected()) {
+        logger.warn(
+          "MQTT service is not connected, attempting to reconnect..."
+        );
+        mqttService.connect();
+        // Wait a bit for connection
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        if (!mqttService.isConnected()) {
+          logger.error(
+            "MQTT service still not connected after reconnect attempt"
+          );
+          return false;
+        }
+      }
+
+      // Prepare the message
+      const message = {
         type: "reminder",
-        reminderId: reminder._id,
+        reminderId: reminder._id.toString(),
         title: reminder.title,
         description: reminder.description,
-        timestamp: new Date(),
-      });
+        timestamp: new Date().toISOString(),
+      };
 
-      logger.info(
-        `📨 Sent reminder to device ${this.deviceId}: ${reminder.title}`
-      );
-      return true;
+      // Send the message
+      const success = mqttService.publishToDevice(message);
+
+      if (success) {
+        logger.info(
+          `📨 Sent reminder to device ${this.deviceId}: ${reminder.title}`
+        );
+        reminder.notificationSent = true;
+        await reminder.save();
+      } else {
+        logger.error(`Failed to send reminder to device ${this.deviceId}`);
+      }
+
+      return success;
     } catch (error) {
       logger.error(`Error sending notifications: ${error.message}`);
       return false;

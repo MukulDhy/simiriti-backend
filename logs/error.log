@@ -4960,3 +4960,20 @@
 {"level":"error","message":"Error sending notifications: mqttService.publishToDevice is not a function","service":"simiriti-management-api","timestamp":"2025-05-17 21:38:13"}
 {"level":"error","message":"Error sending notifications: mqttService.publishToDevice is not a function","service":"simiriti-management-api","timestamp":"2025-05-17 21:41:44"}
 {"level":"error","message":"Error sending notifications: mqttService.publishToDevice is not a function","service":"simiriti-management-api","timestamp":"2025-05-17 22:01:17"}
+{"level":"error","message":"Error sending notifications: mqttService.publishToDevice is not a function","service":"simiriti-management-api","timestamp":"2025-05-17 22:24:44"}
+{"level":"error","message":"Register error: Cannot read properties of undefined (reading '_id')","service":"simiriti-management-api","timestamp":"2025-05-17 22:28:17"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading '_id')","service":"simiriti-management-api","timestamp":"2025-05-17 22:28:17"}
+{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-22 13:23:22"}
+{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-22 13:23:24"}
+{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-22 13:23:33"}
+{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-22 14:09:24"}
+{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-22 14:14:00"}
+{"level":"error","message":"Error sending notifications: mqttService.publishToDevice is not a function","service":"simiriti-management-api","timestamp":"2025-05-22 14:52:01"}
+{"level":"error","message":"Error sending notifications: mqttService.publishToDevice is not a function","service":"simiriti-management-api","timestamp":"2025-05-22 14:52:34"}
+{"level":"error","message":"Error sending notifications: mqttService.publishToDevice is not a function","service":"simiriti-management-api","timestamp":"2025-05-22 14:53:34"}
+{"level":"error","message":"Error sending notifications: mqttService.publishToDevice is not a function","service":"simiriti-management-api","timestamp":"2025-05-22 14:59:20"}
+{"level":"error","message":"Error sending notifications: mqttService.publishToDevice is not a function","service":"simiriti-management-api","timestamp":"2025-05-22 15:05:08"}
+{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-22 16:00:50"}
+{"level":"error","message":"Error sending notifications: mqttService.publishToDevice is not a function","service":"simiriti-management-api","timestamp":"2025-05-22 16:06:00"}
+{"level":"error","message":"Error sending notifications: mqttService.publishToDevice is not a function","service":"simiriti-management-api","timestamp":"2025-05-22 16:11:01"}
+{"level":"error","message":"Error sending notifications: mqttService.publishToDevice is not a function","service":"simiriti-management-api","timestamp":"2025-05-22 16:19:03"}
