@@ -62,3 +62,32 @@ exports.getLocation = asyncHandler(async (req, res) => {
     },
   });
 });
+
+exports.getPatientLocation = asyncHandler(async (req, res) => {
+  // Correct way to get the parameter (either from params or query)
+  const patientId = req.params.id || req.query.id;
+
+  if (!patientId) {
+    throw new AppError("Patient ID is required", 400);
+  }
+
+  const location = await Location.findOne({ userId: patientId })
+    .sort({ updatedAt: -1 }) // Get most recent location
+    .select("latitude longitude updatedAt") // Only select needed fields
+    .lean(); // Return plain JS object instead of Mongoose document
+
+  if (!location) {
+    throw new AppError("No location data found for Your patient", 404);
+  }
+
+  res.status(200).json({
+    success: true,
+    data: {
+      latitude: location.latitude,
+      longitude: location.longitude,
+      updatedAt: location.updatedAt,
+      // You could add additional useful info like:
+      lastUpdated: new Date(location.updatedAt).toLocaleString(),
+    },
+  });
+});

@@ -239,7 +239,7 @@ const reminderRoutes = require("./routes/reminder.routes");
 const userRoutes = require("./routes/user.routes");
 const basicRoutes = require("./routes/basic.routes.js");
 const whatsappRoutes = require("./routes/whatsapp.routes.js");
-
+const locationRoutes = require("./routes/location.routes.js");
 // Initialize express app
 const app = express();
 
@@ -302,6 +302,7 @@ app.use("/api/reminders", reminderRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/basic", basicRoutes);
 app.use("/api/whatsapp", whatsappRoutes);
+app.use("/api/location", locationRoutes);
 
 // Root route
 app.get("/", (req, res) => {
