@@ -168,8 +168,10 @@ class WebSocketService {
       if (message.type === "ping") {
         return ws.send(JSON.stringify({ type: "pong", timestamp: Date.now() }));
       }
-
-      // Add other message handlers here
+      if (message.type === "registerUser") {
+        console.log("GOT IT REG");
+      }
+      // Add other message registerUserhandlers here
     } catch (err) {
       logger.error(`Message handling error: ${err.message}`);
     }

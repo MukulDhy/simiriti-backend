@@ -306,6 +306,7 @@ class MqttService {
     this.topics = {
       DEVICE_STATUS: `devices/${this.deviceId}/status`, // Pre-formatted topic
       DEVICE_COMMAND: `devices/${this.deviceId}/commands`, // Pre-formatted topic
+      DEVICE_VOICE_RECORD: `devices/${this.deviceId}/record`,
     };
   }
 
@@ -385,6 +386,9 @@ class MqttService {
         logger.info(
           `📥 Status from ${this.deviceId}: ${JSON.stringify(payload)}`
         );
+      } else if (topic === this.topics.DEVICE_VOICE_RECORD) {
+
+        
       }
     } catch (error) {
       logger.error(
