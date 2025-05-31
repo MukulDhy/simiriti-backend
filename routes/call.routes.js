@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const CallController = require("../controllers/call.controller");
-const {authorizeRoles,protect} = require("../middlewares/auth");
+const { authorizeRoles, protect } = require("../middlewares/auth");
 
 router.use(protect);
 
