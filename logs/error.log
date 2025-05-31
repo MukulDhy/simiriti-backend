@@ -5,3 +5,5 @@
 {"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-26 03:04:47"}
 {"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-26 03:17:14"}
 {"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-26 03:17:29"}
+{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:00:04"}
+{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-30 20:13:58"}

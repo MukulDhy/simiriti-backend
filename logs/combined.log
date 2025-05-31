@@ -242,3 +242,157 @@
 {"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-26 12:52:31"}
 {"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-26 12:52:32"}
 {"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-26 12:52:32"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-26 12:52:41"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-26 12:52:41"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-26 12:52:41"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-26 12:52:42"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-26 12:52:42"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-02.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-26 12:52:43"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-26 12:52:46"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-26 12:53:46"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-26 12:53:46"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-26 12:53:46"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-26 12:53:47"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-26 12:53:48"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-01.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-26 12:53:49"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-30 15:59:57"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-05-30 15:59:58"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-30 15:59:58"}
+{"level":"warn","message":"Rejected connection: No token provided","service":"simiriti-management-api","timestamp":"2025-05-30 15:59:59"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-30 15:59:59"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-30 15:59:59"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-01.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-30 16:00:00"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-30 16:00:03"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:10:30:03 +0000] \"POST /api/basic/patient HTTP/1.1\" 200 557 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:00:03"}
+{"level":"info","message":"New connection from user 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-05-30 16:00:03"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-05-30 16:00:03"}
+{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:00:04"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:10:30:04 +0000] \"GET /api/reminders?patientId=undefined HTTP/1.1\" 404 46 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:00:04"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:10:30:05 +0000] \"POST /api/location HTTP/1.1\" 200 225 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:00:05"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:10:30:05 +0000] \"POST /api/basic/caregiver HTTP/1.1\" 200 1429 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:00:05"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:10:30:06 +0000] \"POST /api/basic/family HTTP/1.1\" 200 1981 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:00:06"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:10:34:08 +0000] \"POST /api/location HTTP/1.1\" 200 225 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:04:08"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:10:38:08 +0000] \"POST /api/location HTTP/1.1\" 200 225 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:08:08"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-30 16:09:04"}
+{"level":"info","message":"WebSocket server initialized with video calling support","service":"simiriti-management-api","timestamp":"2025-05-30 16:09:04"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-30 16:09:04"}
+{"level":"warn","message":"Rejected connection: No token provided","service":"simiriti-management-api","timestamp":"2025-05-30 16:09:04"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-30 16:09:05"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-30 16:09:05"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-01.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-30 16:09:06"}
+{"level":"info","message":"New connection from user 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-05-30 16:09:06"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-05-30 16:09:06"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-30 16:09:07"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:10:42:08 +0000] \"POST /api/location HTTP/1.1\" 200 225 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:12:08"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:10:46:08 +0000] \"POST /api/location HTTP/1.1\" 200 225 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:16:08"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:10:50:08 +0000] \"POST /api/location HTTP/1.1\" 200 225 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:20:08"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:10:54:08 +0000] \"POST /api/location HTTP/1.1\" 200 225 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:24:08"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:10:58:08 +0000] \"POST /api/location HTTP/1.1\" 200 225 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:28:08"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:11:02:08 +0000] \"POST /api/location HTTP/1.1\" 200 225 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:32:08"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:11:06:08 +0000] \"POST /api/location HTTP/1.1\" 200 224 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:36:08"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:11:10:08 +0000] \"POST /api/location HTTP/1.1\" 200 225 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:40:08"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:06"}
+{"level":"info","message":"WebSocket server initialized with video calling support","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:06"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:06"}
+{"level":"warn","message":"Rejected connection: No token provided","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:06"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:06"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:07"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-00.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:07"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:08"}
+{"level":"info","message":"New connection from user 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:09"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:09"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:23"}
+{"level":"info","message":"WebSocket server initialized with video calling support","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:23"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:23"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:24"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:24"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-01.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:24"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:29"}
+{"level":"info","message":"WebSocket server initialized with video calling support","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:29"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:29"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:30"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:30"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-02.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:31"}
+{"level":"info","message":"New connection from user 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:31"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:31"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:32"}
+{"level":"warn","message":"Rejected connection: No token provided","service":"simiriti-management-api","timestamp":"2025-05-30 16:42:33"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-30 17:44:35"}
+{"level":"info","message":"WebSocket server initialized with video calling support","service":"simiriti-management-api","timestamp":"2025-05-30 17:44:35"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-30 17:44:35"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-30 17:44:36"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-30 17:44:36"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-02.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-30 17:44:37"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-30 17:44:42"}
+{"level":"info","message":"WebSocket server initialized with video calling support","service":"simiriti-management-api","timestamp":"2025-05-30 17:44:42"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-30 17:44:42"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-30 17:44:47"}
+{"level":"info","message":"WebSocket server initialized with video calling support","service":"simiriti-management-api","timestamp":"2025-05-30 17:44:47"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-30 17:44:47"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-30 17:44:48"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-30 17:44:48"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-00.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-30 17:44:49"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-30 17:44:49"}
+{"level":"warn","message":"Rejected connection: No token provided","service":"simiriti-management-api","timestamp":"2025-05-30 20:13:58"}
+{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-30 20:13:58"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:14:43:58 +0000] \"GET /api/reminders?patientId=undefined HTTP/1.1\" 404 46 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 20:13:58"}
+{"level":"info","message":"New connection from user 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-05-30 20:13:58"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-05-30 20:13:58"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:14:44:04 +0000] \"POST /api/location HTTP/1.1\" 200 225 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 20:14:04"}
+{"level":"info","message":"::ffff:192.168.0.3 - - [30/May/2025:14:48:08 +0000] \"POST /api/location HTTP/1.1\" 200 225 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-05-30 20:18:08"}
+{"level":"info","message":"Connection closed for user 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-05-30 20:21:04"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 disconnected (0 remaining)","service":"simiriti-management-api","timestamp":"2025-05-30 20:21:05"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-31 10:07:34"}
+{"level":"info","message":"WebSocket server initialized with video calling support","service":"simiriti-management-api","timestamp":"2025-05-31 10:07:34"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-31 10:07:34"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-31 10:07:35"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-31 10:07:36"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-01.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-31 10:07:36"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-31 10:07:37"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-31 10:10:31"}
+{"level":"info","message":"WebSocket server initialized with video calling support","service":"simiriti-management-api","timestamp":"2025-05-31 10:10:31"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-31 10:10:31"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-31 10:10:32"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-31 10:10:33"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-00.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-31 10:10:33"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-31 10:10:34"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-31 10:10:51"}
+{"level":"info","message":"WebSocket server initialized with video calling support","service":"simiriti-management-api","timestamp":"2025-05-31 10:10:51"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-31 10:10:51"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-31 10:10:52"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-31 10:10:52"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-02.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-31 10:10:54"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-31 10:10:57"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-31 10:11:06"}
+{"level":"info","message":"WebSocket server initialized with video calling support","service":"simiriti-management-api","timestamp":"2025-05-31 10:11:06"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-31 10:11:06"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-31 10:11:07"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-31 10:11:07"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-02.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-31 10:11:08"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-31 10:11:09"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-31 10:12:21"}
+{"level":"info","message":"WebSocket server initialized with video calling support","service":"simiriti-management-api","timestamp":"2025-05-31 10:12:21"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-31 10:12:21"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-31 10:12:23"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-00.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-31 10:12:23"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-31 10:12:23"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-31 10:12:23"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-31 10:12:43"}
+{"level":"info","message":"WebSocket server initialized with video calling support","service":"simiriti-management-api","timestamp":"2025-05-31 10:12:43"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-31 10:12:43"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-31 10:12:44"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-31 10:12:44"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-02.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-31 10:12:46"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-31 10:12:47"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-31 10:13:18"}
+{"level":"info","message":"WebSocket server initialized with video calling support","service":"simiriti-management-api","timestamp":"2025-05-31 10:13:18"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-31 10:13:18"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-31 10:13:19"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-31 10:13:19"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-01.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-05-31 10:13:19"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-05-31 10:13:20"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-05-31 10:14:00"}
+{"level":"info","message":"WebSocket server initialized with video calling support","service":"simiriti-management-api","timestamp":"2025-05-31 10:14:00"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-05-31 10:14:00"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-05-31 10:14:01"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-05-31 10:14:02"}

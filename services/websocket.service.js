@@ -3,12 +3,17 @@ const jwt = require("jsonwebtoken");
 const logger = require("../utils/logger");
 const config = require("../config/config");
 const User = require("../models/user.model");
+
 class WebSocketService {
   constructor() {
     this.wss = null;
     this.clients = new Map();
     this.heartbeatInterval = 25000; // 25 seconds
     this.pingInterval = null;
+
+    // Video calling specific properties
+    this.activeCalls = new Map();
+    this.callQueue = new Map(); // For managing call states
   }
 
   initialize(server) {
@@ -22,7 +27,7 @@ class WebSocketService {
     });
 
     this.setupEventHandlers();
-    logger.info("WebSocket server initialized");
+    logger.info("WebSocket server initialized with video calling support");
   }
 
   async handleUpgrade(request, socket, head) {
@@ -135,11 +140,13 @@ class WebSocketService {
 
       ws.on("close", () => {
         logger.info(`Connection closed for user ${userId}`);
+        this.handleUserDisconnect(userId);
         this.removeClient(userId);
       });
 
       ws.on("error", (err) => {
         logger.error(`Connection error for ${userId}: ${err.message}`);
+        this.handleUserDisconnect(userId);
         this.removeClient(userId);
       });
     });
@@ -168,15 +175,310 @@ class WebSocketService {
       if (message.type === "ping") {
         return ws.send(JSON.stringify({ type: "pong", timestamp: Date.now() }));
       }
+
       if (message.type === "registerUser") {
         console.log("GOT IT REG");
+        return;
       }
-      // Add other message registerUserhandlers here
+
+      // Video calling message handlers
+      switch (message.type) {
+        case "initiate-call":
+          this.handleInitiateCall(userId, message);
+          break;
+        case "accept-call":
+          this.handleAcceptCall(userId, message);
+          break;
+        case "reject-call":
+          this.handleRejectCall(userId, message);
+          break;
+        case "end-call":
+          this.handleEndCall(userId, message);
+          break;
+        case "webrtc-offer":
+          this.handleWebRTCOffer(userId, message);
+          break;
+        case "webrtc-answer":
+          this.handleWebRTCAnswer(userId, message);
+          break;
+        case "webrtc-ice-candidate":
+          this.handleWebRTCIceCandidate(userId, message);
+          break;
+        default:
+          logger.debug(`Unhandled message type: ${message.type}`);
+      }
     } catch (err) {
       logger.error(`Message handling error: ${err.message}`);
     }
   }
 
+  // Video calling methods
+  handleInitiateCall(callerId, message) {
+    try {
+      const { receiverId, callerName, callType = "video" } = message;
+
+      if (!this.clients.has(receiverId)) {
+        return this.sendToUser(callerId, {
+          type: "user-offline",
+          receiverId,
+        });
+      }
+
+      const callId = `call_${Date.now()}_${callerId}`;
+
+      // Store call information
+      this.activeCalls.set(callId, {
+        callId,
+        callerId,
+        receiverId,
+        callerName,
+        callType,
+        status: "ringing",
+        startTime: new Date(),
+      });
+
+      // Notify receiver about incoming call
+      this.sendToUser(receiverId, {
+        type: "incoming-call",
+        callId,
+        callerId,
+        callerName,
+        callType,
+      });
+
+      // Confirm to caller that call was initiated
+      this.sendToUser(callerId, {
+        type: "call-initiated",
+        callId,
+      });
+
+      logger.info(
+        `Call initiated: ${callId} from ${callerId} to ${receiverId}`
+      );
+    } catch (error) {
+      logger.error(`Error initiating call: ${error.message}`);
+    }
+  }
+
+  handleAcceptCall(userId, message) {
+    try {
+      const { callId } = message;
+      const call = this.activeCalls.get(callId);
+
+      if (!call || call.receiverId !== userId) {
+        return this.sendToUser(userId, {
+          type: "error",
+          message: "Invalid call or unauthorized",
+        });
+      }
+
+      call.status = "accepted";
+      call.acceptTime = new Date();
+
+      // Notify caller that call was accepted
+      this.sendToUser(call.callerId, {
+        type: "call-accepted",
+        callId,
+      });
+
+      logger.info(`Call accepted: ${callId}`);
+    } catch (error) {
+      logger.error(`Error accepting call: ${error.message}`);
+    }
+  }
+
+  // handleRejectCall(userId, message) {
+  //   try {
+  //     const { callId } = message;
+  //     const call = this.activeCalls.get(callId);
+
+  //     if (!call || call.receiverId !== userId) {
+  //       return;
+  //     }
+
+  //     // Notify caller that call was rejected
+  //     this.sendToUser(call.callerId, {
+  //       type: "call-rejected",
+  //       callId,
+  //     });
+
+  //     // Clean up call
+  //     this.activeCalls.delete(callId);
+  //     logger.info(`Call rejected: ${callId}`);
+  //   } catch (error) {
+  //     logger.error(`Error rejecting call: ${error.message}`);
+  //   }
+  // }
+
+  // handleEndCall(userId, message) {
+  //   try {
+  //     const { callId } = message;
+  //     const call = this.activeCalls.get(callId);
+
+  //     if (!call) return;
+
+  //     // Notify both parties that call ended
+  //     const otherUserId =
+  //       call.callerId === userId ? call.receiverId : call.callerId;
+
+  //     this.sendToUser(otherUserId, {
+  //       type: "call-ended",
+  //       callId,
+  //     });
+
+  //     // Clean up call
+  //     this.activeCalls.delete(callId);
+  //     call.endTime = new Date();
+
+  //     logger.info(`Call ended: ${callId} by ${userId}`);
+  //   } catch (error) {
+  //     logger.error(`Error ending call: ${error.message}`);
+  //   }
+  // }
+
+  async handleEndCall(userId, message) {
+    try {
+      const { callId } = message;
+      const call = this.activeCalls.get(callId);
+
+      if (!call) return;
+
+      // Notify both parties that call ended
+      const otherUserId =
+        call.callerId === userId ? call.receiverId : call.callerId;
+
+      this.sendToUser(otherUserId, {
+        type: "call-ended",
+        callId,
+      });
+
+      // Update call status and end time
+      call.status = "ended";
+      call.endTime = new Date();
+
+      // Save to database
+      await this.saveCallToDatabase(call);
+
+      // Clean up call
+      this.activeCalls.delete(callId);
+
+      logger.info(`Call ended: ${callId} by ${userId}`);
+    } catch (error) {
+      logger.error(`Error ending call: ${error.message}`);
+    }
+  }
+
+  // Add to handleRejectCall
+  async handleRejectCall(userId, message) {
+    try {
+      const { callId } = message;
+      const call = this.activeCalls.get(callId);
+
+      if (!call || call.receiverId !== userId) {
+        return;
+      }
+
+      // Update call status
+      call.status = "rejected";
+      call.endTime = new Date();
+
+      // Notify caller that call was rejected
+      this.sendToUser(call.callerId, {
+        type: "call-rejected",
+        callId,
+      });
+
+      // Save to database
+      await this.saveCallToDatabase(call);
+
+      // Clean up call
+      this.activeCalls.delete(callId);
+      logger.info(`Call rejected: ${callId}`);
+    } catch (error) {
+      logger.error(`Error rejecting call: ${error.message}`);
+    }
+  }
+
+  handleWebRTCOffer(userId, message) {
+    try {
+      const { callId, offer } = message;
+      const call = this.activeCalls.get(callId);
+
+      if (!call) return;
+
+      const targetUserId =
+        call.callerId === userId ? call.receiverId : call.callerId;
+
+      this.sendToUser(targetUserId, {
+        type: "webrtc-offer",
+        callId,
+        offer,
+      });
+    } catch (error) {
+      logger.error(`Error handling WebRTC offer: ${error.message}`);
+    }
+  }
+
+  handleWebRTCAnswer(userId, message) {
+    try {
+      const { callId, answer } = message;
+      const call = this.activeCalls.get(callId);
+
+      if (!call) return;
+
+      const targetUserId =
+        call.callerId === userId ? call.receiverId : call.callerId;
+
+      this.sendToUser(targetUserId, {
+        type: "webrtc-answer",
+        callId,
+        answer,
+      });
+    } catch (error) {
+      logger.error(`Error handling WebRTC answer: ${error.message}`);
+    }
+  }
+
+  handleWebRTCIceCandidate(userId, message) {
+    try {
+      const { callId, candidate } = message;
+      const call = this.activeCalls.get(callId);
+
+      if (!call) return;
+
+      const targetUserId =
+        call.callerId === userId ? call.receiverId : call.callerId;
+
+      this.sendToUser(targetUserId, {
+        type: "webrtc-ice-candidate",
+        callId,
+        candidate,
+      });
+    } catch (error) {
+      logger.error(`Error handling ICE candidate: ${error.message}`);
+    }
+  }
+
+  handleUserDisconnect(userId) {
+    // Handle any ongoing calls when user disconnects
+    this.activeCalls.forEach((call, callId) => {
+      if (call.callerId === userId || call.receiverId === userId) {
+        const otherUserId =
+          call.callerId === userId ? call.receiverId : call.callerId;
+
+        this.sendToUser(otherUserId, {
+          type: "call-ended",
+          callId,
+          reason: "user-disconnected",
+        });
+
+        this.activeCalls.delete(callId);
+        logger.info(`Call ${callId} ended due to user ${userId} disconnect`);
+      }
+    });
+  }
+
+  // Existing methods remain unchanged
   addClient(userId, ws) {
     // Close existing connection if present
     if (this.clients.has(userId)) {
@@ -223,6 +525,54 @@ class WebSocketService {
       }
     });
     return successCount;
+  }
+  // Add to WebSocketService class
+
+  async saveCallToDatabase(call) {
+    try {
+      const callData = {
+        callId: call.callId,
+        callerId: call.callerId,
+        receiverId: call.receiverId,
+        callerName: call.callerName,
+        callType: call.callType,
+        status: call.status,
+        startTime: call.startTime,
+        acceptTime: call.acceptTime,
+        endTime: call.endTime,
+      };
+
+      await Call.findOneAndUpdate({ callId: call.callId }, callData, {
+        upsert: true,
+        new: true,
+      });
+    } catch (error) {
+      logger.error(`Failed to save call to database: ${error.message}`);
+    }
+  }
+
+  // Modify handleEndCall to save call data
+
+  // Video calling utility methods
+  getActiveCall(callId) {
+    return this.activeCalls.get(callId);
+  }
+
+  getUserActiveCalls(userId) {
+    const userCalls = [];
+    this.activeCalls.forEach((call) => {
+      if (call.callerId === userId || call.receiverId === userId) {
+        userCalls.push(call);
+      }
+    });
+    return userCalls;
+  }
+
+  getCallStats() {
+    return {
+      totalActiveCalls: this.activeCalls.size,
+      connectedClients: this.clients.size,
+    };
   }
 }
 
