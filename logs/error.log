@@ -1,9 +1,1 @@
-{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-25 23:01:19"}
-{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-25 23:24:54"}
-{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-26 01:07:07"}
-{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-26 01:09:57"}
-{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-26 03:04:47"}
-{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-26 03:17:14"}
-{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-26 03:17:29"}
-{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-30 16:00:04"}
-{"level":"error","message":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"patient\" for model \"Reminder\"","service":"simiriti-management-api","timestamp":"2025-05-30 20:13:58"}
+{"level":"error","message":"❌ MQTT error (Device 2113): read ECONNRESET","service":"simiriti-management-api","timestamp":"2025-06-16 22:24:26"}

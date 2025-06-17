@@ -310,19 +310,14 @@ const connectedDevices = new Set();
 const analyzeAudioWithAI = async (audioData) => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const mockSpeakers = [
-        "John Doe",
-        "Jane Smith",
-        "Robert Johnson",
-        "Emily Davis",
-      ];
+      const mockSpeakers = ["Pooja", "Pooja", "Pooja", "Pooja"];
       const randomSpeaker =
         mockSpeakers[Math.floor(Math.random() * mockSpeakers.length)];
       resolve({
         speaker: randomSpeaker,
         confidence: (Math.random() * 0.5 + 0.5).toFixed(2), // Random confidence between 0.5-1.0
       });
-    }, 3000);
+    }, 15000);
   });
 };
 
