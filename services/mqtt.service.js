@@ -361,9 +361,9 @@ class MqttService {
   handleMessage(topic, message) {
     try {
       const payload = JSON.parse(message.toString());
-
+      
       if (topic === this.topics.DEVICE_STATUS) {
-        if (payload.reminder === "Alert") {
+        if (payload.type === "emergency") {
           logger.info("Emergency alert received from patient device");
 
           // Use the injected Socket.IO instance directly

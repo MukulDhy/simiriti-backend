@@ -341,7 +341,7 @@ app.post("/analyze-audio", async (req, res) => {
 
     // Call FastAPI endpoint
     const result = await axios.post(
-      "http://127.0.0.1:8000/analyze-audio",
+      "https://spech-identification.onrender.com/analyze-audio",
       audioData,
       {
         headers: {
