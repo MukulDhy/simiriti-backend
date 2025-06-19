@@ -242,6 +242,8 @@ const whatsappRoutes = require("./routes/whatsapp.routes.js");
 const locationRoutes = require("./routes/location.routes.js");
 const CallRoutes = require("./routes/call.routes.js");
 
+const axios = require("axios");
+
 // Initialize express app
 const app = express();
 
@@ -325,21 +327,46 @@ const analyzeAudioWithAI = async (audioData) => {
 app.post("/analyze-audio", async (req, res) => {
   try {
     const { audio } = req.body;
+    console.log("Received audio data length:", audio ? audio.length : 0);
 
     if (!audio) {
       return res.status(400).json({ error: "No audio data provided" });
     }
 
-    const result = await analyzeAudioWithAI(audio);
+    // Prepare data for FastAPI endpoint
+    const audioData = {
+      audio: audio, // base64 encoded audio data
+      format: "wav", // or whatever format you're using
+    };
+
+    // Call FastAPI endpoint
+    const result = await axios.post(
+      "http://127.0.0.1:8000/analyze-audio",
+      audioData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     // webSocketService.sendToUser()
     res.status(200).json({
       success: true,
-      data: result,
+      data: {
+        speaker: result.data.speaker,
+        confidence: result.data.confidence,
+      },
     });
   } catch (error) {
-    console.error("Error analyzing audio:", error);
-    res.status(500).json({ error: "Failed to analyze audio" });
+    console.error(
+      "Error analyzing audio:",
+      error.response?.data || error.message
+    );
+    res.status(500).json({
+      error: "Failed to analyze audio",
+      details: error.response?.data || error.message,
+    });
   }
 });
 

@@ -3,42 +3,28 @@ const jwt = require("jsonwebtoken");
 const logger = require("../utils/logger");
 const config = require("../config/config");
 const User = require("../models/user.model");
+// Add this model for sensor data storage
+const SensorData = require("../models/server.model");
+const { AudioClipManager } = require("./AudioClipManager");
 
 class WebSocketService {
   constructor() {
     this.wss = null;
-    this.clients = new Map();
-    this.heartbeatInterval = 25000; // 25 seconds
-    this.pingInterval = null;
-
-    // Video calling specific properties
-    this.activeCalls = new Map();
-    this.callQueue = new Map();
-
-    // ESP32 and sensor management
-    this.esp32Clients = new Map(); // ESP32 devices
-    this.audioClients = new Map(); // Clients listening to audio streams
-    this.sensorClients = new Map(); // Clients listening to sensor data
-    this.deviceRegistry = new Map(); // Device registry with capabilities
-    this.sensorData = new Map(); // Latest sensor data cache
-
-    // Room management for different data types
-    this.audioRooms = new Map();
-    this.sensorRooms = new Map();
-
-    // Data streaming configuration
-    this.streamingConfig = {
-      audio: {
-        enabled: true,
-        maxBitrate: 64000,
-        sampleRate: 16000,
-      },
-      sensors: {
-        enabled: true,
-        updateInterval: 5000,
-        batchSize: 10,
-      },
+    this.clients = new Map(); // Connected web clients
+    this.esp32Client = null; // Single ESP32 device
+    this.esp32Status = {
+      connected: false,
+      lastSeen: null,
+      deviceInfo: null,
+      sensorTypes: [],
+      isStreaming: false,
     };
+    // this.audioClipManager = new AudioClipManager(10000, "./audio_clips");
+    // Heartbeat configuration
+    this.heartbeatInterval = 30000; // 30 seconds
+    this.esp32TimeoutInterval = 60000; // 1 minute timeout for ESP32
+    this.pingInterval = null;
+    this.statusCheckInterval = null;
   }
 
   initialize(server) {
@@ -52,26 +38,23 @@ class WebSocketService {
     });
 
     this.setupEventHandlers();
-    this.startCleanupTasks();
-    logger.info("WebSocket server initialized with multi-sensor support");
+    this.startStatusMonitoring();
+    logger.info("WebSocket server initialized");
   }
 
   async handleUpgrade(request, socket, head) {
     try {
       const url = new URL(request.url, `http://${request.headers.host}`);
 
-      // Handle ESP32 device connections (no authentication required)
-      if (
-        url.pathname === "/esp32-audio" ||
-        url.pathname === "/esp32-sensors"
-      ) {
+      // Handle ESP32 connection (no authentication required)
+      if (url.pathname === "/esp32") {
         this.wss.handleUpgrade(request, socket, head, (ws) => {
           this.wss.emit("connection", ws, request);
         });
         return;
       }
 
-      // Regular client authentication
+      // Handle web client authentication
       const { user, error } = await this.verifyClient(request);
       if (error || !user) {
         logger.warn(`Rejected connection: ${error}`);
@@ -139,7 +122,6 @@ class WebSocketService {
       ...(config.cors?.allowedOrigins || []),
       `http://${config.server.host}:${config.server.port}`,
       "http://localhost:3000",
-      "http://192.168.0.103:8081",
     ];
 
     return allowedOrigins.includes(origin) || allowedOrigins.includes("*");
@@ -149,16 +131,13 @@ class WebSocketService {
     this.wss.on("connection", (ws, request) => {
       const url = new URL(request.url, `http://${request.headers.host}`);
 
-      // Handle ESP32 device connections
-      if (
-        url.pathname === "/esp32-audio" ||
-        url.pathname === "/esp32-sensors"
-      ) {
-        this.handleESP32Connection(ws, request);
+      // Handle ESP32 connection
+      if (url.pathname === "/esp32") {
+        this.handleESP32Connection(ws);
         return;
       }
 
-      // Handle regular client connections
+      // Handle web client connection
       const userId = request.user?.id;
       if (!userId) {
         return ws.close(1008, "Authentication failed");
@@ -167,85 +146,76 @@ class WebSocketService {
       this.handleClientConnection(ws, userId);
     });
 
-    // // Start heartbeat interval
-    // this.startHeartbeat();
+    this.startHeartbeat();
   }
 
-  handleESP32Connection(ws, request) {
-    const url = new URL(request.url, `http://${request.headers.host}`);
-    const deviceId = `esp32_${Date.now()}_${Math.random()
-      .toString(36)
-      .substr(2, 9)}`;
-    const deviceType = url.pathname === "/esp32-audio" ? "audio" : "sensors";
+  handleESP32Connection(ws) {
+    // Only allow one ESP32 connection
+    if (this.esp32Client && this.esp32Client.readyState === WebSocket.OPEN) {
+      logger.warn("ESP32 already connected, closing previous connection");
+      this.esp32Client.close();
+    }
 
-    logger.info(`ESP32 ${deviceType} device connected: ${deviceId}`);
+    this.esp32Client = ws;
+    this.esp32Status.connected = true;
+    this.esp32Status.lastSeen = new Date();
 
-    const deviceInfo = {
-      id: deviceId,
-      type: deviceType,
-      ws: ws,
-      connectedAt: new Date(),
-      isStreaming: false,
-      capabilities: [],
-      lastSeen: new Date(),
-      sensorData: {},
+    logger.info("ESP32 connected");
+
+    // Send connection confirmation to ESP32
+    this.sendToESP32({
+      type: "connection-established",
+      serverTime: new Date().toISOString(),
+    });
+
+    // Notify all web clients about ESP32 connection
+    this.broadcastToClients({
+      type: "esp32-status",
       status: "connected",
-    };
+      timestamp: new Date().toISOString(),
+    });
 
-    this.esp32Clients.set(deviceId, deviceInfo);
-
-    // Send connection confirmation
-    // this.sendToESP32(deviceId, {
-    //   type: "connection-established",
-    //   deviceId: deviceId,
-    //   serverTime: new Date().toISOString(),
-    // });
-
-    // Setup message handlers
+    // Setup ESP32 message handlers
     ws.on("message", (data) => {
-      this.handleESP32Message(ws, deviceId, data);
+      this.handleESP32Message(data);
     });
 
     ws.on("close", () => {
-      logger.info(`ESP32 device disconnected: ${deviceId}`);
-      this.handleESP32Disconnect(deviceId);
+      logger.info("ESP32 disconnected");
+      this.handleESP32Disconnect();
     });
 
     ws.on("error", (err) => {
-      logger.error(`ESP32 device error ${deviceId}: ${err.message}`);
-      this.handleESP32Disconnect(deviceId);
+      logger.error(`ESP32 error: ${err.message}`);
+      this.handleESP32Disconnect();
     });
 
-    // Ping ESP32 to keep connection alive
-    const pingInterval = setInterval(() => {
-      if (ws.readyState === WebSocket.OPEN) {
-        ws.ping();
-      } else {
-        clearInterval(pingInterval);
-      }
-    }, 30000);
+    // ESP32 heartbeat
+    ws.on("pong", () => {
+      this.esp32Status.lastSeen = new Date();
+    });
   }
 
   handleClientConnection(ws, userId) {
     logger.info(`Client connected: ${userId}`);
 
-    // Send authentication confirmation
+    // Send connection confirmation and current ESP32 status
     ws.send(
       JSON.stringify({
         type: "connection",
         status: "authenticated",
         userId,
+        esp32Status: this.esp32Status,
         timestamp: new Date().toISOString(),
       })
     );
 
     this.addClient(userId, ws);
 
-    // Setup heartbeat
+    // Setup client heartbeat
     ws.isAlive = true;
     ws.on("pong", () => {
       ws.isAlive = true;
-      logger.debug(`Heartbeat from ${userId}`);
     });
 
     // Message handler
@@ -255,823 +225,235 @@ class WebSocketService {
 
     ws.on("close", () => {
       logger.info(`Client disconnected: ${userId}`);
-      this.handleClientDisconnect(userId);
+      this.removeClient(userId);
     });
 
     ws.on("error", (err) => {
       logger.error(`Client error ${userId}: ${err.message}`);
-      this.handleClientDisconnect(userId);
+      this.removeClient(userId);
     });
   }
 
-  handleESP32Message(ws, deviceId, data) {
-    const device = this.esp32Clients.get(deviceId);
-    if (!device) return;
-
-    device.lastSeen = new Date();
-
+  handleESP32Message(data) {
     try {
-      // Handle binary audio data
-      if (data instanceof Buffer && device.type === "audio") {
-        this.broadcastAudioData(deviceId, data);
+      this.esp32Status.lastSeen = new Date();
+      // logger.info(data);
+      // Handle binary data (if ESP32 sends raw sensor data)
+      if (data instanceof Buffer) {
+        // this.audioClipManager.addAudioData(data, new Date());
+        logger.debug("Received binary data from ESP32");
+        // Broadcast binary data to clients if needed
+        // logger.info(data);
+        const base64Audio = data.toString("base64");
+        this.broadcastToClients({
+          type: "audio-data",
+          timestamp: new Date().toISOString(),
+          dataSize: data.length,
+          data: base64Audio,
+        });
+        console.log(base64Audio);
         return;
+        // return;
       }
-
       // Handle JSON messages
+      logger.info(
+        "HURRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+      );
       const message = JSON.parse(data.toString());
-      logger.debug(`ESP32 ${deviceId} message:`, message.type);
+      logger.info(`ESP32 message: ${message.type}`);
 
       switch (message.type) {
         case "device-info":
-          this.handleDeviceInfo(deviceId, message);
-          break;
-        case "audio-stream-started":
-          this.handleAudioStreamStarted(deviceId, message);
-          break;
-        case "audio-stream-stopped":
-          this.handleAudioStreamStopped(deviceId, message);
+          this.handleDeviceInfo(message);
           break;
         case "sensor-data":
-          this.handleSensorData(deviceId, message);
+          this.handleSensorData(message);
           break;
-        case "device-status":
-          this.handleDeviceStatus(deviceId, message);
+        case "status-update":
+          this.handleStatusUpdate(message);
+          break;
+        case "ping":
+          this.sendToESP32({ type: "pong", timestamp: Date.now() });
           break;
         default:
           logger.debug(`Unhandled ESP32 message type: ${message.type}`);
       }
     } catch (err) {
-      // If JSON parsing fails and it's binary data, handle as audio
-      if (data instanceof Buffer && device.type === "audio") {
-        this.broadcastAudioData(deviceId, data);
-      } else {
-        logger.error(`ESP32 message handling error: ${err.message}`);
-      }
+      logger.error(`ESP32 message handling error: ${err.message}`);
     }
   }
 
   handleClientMessage(ws, userId, data) {
     try {
       const message = JSON.parse(data);
-      logger.debug(`Client ${userId} message:`, message.type);
+      logger.debug(`Client ${userId} message: ${message.type}`);
 
-      if (message.type === "ping") {
-        return ws.send(JSON.stringify({ type: "pong", timestamp: Date.now() }));
-      }
-
-      // Route messages based on type
       switch (message.type) {
-        // Audio streaming
-        case "join-audio-stream":
-          this.handleJoinAudioStream(userId, message);
+        case "ping":
+          ws.send(JSON.stringify({ type: "pong", timestamp: Date.now() }));
           break;
-        case "leave-audio-stream":
-          this.handleLeaveAudioStream(userId, message);
-          break;
-        case "get-available-audio-streams":
-          this.handleGetAvailableAudioStreams(userId);
-          break;
-
-        // Sensor data
-        case "subscribe-sensor-data":
-          this.handleSubscribeSensorData(userId, message);
-          break;
-        case "unsubscribe-sensor-data":
-          this.handleUnsubscribeSensorData(userId, message);
-          break;
-        case "get-available-sensors":
-          this.handleGetAvailableSensors(userId);
+        case "get-esp32-status":
+          this.sendToUser(userId, {
+            type: "esp32-status-response",
+            status: this.esp32Status,
+          });
           break;
         case "get-sensor-data":
           this.handleGetSensorData(userId, message);
           break;
-
-        // Device management
-        case "get-connected-devices":
-          this.handleGetConnectedDevices(userId);
-          break;
-        case "control-device":
-          this.handleControlDevice(userId, message);
-          break;
-
-        // Video calling (existing functionality)
-        case "initiate-call":
-          this.handleInitiateCall(userId, message);
-          break;
-        case "accept-call":
-          this.handleAcceptCall(userId, message);
-          break;
-        case "reject-call":
-          this.handleRejectCall(userId, message);
-          break;
-        case "end-call":
-          this.handleEndCall(userId, message);
-          break;
-        case "webrtc-offer":
-          this.handleWebRTCOffer(userId, message);
-          break;
-        case "webrtc-answer":
-          this.handleWebRTCAnswer(userId, message);
-          break;
-        case "webrtc-ice-candidate":
-          this.handleWebRTCIceCandidate(userId, message);
+        case "control-esp32":
+          this.handleControlESP32(userId, message);
           break;
         default:
-          logger.debug(`Unhandled message type: ${message.type}`);
+          logger.debug(`Unhandled client message type: ${message.type}`);
       }
     } catch (err) {
-      logger.error(`Message handling error: ${err.message}`);
+      logger.error(`Client message handling error: ${err.message}`);
     }
   }
 
-  // Audio Stream Management Methods
-  handleJoinAudioStream(userId, message) {
+  handleDeviceInfo(message) {
     try {
-      const { esp32Id } = message;
+      this.esp32Status.deviceInfo = {
+        deviceName: message.deviceName || "ESP32-Sensor",
+        firmwareVersion: message.firmwareVersion || "unknown",
+        capabilities: message.capabilities || [],
+        sensorTypes: message.sensorTypes || [],
+        batteryLevel: message.batteryLevel,
+        signalStrength: message.signalStrength,
+      };
 
-      // Check if ESP32 exists and is streaming
-      const esp32Client = this.esp32Clients.get(esp32Id);
-      if (!esp32Client) {
-        return this.sendToUser(userId, {
-          type: "error",
-          message: "ESP32 device not found",
-        });
-      }
+      this.esp32Status.sensorTypes = message.sensorTypes || [];
 
-      // Add user to audio clients
-      this.audioClients.set(userId, {
-        listeningToESP32: esp32Id,
-        joinedAt: new Date(),
-      });
+      logger.info("ESP32 device info updated:", this.esp32Status.deviceInfo);
 
-      // Confirm join
-      this.sendToUser(userId, {
-        type: "joined-audio-stream",
-        esp32Id: esp32Id,
-        isStreaming: esp32Client.isStreaming,
-      });
-
-      logger.info(`User ${userId} joined audio stream from ESP32 ${esp32Id}`);
-    } catch (error) {
-      logger.error(`Error joining audio stream: ${error.message}`);
-    }
-  }
-
-  handleLeaveAudioStream(userId, message) {
-    try {
-      const clientInfo = this.audioClients.get(userId);
-      if (clientInfo) {
-        this.audioClients.delete(userId);
-
-        this.sendToUser(userId, {
-          type: "left-audio-stream",
-          esp32Id: clientInfo.listeningToESP32,
-        });
-
-        logger.info(`User ${userId} left audio stream`);
-      }
-    } catch (error) {
-      logger.error(`Error leaving audio stream: ${error.message}`);
-    }
-  }
-
-  handleGetAvailableAudioStreams(userId) {
-    try {
-      const availableStreams = [];
-
-      this.esp32Clients.forEach((esp32Client, esp32Id) => {
-        if (esp32Client.type === "audio") {
-          availableStreams.push({
-            esp32Id: esp32Id,
-            isStreaming: esp32Client.isStreaming,
-            connectedAt: esp32Client.connectedAt,
-            listenerCount: this.getListenerCount(esp32Id),
-          });
-        }
-      });
-
-      this.sendToUser(userId, {
-        type: "available-audio-streams",
-        streams: availableStreams,
-      });
-    } catch (error) {
-      logger.error(`Error getting available audio streams: ${error.message}`);
-    }
-  }
-
-  getListenerCount(esp32Id) {
-    let count = 0;
-    this.audioClients.forEach((clientInfo) => {
-      if (clientInfo.listeningToESP32 === esp32Id) {
-        count++;
-      }
-    });
-    return count;
-  }
-
-  broadcastAudioData(deviceId, audioData) {
-    let broadcastCount = 0;
-
-    this.audioClients.forEach((clientInfo, userId) => {
-      if (clientInfo.listeningToESP32 === deviceId) {
-        const client = this.clients.get(userId);
-        if (client && client.readyState === WebSocket.OPEN) {
-          try {
-            client.send(audioData);
-            broadcastCount++;
-          } catch (err) {
-            logger.error(
-              `Error broadcasting audio to ${userId}: ${err.message}`
-            );
-          }
-        }
-      }
-    });
-
-    if (broadcastCount > 0) {
-      logger.debug(`Audio data broadcasted to ${broadcastCount} clients`);
-    }
-  }
-
-  notifyAudioClientsStreamStarted(deviceId) {
-    this.audioClients.forEach((clientInfo, userId) => {
-      if (clientInfo.listeningToESP32 === deviceId) {
-        this.sendToUser(userId, {
-          type: "audio-stream-started",
-          esp32Id: deviceId,
-        });
-      }
-    });
-  }
-
-  notifyAudioClientsStreamEnded(deviceId) {
-    this.audioClients.forEach((clientInfo, userId) => {
-      if (clientInfo.listeningToESP32 === deviceId) {
-        this.sendToUser(userId, {
-          type: "audio-stream-stopped",
-          esp32Id: deviceId,
-        });
-      }
-    });
-  }
-
-  // Video calling methods
-  handleInitiateCall(callerId, message) {
-    try {
-      const { receiverId, callerName, callType = "video" } = message;
-
-      if (!this.clients.has(receiverId)) {
-        return this.sendToUser(callerId, {
-          type: "user-offline",
-          receiverId,
-        });
-      }
-
-      const callId = `call_${Date.now()}_${callerId}`;
-
-      // Store call information
-      this.activeCalls.set(callId, {
-        callId,
-        callerId,
-        receiverId,
-        callerName,
-        callType,
-        status: "ringing",
-        startTime: new Date(),
-      });
-
-      // Notify receiver about incoming call
-      this.sendToUser(receiverId, {
-        type: "incoming-call",
-        callId,
-        callerId,
-        callerName,
-        callType,
-      });
-
-      // Confirm to caller that call was initiated
-      this.sendToUser(callerId, {
-        type: "call-initiated",
-        callId,
-      });
-
-      logger.info(
-        `Call initiated: ${callId} from ${callerId} to ${receiverId}`
-      );
-    } catch (error) {
-      logger.error(`Error initiating call: ${error.message}`);
-    }
-  }
-
-  handleAcceptCall(userId, message) {
-    try {
-      const { callId } = message;
-      const call = this.activeCalls.get(callId);
-
-      if (!call || call.receiverId !== userId) {
-        return this.sendToUser(userId, {
-          type: "error",
-          message: "Invalid call or unauthorized",
-        });
-      }
-
-      call.status = "accepted";
-      call.acceptTime = new Date();
-
-      // Notify caller that call was accepted
-      this.sendToUser(call.callerId, {
-        type: "call-accepted",
-        callId,
-      });
-
-      logger.info(`Call accepted: ${callId}`);
-    } catch (error) {
-      logger.error(`Error accepting call: ${error.message}`);
-    }
-  }
-
-  async handleEndCall(userId, message) {
-    try {
-      const { callId } = message;
-      const call = this.activeCalls.get(callId);
-
-      if (!call) return;
-
-      // Notify both parties that call ended
-      const otherUserId =
-        call.callerId === userId ? call.receiverId : call.callerId;
-
-      this.sendToUser(otherUserId, {
-        type: "call-ended",
-        callId,
-      });
-
-      // Update call status and end time
-      call.status = "ended";
-      call.endTime = new Date();
-
-      // Save to database
-      await this.saveCallToDatabase(call);
-
-      // Clean up call
-      this.activeCalls.delete(callId);
-
-      logger.info(`Call ended: ${callId} by ${userId}`);
-    } catch (error) {
-      logger.error(`Error ending call: ${error.message}`);
-    }
-  }
-
-  async handleRejectCall(userId, message) {
-    try {
-      const { callId } = message;
-      const call = this.activeCalls.get(callId);
-
-      if (!call || call.receiverId !== userId) {
-        return;
-      }
-
-      // Update call status
-      call.status = "rejected";
-      call.endTime = new Date();
-
-      // Notify caller that call was rejected
-      this.sendToUser(call.callerId, {
-        type: "call-rejected",
-        callId,
-      });
-
-      // Save to database
-      await this.saveCallToDatabase(call);
-
-      // Clean up call
-      this.activeCalls.delete(callId);
-      logger.info(`Call rejected: ${callId}`);
-    } catch (error) {
-      logger.error(`Error rejecting call: ${error.message}`);
-    }
-  }
-
-  handleWebRTCOffer(userId, message) {
-    try {
-      const { callId, offer } = message;
-      const call = this.activeCalls.get(callId);
-
-      if (!call) return;
-
-      const targetUserId =
-        call.callerId === userId ? call.receiverId : call.callerId;
-
-      this.sendToUser(targetUserId, {
-        type: "webrtc-offer",
-        callId,
-        offer,
-      });
-    } catch (error) {
-      logger.error(`Error handling WebRTC offer: ${error.message}`);
-    }
-  }
-
-  handleWebRTCAnswer(userId, message) {
-    try {
-      const { callId, answer } = message;
-      const call = this.activeCalls.get(callId);
-
-      if (!call) return;
-
-      const targetUserId =
-        call.callerId === userId ? call.receiverId : call.callerId;
-
-      this.sendToUser(targetUserId, {
-        type: "webrtc-answer",
-        callId,
-        answer,
-      });
-    } catch (error) {
-      logger.error(`Error handling WebRTC answer: ${error.message}`);
-    }
-  }
-
-  handleWebRTCIceCandidate(userId, message) {
-    try {
-      const { callId, candidate } = message;
-      const call = this.activeCalls.get(callId);
-
-      if (!call) return;
-
-      const targetUserId =
-        call.callerId === userId ? call.receiverId : call.callerId;
-
-      this.sendToUser(targetUserId, {
-        type: "webrtc-ice-candidate",
-        callId,
-        candidate,
-      });
-    } catch (error) {
-      logger.error(`Error handling ICE candidate: ${error.message}`);
-    }
-  }
-
-  // Enhanced ESP32 and Sensor Management Methods
-  handleDeviceInfo(deviceId, message) {
-    try {
-      const device = this.esp32Clients.get(deviceId);
-      if (!device) return;
-
-      // Update device capabilities
-      device.capabilities = message.capabilities || [];
-      device.deviceName = message.deviceName || `ESP32-${deviceId}`;
-      device.firmwareVersion = message.firmwareVersion || "unknown";
-      device.sensorTypes = message.sensorTypes || [];
-
-      // Register device in device registry
-      this.deviceRegistry.set(deviceId, {
-        ...device,
-        lastUpdate: new Date(),
-      });
-
-      logger.info(`Device info updated for ${deviceId}:`, {
-        capabilities: device.capabilities,
-        sensorTypes: device.sensorTypes,
-      });
-
-      // Notify connected clients about new device
-      this.broadcast({
-        type: "device-updated",
-        deviceId: deviceId,
-        deviceInfo: {
-          id: deviceId,
-          name: device.deviceName,
-          type: device.type,
-          capabilities: device.capabilities,
-          sensorTypes: device.sensorTypes,
-          status: device.status,
-          connectedAt: device.connectedAt,
-        },
+      // Broadcast device info to all clients
+      this.broadcastToClients({
+        type: "esp32-device-info",
+        deviceInfo: this.esp32Status.deviceInfo,
+        timestamp: new Date().toISOString(),
       });
     } catch (error) {
       logger.error(`Error handling device info: ${error.message}`);
     }
   }
 
-  handleAudioStreamStarted(deviceId, message) {
+  async handleSensorData(message) {
     try {
-      const device = this.esp32Clients.get(deviceId);
-      if (device) {
-        device.isStreaming = true;
-        device.streamConfig = message.config || {};
-
-        logger.info(`Audio stream started for device ${deviceId}`);
-
-        // Notify audio clients
-        this.notifyAudioClientsStreamStarted(deviceId);
-      }
-    } catch (error) {
-      logger.error(`Error handling audio stream start: ${error.message}`);
-    }
-  }
-
-  handleAudioStreamStopped(deviceId, message) {
-    try {
-      const device = this.esp32Clients.get(deviceId);
-      if (device) {
-        device.isStreaming = false;
-
-        logger.info(`Audio stream stopped for device ${deviceId}`);
-
-        // Notify audio clients
-        this.notifyAudioClientsStreamEnded(deviceId);
-      }
-    } catch (error) {
-      logger.error(`Error handling audio stream stop: ${error.message}`);
-    }
-  }
-
-  handleSensorData(deviceId, message) {
-    try {
-      const device = this.esp32Clients.get(deviceId);
-      if (!device) return;
-
       const sensorData = {
-        deviceId: deviceId,
         timestamp: new Date(),
-        data: message.data || {},
         sensorType: message.sensorType || "unknown",
+        data: message.data || {},
+        deviceId: "esp32-main", // Fixed device ID for single ESP32
         ...message,
       };
 
-      // Cache latest sensor data
-      if (!this.sensorData.has(deviceId)) {
-        this.sensorData.set(deviceId, new Map());
-      }
+      // Save to database
+      await this.saveSensorDataToDatabase(sensorData);
 
-      this.sensorData.get(deviceId).set(message.sensorType, sensorData);
+      // Broadcast to all connected clients immediately
+      this.broadcastToClients({
+        type: "sensor-data",
+        ...sensorData,
+      });
 
-      // Broadcast to subscribed clients
-      this.broadcastSensorData(deviceId, sensorData);
-
-      logger.debug(`Sensor data received from ${deviceId}:`, sensorData);
+      logger.debug(
+        `Sensor data processed and broadcasted: ${sensorData.sensorType}`
+      );
     } catch (error) {
       logger.error(`Error handling sensor data: ${error.message}`);
     }
   }
 
-  handleDeviceStatus(deviceId, message) {
+  handleStatusUpdate(message) {
     try {
-      const device = this.esp32Clients.get(deviceId);
-      if (device) {
-        device.status = message.status || "online";
-        device.lastSeen = new Date();
-        device.batteryLevel = message.batteryLevel;
-        device.signalStrength = message.signalStrength;
+      this.esp32Status.isStreaming = message.isStreaming || false;
+      this.esp32Status.deviceInfo = {
+        ...this.esp32Status.deviceInfo,
+        batteryLevel: message.batteryLevel,
+        signalStrength: message.signalStrength,
+        status: message.status || "online",
+      };
+      logger.info(`ESP-32 Status Updated ${message}`);
 
-        // Broadcast status update
-        this.broadcast({
-          type: "device-status-updated",
-          deviceId: deviceId,
-          status: device.status,
-          batteryLevel: device.batteryLevel,
-          signalStrength: device.signalStrength,
-          lastSeen: device.lastSeen,
-        });
-      }
-    } catch (error) {
-      logger.error(`Error handling device status: ${error.message}`);
-    }
-  }
-
-  handleESP32Disconnect(deviceId) {
-    try {
-      const device = this.esp32Clients.get(deviceId);
-      if (device) {
-        // Update device status
-        device.status = "disconnected";
-        device.disconnectedAt = new Date();
-
-        // Remove from active clients but keep in registry for a while
-        this.esp32Clients.delete(deviceId);
-
-        // Notify clients about disconnection
-        this.broadcast({
-          type: "device-disconnected",
-          deviceId: deviceId,
-          timestamp: new Date().toISOString(),
-        });
-
-        // Notify audio clients if it was streaming
-        if (device.type === "audio") {
-          this.notifyAudioClientsStreamEnded(deviceId);
-        }
-
-        // Remove sensor subscriptions
-        this.sensorClients.forEach((clientInfo, userId) => {
-          if (
-            clientInfo.subscribedDevices &&
-            clientInfo.subscribedDevices.includes(deviceId)
-          ) {
-            clientInfo.subscribedDevices = clientInfo.subscribedDevices.filter(
-              (id) => id !== deviceId
-            );
-            this.sendToUser(userId, {
-              type: "sensor-device-disconnected",
-              deviceId: deviceId,
-            });
-          }
-        });
-
-        logger.info(`ESP32 device ${deviceId} disconnected and cleaned up`);
-      }
-    } catch (error) {
-      logger.error(`Error handling ESP32 disconnect: ${error.message}`);
-    }
-  }
-
-  // Client Message Handlers
-  handleSubscribeSensorData(userId, message) {
-    try {
-      const { deviceId, sensorTypes } = message;
-
-      if (!this.sensorClients.has(userId)) {
-        this.sensorClients.set(userId, {
-          subscribedDevices: [],
-          sensorTypes: {},
-        });
-      }
-
-      const clientInfo = this.sensorClients.get(userId);
-
-      if (!clientInfo.subscribedDevices.includes(deviceId)) {
-        clientInfo.subscribedDevices.push(deviceId);
-      }
-
-      clientInfo.sensorTypes[deviceId] = sensorTypes || ["all"];
-
-      this.sendToUser(userId, {
-        type: "subscribed-sensor-data",
-        deviceId: deviceId,
-        sensorTypes: sensorTypes,
+      // Broadcast status update to all clients
+      this.broadcastToClients({
+        type: "esp32-status-update",
+        status: this.esp32Status,
+        timestamp: new Date().toISOString(),
       });
 
-      // Send latest sensor data if available
-      if (this.sensorData.has(deviceId)) {
-        const deviceSensorData = this.sensorData.get(deviceId);
-        const latestData = {};
-
-        deviceSensorData.forEach((data, sensorType) => {
-          if (sensorTypes.includes("all") || sensorTypes.includes(sensorType)) {
-            latestData[sensorType] = data;
-          }
-        });
-
-        if (Object.keys(latestData).length > 0) {
-          this.sendToUser(userId, {
-            type: "sensor-data-update",
-            deviceId: deviceId,
-            data: latestData,
-          });
-        }
-      }
-
-      logger.info(`User ${userId} subscribed to sensor data from ${deviceId}`);
+      logger.debug("ESP32 status updated");
     } catch (error) {
-      logger.error(`Error subscribing to sensor data: ${error.message}`);
+      logger.error(`Error handling status update: ${error.message}`);
     }
   }
 
-  handleUnsubscribeSensorData(userId, message) {
-    try {
-      const { deviceId } = message;
-      const clientInfo = this.sensorClients.get(userId);
+  handleESP32Disconnect() {
+    this.esp32Client = null;
+    this.esp32Status.connected = false;
+    this.esp32Status.isStreaming = false;
 
-      if (clientInfo) {
-        clientInfo.subscribedDevices = clientInfo.subscribedDevices.filter(
-          (id) => id !== deviceId
-        );
-        delete clientInfo.sensorTypes[deviceId];
+    // Notify all clients about ESP32 disconnection
+    this.broadcastToClients({
+      type: "esp32-status",
+      status: "disconnected",
+      timestamp: new Date().toISOString(),
+    });
 
-        this.sendToUser(userId, {
-          type: "unsubscribed-sensor-data",
-          deviceId: deviceId,
-        });
-
-        logger.info(
-          `User ${userId} unsubscribed from sensor data from ${deviceId}`
-        );
-      }
-    } catch (error) {
-      logger.error(`Error unsubscribing from sensor data: ${error.message}`);
-    }
+    logger.info("ESP32 disconnected and status updated");
   }
 
-  handleGetAvailableSensors(userId) {
+  async handleGetSensorData(userId, message) {
     try {
-      const availableSensors = [];
+      const { sensorType, limit = 100, startDate, endDate } = message;
 
-      this.esp32Clients.forEach((device, deviceId) => {
-        if (device.type === "sensors" || device.sensorTypes) {
-          availableSensors.push({
-            deviceId: deviceId,
-            deviceName: device.deviceName || `ESP32-${deviceId}`,
-            sensorTypes: device.sensorTypes || [],
-            status: device.status || "online",
-            lastSeen: device.lastSeen,
-            batteryLevel: device.batteryLevel,
-            signalStrength: device.signalStrength,
-          });
-        }
-      });
-
-      this.sendToUser(userId, {
-        type: "available-sensors",
-        sensors: availableSensors,
-      });
-    } catch (error) {
-      logger.error(`Error getting available sensors: ${error.message}`);
-    }
-  }
-
-  handleGetSensorData(userId, message) {
-    try {
-      const { deviceId, sensorType, timeRange } = message;
-
-      if (!this.sensorData.has(deviceId)) {
-        return this.sendToUser(userId, {
-          type: "sensor-data-response",
-          deviceId: deviceId,
-          error: "Device not found or no data available",
-        });
-      }
-
-      const deviceSensorData = this.sensorData.get(deviceId);
-      const responseData = {};
+      // Build query
+      const query = { deviceId: "esp32-main" };
 
       if (sensorType && sensorType !== "all") {
-        const data = deviceSensorData.get(sensorType);
-        if (data) {
-          responseData[sensorType] = data;
-        }
-      } else {
-        deviceSensorData.forEach((data, type) => {
-          responseData[type] = data;
-        });
+        query.sensorType = sensorType;
       }
 
+      if (startDate || endDate) {
+        query.timestamp = {};
+        if (startDate) query.timestamp.$gte = new Date(startDate);
+        if (endDate) query.timestamp.$lte = new Date(endDate);
+      }
+
+      // Fetch from database
+      const sensorData = await SensorData.find(query)
+        .sort({ timestamp: -1 })
+        .limit(limit);
+
       this.sendToUser(userId, {
-        type: "sensor-data-response",
-        deviceId: deviceId,
-        data: responseData,
-        timestamp: new Date().toISOString(),
+        type: "sensor-data-history",
+        data: sensorData,
+        query: { sensorType, limit, startDate, endDate },
       });
     } catch (error) {
       logger.error(`Error getting sensor data: ${error.message}`);
-    }
-  }
-
-  handleGetConnectedDevices(userId) {
-    try {
-      const connectedDevices = [];
-
-      this.esp32Clients.forEach((device, deviceId) => {
-        connectedDevices.push({
-          deviceId: deviceId,
-          deviceName: device.deviceName || `ESP32-${deviceId}`,
-          type: device.type,
-          status: device.status || "online",
-          capabilities: device.capabilities || [],
-          sensorTypes: device.sensorTypes || [],
-          connectedAt: device.connectedAt,
-          lastSeen: device.lastSeen,
-          isStreaming: device.isStreaming || false,
-          batteryLevel: device.batteryLevel,
-          signalStrength: device.signalStrength,
-        });
-      });
-
       this.sendToUser(userId, {
-        type: "connected-devices",
-        devices: connectedDevices,
+        type: "error",
+        message: "Failed to retrieve sensor data",
       });
-    } catch (error) {
-      logger.error(`Error getting connected devices: ${error.message}`);
     }
   }
 
-  handleControlDevice(userId, message) {
+  handleControlESP32(userId, message) {
     try {
-      const { deviceId, command, parameters } = message;
+      const { command, parameters } = message;
 
-      const device = this.esp32Clients.get(deviceId);
-      if (!device) {
+      if (!this.esp32Client || this.esp32Client.readyState !== WebSocket.OPEN) {
         return this.sendToUser(userId, {
-          type: "device-control-response",
-          deviceId: deviceId,
-          error: "Device not found",
+          type: "error",
+          message: "ESP32 not connected",
         });
       }
 
-      // Send command to ESP32 device
-      this.sendToESP32(deviceId, {
-        type: "device-command",
+      // Send command to ESP32
+      this.sendToESP32({
+        type: "command",
         command: command,
         parameters: parameters || {},
         requestId: `cmd_${Date.now()}`,
@@ -1080,159 +462,124 @@ class WebSocketService {
 
       // Send confirmation to user
       this.sendToUser(userId, {
-        type: "device-control-sent",
-        deviceId: deviceId,
+        type: "command-sent",
         command: command,
+        timestamp: new Date().toISOString(),
       });
 
-      logger.info(
-        `User ${userId} sent command '${command}' to device ${deviceId}`
-      );
+      logger.info(`User ${userId} sent command '${command}' to ESP32`);
     } catch (error) {
-      logger.error(`Error controlling device: ${error.message}`);
+      logger.error(`Error controlling ESP32: ${error.message}`);
     }
   }
 
-  // Utility Methods
-  sendToESP32(deviceId, message) {
+  async saveSensorDataToDatabase(sensorData) {
     try {
-      const device = this.esp32Clients.get(deviceId);
-      if (device && device.ws.readyState === WebSocket.OPEN) {
-        device.ws.send(JSON.stringify(message));
-        return true;
-      }
-      return false;
-    } catch (error) {
-      logger.error(`Error sending to ESP32 ${deviceId}: ${error.message}`);
-      return false;
-    }
-  }
-
-  broadcastSensorData(deviceId, sensorData) {
-    let broadcastCount = 0;
-
-    this.sensorClients.forEach((clientInfo, userId) => {
-      if (clientInfo.subscribedDevices.includes(deviceId)) {
-        const subscribedSensorTypes = clientInfo.sensorTypes[deviceId] || [
-          "all",
-        ];
-
-        if (
-          subscribedSensorTypes.includes("all") ||
-          subscribedSensorTypes.includes(sensorData.sensorType)
-        ) {
-          const success = this.sendToUser(userId, {
-            type: "sensor-data-update",
-            deviceId: deviceId,
-            sensorType: sensorData.sensorType,
-            data: sensorData.data,
-            timestamp: sensorData.timestamp,
-          });
-
-          if (success) broadcastCount++;
-        }
-      }
-    });
-
-    if (broadcastCount > 0) {
-      logger.debug(`Sensor data broadcasted to ${broadcastCount} clients`);
-    }
-  }
-
-  // Cleanup and Maintenance
-  startCleanupTasks() {
-    // Clean up old sensor data every 5 minutes
-    setInterval(() => {
-      this.cleanupOldSensorData();
-    }, 5 * 60 * 1000);
-
-    // Check device heartbeats every 30 seconds
-    setInterval(() => {
-      this.checkDeviceHeartbeats();
-    }, 30 * 1000);
-  }
-
-  cleanupOldSensorData() {
-    const maxAge = 24 * 60 * 60 * 1000; // 24 hours
-    const now = new Date();
-
-    this.sensorData.forEach((deviceData, deviceId) => {
-      deviceData.forEach((sensorData, sensorType) => {
-        if (now - sensorData.timestamp > maxAge) {
-          deviceData.delete(sensorType);
-        }
+      const newSensorData = new SensorData({
+        deviceId: sensorData.deviceId,
+        sensorType: sensorData.sensorType,
+        data: sensorData.data,
+        timestamp: sensorData.timestamp,
+        metadata: {
+          batteryLevel: this.esp32Status.deviceInfo?.batteryLevel,
+          signalStrength: this.esp32Status.deviceInfo?.signalStrength,
+        },
       });
 
-      if (deviceData.size === 0) {
-        this.sensorData.delete(deviceId);
-      }
-    });
+      await newSensorData.save();
+      logger.debug(`Sensor data saved to database: ${sensorData.sensorType}`);
+    } catch (error) {
+      logger.error(`Failed to save sensor data to database: ${error.message}`);
+    }
   }
 
-  checkDeviceHeartbeats() {
-    const timeout = 2 * 60 * 1000; // 2 minutes
-    const now = new Date();
+  // Status monitoring
+  startStatusMonitoring() {
+    this.statusCheckInterval = setInterval(() => {
+      this.checkESP32Status();
+    }, 30000); // Check every 30 seconds
+  }
 
-    this.esp32Clients.forEach((device, deviceId) => {
-      if (now - device.lastSeen > timeout) {
-        logger.warn(
-          `Device ${deviceId} appears to be offline (last seen: ${device.lastSeen})`
-        );
-        device.status = "offline";
+  checkESP32Status() {
+    if (this.esp32Status.connected && this.esp32Status.lastSeen) {
+      const timeSinceLastSeen =
+        Date.now() - this.esp32Status.lastSeen.getTime();
 
-        // Notify clients
-        this.broadcast({
-          type: "device-status-updated",
-          deviceId: deviceId,
+      if (timeSinceLastSeen > this.esp32TimeoutInterval) {
+        logger.warn("ESP32 appears to be offline (timeout)");
+        this.esp32Status.connected = false;
+
+        // Notify clients about offline status
+        this.broadcastToClients({
+          type: "esp32-status",
           status: "offline",
-          lastSeen: device.lastSeen,
+          lastSeen: this.esp32Status.lastSeen,
+          timestamp: new Date().toISOString(),
         });
       }
-    });
+    }
   }
 
   startHeartbeat() {
     this.pingInterval = setInterval(() => {
-      this.wss.clients.forEach((ws) => {
+      // Ping web clients
+      this.clients.forEach((ws, userId) => {
         if (ws.isAlive === false) {
-          logger.warn("Terminating unresponsive client");
+          logger.warn(`Terminating unresponsive client: ${userId}`);
           return ws.terminate();
         }
-
         ws.isAlive = false;
         ws.ping();
       });
+
+      // Ping ESP32
+      if (this.esp32Client && this.esp32Client.readyState === WebSocket.OPEN) {
+        this.esp32Client.ping();
+      }
     }, this.heartbeatInterval);
   }
 
-  handleClientDisconnect(userId) {
-    this.removeClient(userId);
-    this.handleUserDisconnect(userId);
+  // Utility methods
+  sendToESP32(message) {
+    if (this.esp32Client && this.esp32Client.readyState === WebSocket.OPEN) {
+      try {
+        this.esp32Client.send(JSON.stringify(message));
+        return true;
+      } catch (error) {
+        logger.error(`Error sending to ESP32: ${error.message}`);
+        return false;
+      }
+    }
+    return false;
   }
 
-  handleUserDisconnect(userId) {
-    // Handle any ongoing calls when user disconnects
-    this.activeCalls.forEach((call, callId) => {
-      if (call.callerId === userId || call.receiverId === userId) {
-        const otherUserId =
-          call.callerId === userId ? call.receiverId : call.callerId;
+  sendToUser(userId, data) {
+    const client = this.clients.get(userId);
+    if (!client || client.readyState !== WebSocket.OPEN) return false;
 
-        this.sendToUser(otherUserId, {
-          type: "call-ended",
-          callId,
-          reason: "user-disconnected",
-        });
+    try {
+      client.send(JSON.stringify(data));
+      return true;
+    } catch (err) {
+      logger.error(`Send error to ${userId}: ${err.message}`);
+      this.removeClient(userId);
+      return false;
+    }
+  }
 
-        this.activeCalls.delete(callId);
-        logger.info(`Call ${callId} ended due to user ${userId} disconnect`);
+  broadcastToClients(data) {
+    let successCount = 0;
+    this.clients.forEach((client, userId) => {
+      if (this.sendToUser(userId, data)) {
+        successCount++;
       }
     });
 
-    // Remove from audio clients
-    this.audioClients.delete(userId);
+    if (successCount > 0) {
+      logger.debug(`Broadcasted to ${successCount} clients`);
+    }
 
-    // Remove from sensor clients
-    this.sensorClients.delete(userId);
+    return successCount;
   }
 
   addClient(userId, ws) {
@@ -1251,105 +598,37 @@ class WebSocketService {
         `Client ${userId} disconnected (${this.clients.size} remaining)`
       );
     }
-
-    // Clear interval if no clients left
-    if (this.clients.size === 0 && this.pingInterval) {
-      clearInterval(this.pingInterval);
-      this.pingInterval = null;
-    }
   }
 
-  sendToUser(userId, data) {
-    const client = this.clients.get(userId);
-    if (!client || client.readyState !== WebSocket.OPEN) return false;
-
-    try {
-      client.send(JSON.stringify(data));
-      return true;
-    } catch (err) {
-      logger.error(`Send error to ${userId}: ${err.message}`);
-      this.removeClient(userId);
-      return false;
-    }
-  }
-
-  broadcast(data) {
-    let successCount = 0;
-    this.clients.forEach((client, userId) => {
-      if (this.sendToUser(userId, data)) {
-        successCount++;
-      }
-    });
-    return successCount;
-  }
-
-  async saveCallToDatabase(call) {
-    try {
-      const callData = {
-        callId: call.callId,
-        callerId: call.callerId,
-        receiverId: call.receiverId,
-        callerName: call.callerName,
-        callType: call.callType,
-        status: call.status,
-        startTime: call.startTime,
-        acceptTime: call.acceptTime,
-        endTime: call.endTime,
-      };
-
-      // Note: You'll need to import the Call model
-      // await Call.findOneAndUpdate({ callId: call.callId }, callData, {
-      //   upsert: true,
-      //   new: true,
-      // });
-    } catch (error) {
-      logger.error(`Failed to save call to database: ${error.message}`);
-    }
-  }
-
-  // Video calling utility methods
-  getActiveCall(callId) {
-    return this.activeCalls.get(callId);
-  }
-
-  getUserActiveCalls(userId) {
-    const userCalls = [];
-    this.activeCalls.forEach((call) => {
-      if (call.callerId === userId || call.receiverId === userId) {
-        userCalls.push(call);
-      }
-    });
-    return userCalls;
-  }
-
-  getCallStats() {
+  // Stats and monitoring
+  getSystemStats() {
     return {
-      totalActiveCalls: this.activeCalls.size,
       connectedClients: this.clients.size,
-      esp32Clients: this.esp32Clients.size,
-      audioListeners: this.audioClients.size,
+      esp32Status: this.esp32Status,
+      uptime: process.uptime(),
+      memoryUsage: process.memoryUsage(),
     };
   }
 
-  // Audio streaming utility methods
-  getAudioStreamStats() {
-    const stats = {
-      totalESP32Devices: this.esp32Clients.size,
-      totalAudioListeners: this.audioClients.size,
-      streamsByDevice: {},
-    };
+  // Cleanup
+  shutdown() {
+    if (this.pingInterval) {
+      clearInterval(this.pingInterval);
+    }
 
-    this.esp32Clients.forEach((client, esp32Id) => {
-      if (client.type === "audio") {
-        stats.streamsByDevice[esp32Id] = {
-          isStreaming: client.isStreaming,
-          listenerCount: this.getListenerCount(esp32Id),
-          connectedAt: client.connectedAt,
-        };
-      }
+    if (this.statusCheckInterval) {
+      clearInterval(this.statusCheckInterval);
+    }
+
+    if (this.esp32Client) {
+      this.esp32Client.close();
+    }
+
+    this.clients.forEach((client) => {
+      client.close();
     });
 
-    return stats;
+    logger.info("WebSocket service shut down");
   }
 }
 
