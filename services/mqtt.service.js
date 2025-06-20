@@ -378,7 +378,7 @@ class MqttService {
 startStatusMonitoring() {
   this.statusCheckInterval = setInterval(() => {
     this.checkDeviceStatus();
-  }, 10000); // Check every 10 seconds
+  }, 20000); // Check every 10 seconds
 }
 
 checkDeviceStatus() {
@@ -393,7 +393,11 @@ checkDeviceStatus() {
       logger.warn(`Device ${this.deviceId} marked as offline - no status for ${timeSinceLastUpdate}ms`);
       
       // Broadcast offline status to WebSocket clients
-      this.broadcastStatusUpdate();
+      websocket.broadcastToClients({
+      type: "esp32-cyd-status",
+      status: this.esp32Cyd,
+      timestamp: new Date().toISOString(),
+    })
     }
   }
 }
@@ -416,6 +420,11 @@ updateDeviceStatus(statusData) {
   logger.info(`Device ${this.deviceId} status updated:`, this.esp32Cyd);
   
   // Broadcast updated status to WebSocket clients
+  websocket.broadcastToClients({
+      type: "esp32-cyd-status",
+      status: this.esp32Cyd,
+      timestamp: new Date().toISOString(),
+    })
   
 }
 
@@ -452,11 +461,7 @@ updateDeviceStatus(statusData) {
       logger.info(
         `📥 Status from ${this.deviceId}: ${JSON.stringify(payload)}`
       );
-      websocket.broadcastToClients({
-      type: "esp32-cyd-status",
-      status: this.esp32Cyd,
-      timestamp: new Date().toISOString(),
-    })
+      
     } else if (topic === this.topics.DEVICE_VOICE_RECORD) {
       // Handle voice record messages
     }
