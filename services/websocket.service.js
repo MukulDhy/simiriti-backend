@@ -52,7 +52,7 @@ class WebSocketService {
   batteryLevel: 0,
   wifiSignal: 0,
   temperature: 0,
-  displayBrightness: 0,
+  displayBrightness: 80,
   uptime: 0
 };
     // this.audioClipManager = new AudioClipManager(10000, "./audio_clips");
