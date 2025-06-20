@@ -19,6 +19,19 @@ class WebSocketService {
       sensorTypes: [],
       isStreaming: false,
     };
+   this.lastStatusUpdate = null;
+  this.statusCheckInterval = null;
+  this.STATUS_TIMEOUT = 30000; // 30 seconds
+  this.esp32Cyd = {
+  deviceId: "2113",
+  currentStatus: "offline",
+  lastSeen: "Not Available",
+  batteryLevel: 0,
+  wifiSignal: 0,
+  temperature: 0,
+  displayBrightness: 0,
+  uptime: 0
+};
     // this.audioClipManager = new AudioClipManager(10000, "./audio_clips");
     // Heartbeat configuration
     this.heartbeatInterval = 30000; // 30 seconds
@@ -195,6 +208,22 @@ class WebSocketService {
       this.esp32Status.lastSeen = new Date();
     });
   }
+  updateESP32CydStatus(statusData) {
+  this.esp32Cyd = {
+    ...this.esp32Cyd,
+    ...statusData,
+    lastSeen: new Date().toISOString()
+  };
+  
+  // Broadcast to all WebSocket clients
+  this.broadcastToClients({
+    type: "esp32-cyd-status",
+    status: this.esp32Cyd,
+    timestamp: new Date().toISOString(),
+  });
+  
+  logger.info("ESP32 CYD status updated and broadcasted");
+}
 
   handleClientConnection(ws, userId) {
     logger.info(`Client connected: ${userId}`);

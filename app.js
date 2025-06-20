@@ -449,6 +449,13 @@ server.listen(PORT, () => {
 const webSocketService = require("./services/websocket.service");
 webSocketService.initialize(server);
 
+
+io.on('device-status-update', (data) => {
+  if (data.type === 'esp32-cyd-status') {
+    webSocketService.updateESP32CydStatus(data.status);
+  }
+});
+
 // Initialize notification service AFTER MQTT service is ready
 const notificationService = require("./services/notification.service");
 

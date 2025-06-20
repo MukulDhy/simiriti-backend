@@ -293,6 +293,7 @@
 const mqtt = require("mqtt");
 const config = require("../config/config");
 const logger = require("../utils/logger");
+const websocket = require("./websocket.service")
 
 class MqttService {
   constructor(io) {
@@ -303,6 +304,19 @@ class MqttService {
     this.client = null;
     this.connected = false;
     this.deviceId = "2113"; // Hardcoded device ID
+    this.lastStatusUpdate = null;
+  this.statusCheckInterval = null;
+  this.STATUS_TIMEOUT = 30000; // 30 seconds
+  this.esp32Cyd = {
+    deviceId: "2113",
+    currentStatus: "offline",
+    lastSeen: "Not Available",
+    batteryLevel: 80,
+    wifiSignal: -70,
+    temperature: 25.0,
+    displayBrightness: 85,
+    uptime: 0
+  };
     this.topics = {
       DEVICE_STATUS: `devices/${this.deviceId}/status`, // Pre-formatted topic
       DEVICE_COMMAND: `devices/${this.deviceId}/commands`, // Pre-formatted topic
@@ -329,6 +343,8 @@ class MqttService {
         this.connected = true;
         logger.info(`✅ Connected to HiveMQ Cloud for device ${this.deviceId}`);
         this.subscribe(this.topics.DEVICE_STATUS);
+         // Start status monitoring
+      this.startStatusMonitoring();
       });
 
       this.client.on("error", (error) => {
@@ -358,44 +374,98 @@ class MqttService {
     }
   }
 
-  handleMessage(topic, message) {
-    try {
-      const payload = JSON.parse(message.toString());
+  // Add these new methods to the class
+startStatusMonitoring() {
+  this.statusCheckInterval = setInterval(() => {
+    this.checkDeviceStatus();
+  }, 10000); // Check every 10 seconds
+}
+
+checkDeviceStatus() {
+  if (this.lastStatusUpdate) {
+    const timeSinceLastUpdate = Date.now() - this.lastStatusUpdate;
+    
+    if (timeSinceLastUpdate > this.STATUS_TIMEOUT) {
+      // Mark device as offline
+      this.esp32Cyd.currentStatus = "offline";
+      this.esp32Cyd.lastSeen = new Date(this.lastStatusUpdate).toISOString();
       
-      if (topic === this.topics.DEVICE_STATUS) {
-        if (payload.type === "emergency") {
-          logger.info("Emergency alert received from patient device");
-
-          // Use the injected Socket.IO instance directly
-          this.io.emit("emergency", {
-            title: "🚨 EMERGENCY ALERT!",
-            message: "Patient Needs Assistance",
-            data: {
-              patientId: payload.patientId || 343434,
-              severity: "high",
-              deviceId: this.deviceId,
-              timestamp: new Date().toISOString(),
-            },
-          });
-
-          logger.info(
-            `Emergency alert emitted to ${this.io.engine.clientsCount} connected clients`
-          );
-        }
-
-        logger.info(
-          `📥 Status from ${this.deviceId}: ${JSON.stringify(payload)}`
-        );
-      } else if (topic === this.topics.DEVICE_VOICE_RECORD) {
-
-        
-      }
-    } catch (error) {
-      logger.error(
-        `Message handling error (Device ${this.deviceId}): ${error.message}`
-      );
+      logger.warn(`Device ${this.deviceId} marked as offline - no status for ${timeSinceLastUpdate}ms`);
+      
+      // Broadcast offline status to WebSocket clients
+      this.broadcastStatusUpdate();
     }
   }
+}
+
+updateDeviceStatus(statusData) {
+  this.lastStatusUpdate = Date.now();
+  
+  // Update esp32Cyd status
+  this.esp32Cyd = {
+    ...this.esp32Cyd,
+    currentStatus: "online",
+    lastSeen: new Date().toISOString(),
+    batteryLevel: statusData.batteryLevel || this.esp32Cyd.batteryLevel,
+    wifiSignal: statusData.wifiSignal || this.esp32Cyd.wifiSignal,
+    temperature: statusData.temperature || this.esp32Cyd.temperature,
+    displayBrightness: statusData.displayBrightness || this.esp32Cyd.displayBrightness,
+    uptime: statusData.uptime || 0
+  };
+  
+  logger.info(`Device ${this.deviceId} status updated:`, this.esp32Cyd);
+  
+  // Broadcast updated status to WebSocket clients
+  
+}
+
+
+  handleMessage(topic, message) {
+  try {
+    const payload = JSON.parse(message.toString());
+    
+    if (topic === this.topics.DEVICE_STATUS) {
+      // Handle regular status updates
+      if (payload.type === "status") {
+        this.updateDeviceStatus(payload);
+      }
+      
+      if (payload.type === "emergency") {
+        logger.info("Emergency alert received from patient device");
+        
+        this.io.emit("emergency", {
+          title: "🚨 EMERGENCY ALERT!",
+          message: "Patient Needs Assistance",
+          data: {
+            patientId: payload.patientId || 343434,
+            severity: "high",
+            deviceId: this.deviceId,
+            timestamp: new Date().toISOString(),
+          },
+        });
+        
+        logger.info(
+          `Emergency alert emitted to ${this.io.engine.clientsCount} connected clients`
+        );
+      }
+      
+      logger.info(
+        `📥 Status from ${this.deviceId}: ${JSON.stringify(payload)}`
+      );
+      websocket.broadcastToClients({
+      type: "esp32-cyd-status",
+      status: this.esp32Cyd,
+      timestamp: new Date().toISOString(),
+    })
+    } else if (topic === this.topics.DEVICE_VOICE_RECORD) {
+      // Handle voice record messages
+    }
+  } catch (error) {
+    logger.error(
+      `Message handling error (Device ${this.deviceId}): ${error.message}`
+    );
+  }
+}
 
   subscribe(topic) {
     if (!this.client || !this.connected) {

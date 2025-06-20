@@ -148,3 +148,13 @@
 {"level":"info","message":"::ffff:192.168.0.4 - - [16/Jun/2025:20:42:12 +0000] \"POST /api/location HTTP/1.1\" 200 225 \"-\" \"okhttp/4.12.0\"","service":"simiriti-management-api","timestamp":"2025-06-17 02:12:12"}
 {"level":"info","message":"Client disconnected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-17 02:20:50"}
 {"level":"info","message":"Client 6830634bb91ca93949d6aad5 disconnected (0 remaining)","service":"simiriti-management-api","timestamp":"2025-06-17 02:20:50"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 06:12:49"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 06:12:50"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 06:12:50"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 06:12:51"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-06-20 06:12:51"}
+{"level":"info","message":"Emergency alert received from patient device","service":"simiriti-management-api","timestamp":"2025-06-20 06:12:51"}
+{"level":"info","message":"Emergency alert emitted to 0 connected clients","service":"simiriti-management-api","timestamp":"2025-06-20 06:12:51"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":790710}","service":"simiriti-management-api","timestamp":"2025-06-20 06:12:51"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-02.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-06-20 06:12:53"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-06-20 06:12:55"}
