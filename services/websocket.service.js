@@ -13,12 +13,35 @@ class WebSocketService {
     this.clients = new Map(); // Connected web clients
     this.esp32Client = null; // Single ESP32 device
     this.esp32Status = {
+      deviceId:"ESP-Now",
       connected: false,
       lastSeen: null,
+      espNow:false,
+      battery:76,
       deviceInfo: null,
-      sensorTypes: [],
       isStreaming: false,
-    };
+      heartRate : false,
+      gyro:false,
+      microphone:false,
+      sensors: {
+            heartRate: { 
+              value: 88 || 0, 
+              unit: 'bpm' 
+            },
+            gyroscope: { 
+              value:  { x: 0.12, y: 0.45, z: 23 } || { x: 0, y: 0, z: 0 }, 
+              unit: 'm/s²' 
+            },
+            microphone: { 
+              value: 9 || 0, 
+              unit: 'dB' 
+            },
+            gps: { 
+              value:  { lat: 90, lng: 78 } || { lat: 0, lng: 0 }, 
+              unit: 'coords' 
+            }
+    }
+  }
    this.lastStatusUpdate = null;
   this.statusCheckInterval = null;
   this.STATUS_TIMEOUT = 30000; // 30 seconds
@@ -183,8 +206,9 @@ class WebSocketService {
 
     // Notify all web clients about ESP32 connection
     this.broadcastToClients({
-      type: "esp32-status",
+      type: "esp32Status",
       status: "connected",
+      esp32Status:this.esp32Status,
       timestamp: new Date().toISOString(),
     });
 

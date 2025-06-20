@@ -435,7 +435,7 @@ updateDeviceStatus(statusData) {
     
     if (topic === this.topics.DEVICE_STATUS) {
       // Handle regular status updates
-      if (payload.type === "status") {
+      if (payload.status === "running") {
         this.updateDeviceStatus(payload);
       }
       
