@@ -265,3 +265,571 @@
 {"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":790710}","service":"simiriti-management-api","timestamp":"2025-06-20 09:59:24"}
 {"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-00.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-06-20 09:59:26"}
 {"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-06-20 09:59:28"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 09:59:37"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 09:59:37"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 09:59:37"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 09:59:38"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-06-20 09:59:39"}
+{"level":"info","message":"Emergency alert received from patient device","service":"simiriti-management-api","timestamp":"2025-06-20 09:59:39"}
+{"level":"info","message":"Emergency alert emitted to 0 connected clients","service":"simiriti-management-api","timestamp":"2025-06-20 09:59:39"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":790710}","service":"simiriti-management-api","timestamp":"2025-06-20 09:59:39"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-01.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-06-20 09:59:41"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-06-20 09:59:44"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:29:49.152Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 09:59:49","uptime":362307,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":88368,\"uptime\":362307,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 09:59:49"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 49698ms","service":"simiriti-management-api","timestamp":"2025-06-20 10:00:38"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 69703ms","service":"simiriti-management-api","timestamp":"2025-06-20 10:00:58"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 89703ms","service":"simiriti-management-api","timestamp":"2025-06-20 10:01:18"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 109710ms","service":"simiriti-management-api","timestamp":"2025-06-20 10:01:38"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 129717ms","service":"simiriti-management-api","timestamp":"2025-06-20 10:01:58"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 149724ms","service":"simiriti-management-api","timestamp":"2025-06-20 10:02:18"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 169733ms","service":"simiriti-management-api","timestamp":"2025-06-20 10:02:38"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 189749ms","service":"simiriti-management-api","timestamp":"2025-06-20 10:02:58"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 209755ms","service":"simiriti-management-api","timestamp":"2025-06-20 10:03:18"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 229768ms","service":"simiriti-management-api","timestamp":"2025-06-20 10:03:38"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 249774ms","service":"simiriti-management-api","timestamp":"2025-06-20 10:03:58"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"timestamp\":238041}","service":"simiriti-management-api","timestamp":"2025-06-20 10:04:10"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:34:10.400Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:04:10","uptime":238046,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":87940,\"uptime\":238046,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:04:10"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:34:40.422Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:04:40","uptime":268109,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91680,\"uptime\":268109,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:04:40"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:35:10.637Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:05:10","uptime":298309,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91712,\"uptime\":298309,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:05:10"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 10:05:23"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 10:05:23"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 10:05:23"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 10:05:25"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-06-20 10:05:26"}
+{"level":"info","message":"Emergency alert received from patient device","service":"simiriti-management-api","timestamp":"2025-06-20 10:05:26"}
+{"level":"info","message":"Emergency alert emitted to 0 connected clients","service":"simiriti-management-api","timestamp":"2025-06-20 10:05:26"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":790710}","service":"simiriti-management-api","timestamp":"2025-06-20 10:05:26"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-00.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-06-20 10:05:28"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-06-20 10:05:30"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:35:40.843Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:05:40","uptime":328509,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":328509,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:05:40"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:36:11.084Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:06:11","uptime":358709,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":358709,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:06:11"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:36:41.272Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:06:41","uptime":388909,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":388909,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:06:41"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:37:11.476Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:07:11","uptime":419109,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":419109,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:07:11"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:37:41.857Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:07:41","uptime":449309,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":449309,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:07:41"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:38:11.838Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:08:11","uptime":479509,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":479509,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:08:11"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:38:42.110Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:08:42","uptime":509710,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":509710,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:08:42"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:39:12.250Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:09:12","uptime":539909,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":539909,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:09:12"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:39:42.423Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:09:42","uptime":570109,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":570109,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:09:42"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:40:12.792Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:10:12","uptime":600309,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":600309,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:10:12"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:40:42.838Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:10:42","uptime":630509,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":630509,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:10:42"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:41:13.045Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:11:13","uptime":660709,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":660709,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:11:13"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:41:43.218Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:11:43","uptime":690909,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":690909,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:11:43"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:42:13.465Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:12:13","uptime":721109,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":721109,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:12:13"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:42:43.672Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:12:43","uptime":751309,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":751309,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:12:43"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:43:13.830Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:13:13","uptime":781509,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":90160,\"uptime\":781509,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:13:13"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:43:44.020Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:13:44","uptime":811709,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":811709,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:13:44"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:44:14.474Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:14:14","uptime":841909,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":841909,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:14:14"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:44:44.419Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:14:44","uptime":872109,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":872109,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:14:44"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:45:14.730Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:15:14","uptime":902309,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":902309,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:15:14"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:45:45.020Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:15:45","uptime":932510,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":932510,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:15:45"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T04:46:15.128Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:16:15","uptime":962709,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91752,\"uptime\":962709,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:16:15"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 10:50:10"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 10:50:10"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 10:50:10"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 10:50:11"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-06-20 10:50:11"}
+{"level":"info","message":"Emergency alert received from patient device","service":"simiriti-management-api","timestamp":"2025-06-20 10:50:11"}
+{"level":"info","message":"Emergency alert emitted to 0 connected clients","service":"simiriti-management-api","timestamp":"2025-06-20 10:50:11"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":1516565}","service":"simiriti-management-api","timestamp":"2025-06-20 10:50:11"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-00.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-06-20 10:50:13"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-06-20 10:50:15"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:20:28.743Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:50:28","uptime":3016309,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91220,\"uptime\":3016309,\"last_message\":1477515}","service":"simiriti-management-api","timestamp":"2025-06-20 10:50:28"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:20:58.822Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:50:58","uptime":3046509,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91220,\"uptime\":3046509,\"last_message\":1477515}","service":"simiriti-management-api","timestamp":"2025-06-20 10:50:58"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:21:29.147Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:51:29","uptime":3076709,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91220,\"uptime\":3076709,\"last_message\":1477515}","service":"simiriti-management-api","timestamp":"2025-06-20 10:51:29"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:21:59.230Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:51:59","uptime":3106909,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91220,\"uptime\":3106909,\"last_message\":1477515}","service":"simiriti-management-api","timestamp":"2025-06-20 10:51:59"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:22:29.517Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:52:29","uptime":3137109,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91220,\"uptime\":3137109,\"last_message\":1477515}","service":"simiriti-management-api","timestamp":"2025-06-20 10:52:29"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:22:59.845Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:52:59","uptime":3167309,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91220,\"uptime\":3167309,\"last_message\":1477515}","service":"simiriti-management-api","timestamp":"2025-06-20 10:52:59"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:23:29.939Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:53:29","uptime":3197509,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91220,\"uptime\":3197509,\"last_message\":1477515}","service":"simiriti-management-api","timestamp":"2025-06-20 10:53:29"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:24:00.077Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:54:00","uptime":3227709,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91220,\"uptime\":3227709,\"last_message\":1477515}","service":"simiriti-management-api","timestamp":"2025-06-20 10:54:00"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:24:30.338Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:54:30","uptime":3257909,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91220,\"uptime\":3257909,\"last_message\":1477515}","service":"simiriti-management-api","timestamp":"2025-06-20 10:54:30"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:25:00.448Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:55:00","uptime":3288109,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91220,\"uptime\":3288109,\"last_message\":1477515}","service":"simiriti-management-api","timestamp":"2025-06-20 10:55:00"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:25:30.654Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:55:30","uptime":3318309,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":89636,\"uptime\":3318309,\"last_message\":1477515}","service":"simiriti-management-api","timestamp":"2025-06-20 10:55:30"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:26:00.937Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:56:00","uptime":3348509,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91220,\"uptime\":3348509,\"last_message\":1477515}","service":"simiriti-management-api","timestamp":"2025-06-20 10:56:00"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:26:31.024Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:56:31","uptime":3378709,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91220,\"uptime\":3378709,\"last_message\":1477515}","service":"simiriti-management-api","timestamp":"2025-06-20 10:56:31"}
+{"level":"info","message":"Client connected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 10:56:49"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-06-20 10:56:49"}
+{"level":"info","message":"Client connected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 10:56:49"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-06-20 10:56:49"}
+{"level":"info","message":"Client disconnected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 10:56:49"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 disconnected (0 remaining)","service":"simiriti-management-api","timestamp":"2025-06-20 10:56:49"}
+{"level":"info","message":"Client connected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 10:56:56"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-06-20 10:56:56"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:27:01.240Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:57:01","uptime":3408909,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91220,\"uptime\":3408909,\"last_message\":1477515}","service":"simiriti-management-api","timestamp":"2025-06-20 10:57:01"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 30387ms","service":"simiriti-management-api","timestamp":"2025-06-20 10:57:31"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"timestamp\":18796}","service":"simiriti-management-api","timestamp":"2025-06-20 10:57:36"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:27:48.111Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:57:48","uptime":30113,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91904,\"uptime\":30113,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:57:48"}
+{"level":"info","message":"Client disconnected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:13"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 disconnected (0 remaining)","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:13"}
+{"level":"info","message":"Client disconnected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:13"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:28:18.318Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:58:18","uptime":60313,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91904,\"uptime\":60313,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:18"}
+{"level":"info","message":"Client connected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:29"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:29"}
+{"level":"info","message":"Client connected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:30"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:30"}
+{"level":"info","message":"Client disconnected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:30"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 disconnected (0 remaining)","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:30"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:38"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:39"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:39"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:40"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:40"}
+{"level":"info","message":"Emergency alert received from patient device","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:40"}
+{"level":"info","message":"Emergency alert emitted to 0 connected clients","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:40"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":1516565}","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:40"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-00.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:46"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:28:48.522Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:58:48","uptime":90513,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91944,\"uptime\":90513,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:48"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:52"}
+{"level":"info","message":"Client connected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:57"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-06-20 10:58:57"}
+{"level":"info","message":"Client connected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:01"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:01"}
+{"level":"info","message":"Client disconnected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:01"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 disconnected (0 remaining)","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:01"}
+{"level":"info","message":"Client connected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:04"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:04"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:29:18.709Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:59:18","uptime":120713,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91944,\"uptime\":120713,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:18"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:39"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:39"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:39"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:40"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:41"}
+{"level":"info","message":"Emergency alert received from patient device","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:41"}
+{"level":"info","message":"Emergency alert emitted to 0 connected clients","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:41"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":1516565}","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:41"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-00.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:43"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:45"}
+{"level":"info","message":"Client connected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:47"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:47"}
+{"level":"info","message":"Client connected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:48"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:48"}
+{"level":"info","message":"Client disconnected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:48"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 disconnected (0 remaining)","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:48"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:29:49.298Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 10:59:49","uptime":150913,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91944,\"uptime\":150913,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:49"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:54"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:54"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:54"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:55"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:55"}
+{"level":"info","message":"Emergency alert received from patient device","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:55"}
+{"level":"info","message":"Emergency alert emitted to 0 connected clients","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:55"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":1516565}","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:55"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-00.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-06-20 10:59:59"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-06-20 11:00:01"}
+{"level":"info","message":"Client connected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 11:00:02"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-06-20 11:00:02"}
+{"level":"info","message":"Client connected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 11:00:13"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-06-20 11:00:13"}
+{"level":"info","message":"Client disconnected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 11:00:13"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 disconnected (0 remaining)","service":"simiriti-management-api","timestamp":"2025-06-20 11:00:13"}
+{"level":"info","message":"Client connected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 11:00:16"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-06-20 11:00:16"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:30:19.151Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:00:19","uptime":181113,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91944,\"uptime\":181113,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:00:19"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:30:49.397Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:00:49","uptime":211313,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91944,\"uptime\":211313,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:00:49"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"timestamp\":240211}","service":"simiriti-management-api","timestamp":"2025-06-20 11:01:18"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:31:19.501Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:01:19","uptime":241513,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91900,\"uptime\":241513,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:01:19"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:31:49.738Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:01:49","uptime":271713,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":90308,\"uptime\":271713,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:01:49"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:32:19.936Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:02:19","uptime":301913,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91932,\"uptime\":301913,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:02:19"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:32:50.128Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:02:50","uptime":332113,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91932,\"uptime\":332113,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:02:50"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:33:20.311Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:03:20","uptime":362313,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91932,\"uptime\":362313,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:03:20"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:33:50.528Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:03:50","uptime":392513,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91932,\"uptime\":392513,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:03:50"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:34:20.750Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:04:20","uptime":422713,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91932,\"uptime\":422713,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:04:20"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 34915ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:04:55"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 54919ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:05:15"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 74927ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:05:35"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"timestamp\":514964}","service":"simiriti-management-api","timestamp":"2025-06-20 11:05:53"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:35:53.026Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:05:53","uptime":514969,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":88168,\"uptime\":514969,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:05:53"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:36:23.145Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:06:23","uptime":545113,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91916,\"uptime\":545113,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:06:23"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 32570ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:06:55"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 52574ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:07:15"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 72581ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:07:35"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 92586ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:07:55"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 112591ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:08:15"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 132591ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:08:35"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 152598ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:08:55"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 172608ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:09:15"}
+{"level":"info","message":"Client disconnected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 11:09:25"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 disconnected (0 remaining)","service":"simiriti-management-api","timestamp":"2025-06-20 11:09:25"}
+{"level":"info","message":"Client disconnected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 11:09:25"}
+{"level":"info","message":"Client connected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 11:09:31"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 connected (1 total)","service":"simiriti-management-api","timestamp":"2025-06-20 11:09:31"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 192608ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:09:35"}
+{"level":"info","message":"Client disconnected: 6830634bb91ca93949d6aad5","service":"simiriti-management-api","timestamp":"2025-06-20 11:09:40"}
+{"level":"info","message":"Client 6830634bb91ca93949d6aad5 disconnected (0 remaining)","service":"simiriti-management-api","timestamp":"2025-06-20 11:09:40"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 212618ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:09:55"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 232624ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:10:15"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 252627ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:10:35"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 272642ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:10:55"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 292643ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:11:15"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 312653ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:11:35"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 332654ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:11:55"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 352670ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:12:15"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 372674ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:12:35"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 392679ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:12:55"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 412679ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:13:15"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 432687ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:13:35"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 452689ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:13:55"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 472690ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:14:15"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 492694ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:14:35"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 512695ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:14:55"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 532701ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:15:15"}
+{"level":"error","message":"❌ MQTT error (Device 2113): read ECONNRESET","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"warn","message":"ESP32 already connected, closing previous connection","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"warn","message":"ESP32 already connected, closing previous connection","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"warn","message":"ESP32 already connected, closing previous connection","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 connected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ℹ️ MQTT client offline for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ℹ️ MQTT connection closed for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 883176ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:06"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:08"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:08"}
+{"level":"info","message":"Emergency alert received from patient device","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:08"}
+{"level":"info","message":"Emergency alert emitted to 0 connected clients","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:08"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":1516565}","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:08"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"online\",\"timestamp\":30053}","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:12"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:51:12.806Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:21:12","uptime":30058,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":87792,\"uptime\":30058,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:12"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:25"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:25"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:36"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:36"}
+{"level":"info","message":"ESP32 disconnected","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:37"}
+{"level":"info","message":"ESP32 disconnected and status updated","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:37"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:51:43.342Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:21:43","uptime":60109,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91572,\"uptime\":60109,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:21:43"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:52:13.082Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:22:13","uptime":90309,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91572,\"uptime\":90309,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:22:13"}
+{"level":"info","message":"Emergency alert received from patient device","service":"simiriti-management-api","timestamp":"2025-06-20 11:22:23"}
+{"level":"info","message":"Emergency alert emitted to 0 connected clients","service":"simiriti-management-api","timestamp":"2025-06-20 11:22:23"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":100713}","service":"simiriti-management-api","timestamp":"2025-06-20 11:22:23"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:52:43.292Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:22:43","uptime":120509,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91396,\"uptime\":120509,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:22:43"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:53:13.440Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:23:13","uptime":150709,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91436,\"uptime\":150709,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:23:13"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:53:43.938Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:23:43","uptime":180909,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91436,\"uptime\":180909,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:23:43"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:54:13.916Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:24:13","uptime":211109,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91436,\"uptime\":211109,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:24:13"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:54:44.125Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:24:44","uptime":241309,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91436,\"uptime\":241309,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:24:44"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:55:14.330Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:25:14","uptime":271509,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91436,\"uptime\":271509,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:25:14"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:55:44.436Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:25:44","uptime":301709,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91436,\"uptime\":301709,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:25:44"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:56:14.644Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:26:14","uptime":331909,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91436,\"uptime\":331909,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:26:14"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:56:44.954Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:26:44","uptime":362109,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91436,\"uptime\":362109,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:26:44"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:57:15.120Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:27:15","uptime":392309,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91436,\"uptime\":392309,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:27:15"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:57:45.311Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:27:45","uptime":422509,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91436,\"uptime\":422509,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:27:45"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:58:15.484Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:28:15","uptime":452709,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91436,\"uptime\":452709,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:28:15"}
+{"batteryLevel":80,"currentStatus":"online","deviceId":"2113","displayBrightness":85,"lastSeen":"2025-06-20T05:58:45.654Z","level":"info","message":"Device 2113 status updated:","service":"simiriti-management-api","temperature":25,"timestamp":"2025-06-20 11:28:45","uptime":482909,"wifiSignal":-70}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"running\",\"free_heap\":91436,\"uptime\":482909,\"last_message\":0}","service":"simiriti-management-api","timestamp":"2025-06-20 11:28:45"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 40805ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:29:26"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 43210ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:29:28"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 60810ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:29:46"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 63211ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:29:48"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 80827ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:30:06"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 83220ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:30:08"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 100828ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:30:26"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 103227ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:30:28"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 120840ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:30:46"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 123229ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:30:48"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 140840ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:31:06"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 143233ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:31:08"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 160852ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:31:26"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 163240ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:31:28"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 180857ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:31:46"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 183252ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:31:48"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 200858ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:32:06"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 203252ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:32:08"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 220868ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:32:26"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 223254ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:32:28"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 240874ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:32:46"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 243266ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:32:48"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 260882ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:33:06"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 263273ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:33:08"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 280891ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:33:26"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 283288ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:33:28"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 300899ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:33:46"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 303290ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:33:48"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 320901ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:34:06"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 323292ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:34:08"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 340906ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:34:26"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 343293ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:34:28"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 360907ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:34:46"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 363305ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:34:48"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 380914ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:35:06"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 383328ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:35:08"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 400923ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:35:26"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 403332ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:35:28"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 420926ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:35:46"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 423337ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:35:48"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 440940ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:36:06"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 443337ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:36:08"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 460943ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:36:26"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 463341ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:36:28"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 480953ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:36:46"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 483343ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:36:48"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 500956ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:37:06"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 503344ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:37:08"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 520961ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:37:26"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 523344ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:37:28"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 540969ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:37:46"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 543344ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:37:48"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 560970ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:38:06"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 563356ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:38:09"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 580978ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:38:26"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 583362ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:38:29"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 600979ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:38:46"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 603370ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:38:49"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 620985ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:39:06"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 623374ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:39:09"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 640996ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:39:26"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 643379ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:39:29"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 660997ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:39:46"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 663380ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:39:49"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 681009ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:40:06"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 683380ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:40:09"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 701010ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:40:26"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 703380ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:40:29"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 721011ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:40:46"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 723392ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:40:49"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 741023ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:41:06"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 743407ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:41:09"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 761032ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:41:26"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 763407ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:41:29"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 781033ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:41:46"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 783415ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:41:49"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 801043ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:42:06"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 803415ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:42:09"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 821058ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:42:26"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 823424ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:42:29"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 841065ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:42:46"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 843425ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:42:49"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 861075ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:43:06"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 863433ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:43:09"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 881076ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:43:26"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 883439ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:43:29"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 901082ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:43:46"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 903444ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:43:49"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 921098ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:06"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 923444ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:09"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 941109ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:26"}
+{"level":"warn","message":"Device 2113 marked as offline - no status for 943455ms","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:29"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:35"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:35"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:35"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:37"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:40"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:40"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:40"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:41"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:42"}
+{"level":"info","message":"Emergency alert received from patient device","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:42"}
+{"level":"info","message":"Emergency alert emitted to 0 connected clients","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:42"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":100713}","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:42"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:45"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:45"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:45"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:46"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:46"}
+{"level":"info","message":"Emergency alert received from patient device","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:46"}
+{"level":"info","message":"Emergency alert emitted to 0 connected clients","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:46"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":100713}","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:46"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-01.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:48"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:51"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:51"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:51"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:52"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:52"}
+{"level":"info","message":"Emergency alert received from patient device","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:52"}
+{"level":"info","message":"Emergency alert emitted to 0 connected clients","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:52"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":100713}","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:52"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-02.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:54"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-06-20 11:44:56"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 11:45:29"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 11:45:29"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 11:45:29"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 11:45:41"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 11:45:41"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 11:45:41"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 11:45:51"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 11:45:51"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 11:45:51"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 11:45:53"}
+{"level":"error","message":"Error connecting to MongoDB: querySrv ESERVFAIL _mongodb._tcp.cluster0.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-06-20 11:45:53"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 11:45:57"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 11:45:57"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 11:45:57"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:02"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:03"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:03"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:04"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:04"}
+{"level":"info","message":"Emergency alert received from patient device","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:04"}
+{"level":"info","message":"Emergency alert emitted to 0 connected clients","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:04"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":100713}","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:04"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-02.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:05"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:09"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:09"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:09"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:10"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:10"}
+{"level":"info","message":"Emergency alert received from patient device","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:10"}
+{"level":"info","message":"Emergency alert emitted to 0 connected clients","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:10"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":100713}","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:10"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-00.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:10"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-06-20 11:46:12"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:00"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:00"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:00"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:05"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:05"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:05"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:06"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:06"}
+{"level":"info","message":"Emergency alert received from patient device","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:06"}
+{"level":"info","message":"Emergency alert emitted to 0 connected clients","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:06"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":100713}","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:06"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-02.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:08"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:09"}
+{"level":"info","message":"MQTT Service singleton created","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:22"}
+{"level":"info","message":"WebSocket server initialized","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:22"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:22"}
+{"level":"info","message":"✅ Connected to HiveMQ Cloud for device 2113","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:23"}
+{"level":"info","message":"📡 2113 subscribed to devices/2113/status","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:23"}
+{"level":"info","message":"Emergency alert received from patient device","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:23"}
+{"level":"info","message":"Emergency alert emitted to 0 connected clients","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:23"}
+{"level":"info","message":"📥 Status from 2113: {\"device_id\":\"2113\",\"status\":\"alert\",\"type\":\"emergency\",\"timestamp\":100713}","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:23"}
+{"level":"info","message":"MongoDB Connected: ac-57ytooh-shard-00-01.u11bugl.mongodb.net","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:24"}
+{"level":"info","message":"♻️ Scheduled 0 pending reminders on startup","service":"simiriti-management-api","timestamp":"2025-06-20 11:48:26"}

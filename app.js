@@ -309,12 +309,13 @@ const connectedUsers = new Map();
 const connectedDevices = new Set();
 
 // Mock AI service
+let i = 0;
 const analyzeAudioWithAI = async (audioData) => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const mockSpeakers = ["Pooja", "Pooja", "Pooja", "Pooja"];
+      const mockSpeakers = ["Pooja", "Diksha", "Pooja", "Mukul","Sumit"];
       const randomSpeaker =
-        mockSpeakers[Math.floor(Math.random() * mockSpeakers.length)];
+        mockSpeakers[i%mockSpeakers.length];
       resolve({
         speaker: randomSpeaker,
         confidence: (Math.random() * 0.5 + 0.5).toFixed(2), // Random confidence between 0.5-1.0
@@ -340,16 +341,16 @@ app.post("/analyze-audio", async (req, res) => {
     };
 
     // Call FastAPI endpoint
-    const result = await axios.post(
-      "https://spech-identification.onrender.com/analyze-audio",
-      audioData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
+    // const result = await axios.post(
+    //   "https://spech-identification.onrender.com/analyze-audio",
+    //   audioData,
+    //   {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   }
+    // );
+    const result = analyzeAudioWithAI(audioData)
     // webSocketService.sendToUser()
     res.status(200).json({
       success: true,

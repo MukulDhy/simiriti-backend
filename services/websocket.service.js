@@ -80,7 +80,7 @@ class WebSocketService {
 
   async handleUpgrade(request, socket, head) {
     try {
-      const url = new URL(request.url, `https://${request.headers.host}`);
+      const url = new URL(request.url, `http://${request.headers.host}`);
 
       // Handle ESP32 connection (no authentication required)
       if (url.pathname === "/esp32") {
